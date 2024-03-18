@@ -14,7 +14,7 @@ var abp = abp || {};
     /* NOTIFICATION *********************************************/
 
     var showNotification = function (type, message, title, options) {
-        var icon = options.imageClass ? '<i class="mr-2 text-white ' + options.imageClass + '"></i>' : '';
+        var icon = options.imageClass ? '<i class="me-2 text-white ' + options.imageClass + '"></i>' : '';
 
         if (title) {
             options.title = icon + '<span class="text-white">' + title + '</span>';

@@ -150,3 +150,7 @@ gridster.no-tab{
  #dropdownMenuAddPage, #dropdownMenuRenamePage{
      min-width:250px;
  }
+
+ .div-dashboard-customization .border-right {
+     border-right: 1px solid white;
+ }

@@ -80,8 +80,6 @@ export class NotificationsComponent extends AppComponentBase {
     getNotifications(event?: LazyLoadEvent): void {
         if (this.primengTableHelper.shouldResetPaging(event)) {
             this.paginator.changePage(0);
-
-            return;
         }
 
         this.primengTableHelper.showLoadingIndicator();

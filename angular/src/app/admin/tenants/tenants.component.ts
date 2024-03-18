@@ -140,7 +140,6 @@ export class TenantsComponent extends AppComponentBase implements OnInit {
     getTenants(event?: LazyLoadEvent) {
         if (this.primengTableHelper.shouldResetPaging(event)) {
             this.paginator.changePage(0);
-
             return;
         }
 

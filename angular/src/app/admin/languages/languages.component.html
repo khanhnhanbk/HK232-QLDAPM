@@ -160,13 +160,13 @@
                                         <td *ngIf="appSession.tenantId ? true : false">
                                             <span class="p-column-title">{{ 'Default' | localize }}</span>
                                             <span
-                                                class="label label-success label-inline"
+                                                class="badge badge-success"
                                                 *ngIf="record.name === defaultLanguageName"
                                             >
                                                 {{ 'Yes' | localize }}
                                             </span>
                                             <span
-                                                class="label label-dark label-inline"
+                                                class="badge badge-dark"
                                                 *ngIf="record.name !== defaultLanguageName"
                                             >
                                                 {{ 'No' | localize }}
@@ -174,10 +174,10 @@
                                         </td>
                                         <td>
                                             <span class="p-column-title">{{ 'IsEnabled' | localize }}</span>
-                                            <span class="label label-success label-inline" *ngIf="!record.isDisabled">
+                                            <span class="badge badge-success" *ngIf="!record.isDisabled">
                                                 {{ 'Yes' | localize }}
                                             </span>
-                                            <span class="label label-dark label-inline" *ngIf="record.isDisabled">
+                                            <span class="badge badge-dark" *ngIf="record.isDisabled">
                                                 {{ 'No' | localize }}
                                             </span>
                                         </td>

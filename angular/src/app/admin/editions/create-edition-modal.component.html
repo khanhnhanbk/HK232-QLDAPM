@@ -18,19 +18,19 @@
                     </h5>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
-                    >
-                        <i aria-hidden="true" class="ki ki-close"></i>
-                    </button>
+                    ></button>
                 </div>
                 <div class="modal-body">
                     <tabset>
                         <tab heading="{{ 'EditionProperties' | localize }}" class="p-5">
-                            <div class="form-group">
-                                <label for="EditionDisplayName">{{ 'EditionName' | localize }} *</label>
+                            <div class="mb-5">
+                                <label class="form-label" for="EditionDisplayName">
+                                    {{ 'EditionName' | localize }} *
+                                </label>
                                 <input
                                     id="EditionDisplayName"
                                     #editionNameInput="ngModel"
@@ -44,10 +44,14 @@
                                 <validation-messages [formCtrl]="editionNameInput"></validation-messages>
                             </div>
 
-                            <label>{{ 'SubscriptionPrice' | localize }}</label>
-                            <div class="radio-inline">
-                                <label for="EditEdition_IsFree" class="radio">
+                            <label class="form-label">{{ 'SubscriptionPrice' | localize }}</label>
+                            <div class="d-flex mb-5">
+                                <label
+                                    for="EditEdition_IsFree"
+                                    class="form-check form-check-custom form-check-solid me-5"
+                                >
                                     <input
+                                        class="form-check-input"
                                         id="EditEdition_IsFree"
                                         name="SubscriptionPrice"
                                         [(ngModel)]="isFree"
@@ -55,31 +59,32 @@
                                         [value]="true"
                                         type="radio"
                                     />
-                                    <span></span>
-                                    {{ 'Free' | localize }}
+                                    <span class="form-check-label">
+                                        {{ 'Free' | localize }}
+                                    </span>
                                 </label>
-                                <label for="EditEdition_IsPaid" class="radio">
+                                <label for="EditEdition_IsPaid" class="form-check form-check-custom form-check-solid">
                                     <input
+                                        class="form-check-input"
                                         id="EditEdition_IsPaid"
                                         name="SubscriptionPrice"
                                         [(ngModel)]="isFree"
                                         [value]="false"
                                         type="radio"
                                     />
-                                    <span></span>
-                                    {{ 'Paid' | localize }}
+                                    <span class="form-check-label">
+                                        {{ 'Paid' | localize }}
+                                    </span>
                                 </label>
                             </div>
                             <div class="row" *ngIf="!isFree">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="DailyPrice">{{ 'DailyPrice' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="DailyPrice">{{ 'DailyPrice' | localize }}</label>
                                         <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    {{ appSession.application.currencySign }}
-                                                </span>
-                                            </div>
+                                            <span class="input-group-text">
+                                                {{ appSession.application.currencySign }}
+                                            </span>
                                             <input
                                                 #dailyPriceInput="ngModel"
                                                 type="text"
@@ -97,14 +102,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="WeeklyPrice">{{ 'WeeklyPrice' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="WeeklyPrice">
+                                            {{ 'WeeklyPrice' | localize }}
+                                        </label>
                                         <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    {{ appSession.application.currencySign }}
-                                                </span>
-                                            </div>
+                                            <span class="input-group-text">
+                                                {{ appSession.application.currencySign }}
+                                            </span>
                                             <input
                                                 #weeklyPriceInput="ngModel"
                                                 type="text"
@@ -123,14 +128,14 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="MonthlyPrice">{{ 'MonthlyPrice' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="MonthlyPrice">
+                                            {{ 'MonthlyPrice' | localize }}
+                                        </label>
                                         <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    {{ appSession.application.currencySign }}
-                                                </span>
-                                            </div>
+                                            <span class="input-group-text">
+                                                {{ appSession.application.currencySign }}
+                                            </span>
                                             <input
                                                 #monthlyPriceInput="ngModel"
                                                 type="text"
@@ -148,14 +153,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="AnnualPrice">{{ 'AnnualPrice' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="AnnualPrice">
+                                            {{ 'AnnualPrice' | localize }}
+                                        </label>
                                         <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    {{ appSession.application.currencySign }}
-                                                </span>
-                                            </div>
+                                            <span class="input-group-text">
+                                                {{ appSession.application.currencySign }}
+                                            </span>
                                             <input
                                                 #annualPriceInput="ngModel"
                                                 type="text"
@@ -174,20 +179,22 @@
                                 </div>
                             </div>
                             <div [hidden]="isFree" class="paid-features">
-                                <div class="checkbox-list">
-                                    <label for="EditEdition_IsTrialActive" class="checkbox">
-                                        <input
-                                            id="EditEdition_IsTrialActive"
-                                            type="checkbox"
-                                            name="isTrialActive"
-                                            [(ngModel)]="isTrialActive"
-                                        />
-                                        <span></span>
+                                <label class="form-check form-check-custom form-check-solid py-1 mb-5">
+                                    <input
+                                        id="EditEdition_IsTrialActive"
+                                        type="checkbox"
+                                        name="isTrialActive"
+                                        [(ngModel)]="isTrialActive"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'IsTrialActive' | localize }}
+                                    </span>
+                                </label>
+                                <div class="mb-5 trial-day-count" *ngIf="isTrialActive">
+                                    <label class="form-label" for="TrialDayCount">
+                                        {{ 'TrialDayCount' | localize }}
                                     </label>
-                                </div>
-                                <div class="form-group trial-day-count" *ngIf="isTrialActive">
-                                    <label for="TrialDayCount">{{ 'TrialDayCount' | localize }}</label>
                                     <input
                                         #trialDayCountInput="ngModel"
                                         class="form-control"
@@ -200,20 +207,22 @@
                                     />
                                     <validation-messages [formCtrl]="trialDayCountInput"></validation-messages>
                                 </div>
-                                <div class="checkbox-list">
-                                    <label for="EditEdition_IsWaitingDayActive" class="checkbox">
-                                        <input
-                                            id="EditEdition_IsWaitingDayActive"
-                                            type="checkbox"
-                                            name="IsWaitingDayActive"
-                                            [(ngModel)]="isWaitingDayActive"
-                                        />
-                                        <span></span>
+                                <label class="form-check form-check-custom form-check-solid py-1 mb-5">
+                                    <input
+                                        id="EditEdition_IsWaitingDayActive"
+                                        type="checkbox"
+                                        name="IsWaitingDayActive"
+                                        [(ngModel)]="isWaitingDayActive"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'WaitAfterSubscriptionExpireDate' | localize }}
+                                    </span>
+                                </label>
+                                <div class="mb-5 waiting-day-after-expire" *ngIf="isWaitingDayActive">
+                                    <label class="form-label" for="WaitingDayAfterExpire">
+                                        {{ 'WaitingDayAfterExpire' | localize }}
                                     </label>
-                                </div>
-                                <div class="form-group waiting-day-after-expire" *ngIf="isWaitingDayActive">
-                                    <label for="WaitingDayAfterExpire">{{ 'WaitingDayAfterExpire' | localize }}</label>
                                     <input
                                         #waitingDayAfterExpireInput="ngModel"
                                         class="form-control"
@@ -226,34 +235,44 @@
                                     />
                                     <validation-messages [formCtrl]="waitingDayAfterExpireInput"></validation-messages>
                                 </div>
-                                <label>{{ 'WhatWillDoneAfterSubscriptionExpiry' | localize }}</label>
-                                <div class="radio-inline">
-                                    <label for="EditEdition_ExpireAction_DeactiveUser" class="radio">
+                                <label class="form-label">{{ 'WhatWillDoneAfterSubscriptionExpiry' | localize }}</label>
+                                <div class="d-flex mb-5">
+                                    <label
+                                        for="EditEdition_ExpireAction_DeactiveUser"
+                                        class="form-check form-check-custom form-check-solid me-5"
+                                    >
                                         <input
                                             id="EditEdition_ExpireAction_DeactiveUser"
+                                            class="form-check-input"
                                             name="ExpireAction"
                                             [(ngModel)]="expireAction"
                                             [value]="expireActionEnum.DeactiveTenant"
                                             (ngModelChange)="removeExpiringEdition($event)"
                                             type="radio"
                                         />
-                                        <span></span>
-                                        {{ 'DeactiveTenant' | localize }}
+                                        <span class="form-check-label">
+                                            {{ 'DeactiveTenant' | localize }}
+                                        </span>
                                     </label>
-                                    <label for="EditEdition_ExpireAction_AssignEdition" class="radio">
+                                    <label
+                                        for="EditEdition_ExpireAction_AssignEdition"
+                                        class="form-check form-check-custom form-check-solid me-5"
+                                    >
                                         <input
                                             id="EditEdition_ExpireAction_AssignEdition"
+                                            class="form-check-input"
                                             name="ExpireAction"
                                             [(ngModel)]="expireAction"
                                             [value]="expireActionEnum.AssignToAnotherEdition"
                                             type="radio"
                                         />
-                                        <span></span>
-                                        {{ 'AssignToAnotherEdition' | localize }}
+                                        <span class="form-check-label">
+                                            {{ 'AssignToAnotherEdition' | localize }}
+                                        </span>
                                     </label>
                                 </div>
                                 <div
-                                    class="form-group edition-list"
+                                    class="mb-5 edition-list"
                                     *ngIf="expireAction == expireActionEnum.AssignToAnotherEdition"
                                 >
                                     <select

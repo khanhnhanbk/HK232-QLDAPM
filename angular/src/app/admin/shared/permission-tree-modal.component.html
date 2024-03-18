@@ -1,4 +1,4 @@
-<button class="btn btn-default btn-block" (click)="openPermissionTreeModal()" *ngIf="!dontAddOpenerButton">
+<button class="btn btn-secondary w-100" (click)="openPermissionTreeModal()" *ngIf="!dontAddOpenerButton">
     {{ 'SelectPermissions' | localize }} ({{ NumberOfFilteredPermission }})
 </button>
 
@@ -18,8 +18,7 @@
                 <h4 class="modal-title">
                     {{ 'SelectPermissions' | localize }}
                 </h4>
-                <button type="button" class="close" (click)="closePermissionTreeModal()" [attr.aria-label]="l('Close')">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                <button type="button" class="btn-close" (click)="closePermissionTreeModal()" [attr.aria-label]="l('Close')">
                 </button>
             </div>
             <div class="modal-body">

@@ -26,3 +26,13 @@ header-notifications .dropdown-menu {
     left: 0px !important;
     min-width: 300px;
 }
+
+#kt_aside_menu side-bar-menu {
+    width: 100% !important;
+}
+
+@media (min-width: 992px) {
+    #kt_content {
+      margin-top: -60px;
+    }
+  }

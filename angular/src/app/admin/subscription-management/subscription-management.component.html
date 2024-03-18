@@ -9,49 +9,49 @@
                         <tab class="p-5" heading="{{ 'SubscriptionInformation' | localize }}">
                             <form>
                                 <h3 class="mb-10">Your Plan</h3>
-                                <div class="card col-md-6 col-lg-4">
+                                <div class="card shadow-sm col-md-6 col-lg-4">
                                     <div class="card-header">
-                                        <div class="row">
-                                            <div class="col-md-12 mt-10" *ngIf="tenant.edition">
-                                                <small class="text-muted text-uppercase d-block">
-                                                    {{ 'Edition' | localize }}
-                                                </small>
-                                                <h3 class="d-inline">
-                                                    {{ tenant.edition.displayName }}
-                                                </h3>
-                                                <span
-                                                    *ngIf="tenant.edition.isFree"
-                                                    class="label label-success label-inline"
-                                                >
-                                                    {{ 'Free' | localize }}
-                                                </span>
-                                                <span *ngIf="tenant.isInTrialPeriod" class="label label-warning label-inline">
-                                                    {{ 'Trial' | localize }}
-                                                </span>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12 mt-10" *ngIf="tenant.edition">
+                                                    <small class="text-muted text-uppercase d-block">
+                                                        {{ 'Edition' | localize }}
+                                                    </small>
+                                                    <h3 class="d-inline">
+                                                        {{ tenant.edition.displayName }}
+                                                    </h3>
+                                                    <span *ngIf="tenant.edition.isFree" class="badge badge-success">
+                                                        {{ 'Free' | localize }}
+                                                    </span>
+                                                    <span *ngIf="tenant.isInTrialPeriod" class="badge badge-warning">
+                                                        {{ 'Trial' | localize }}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row mt-10">
-                                            <div class="col-md-6">
-                                                <small class="text-muted text-uppercase d-block">
-                                                    {{ 'SubscriptionStartDate' | localize }}
-                                                </small>
-                                                <h3 class="d-inline">
-                                                    {{ tenant.creationTimeString }}
-                                                </h3>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <small class="text-muted text-uppercase d-block">
-                                                    {{ 'SubscriptionEndDate' | localize }}
-                                                </small>
-                                                <h3 class="d-inline">
-                                                    {{ tenant.subscriptionDateString }}
-                                                </h3>
+                                            <div class="row my-5">
+                                                <div class="col-md-6">
+                                                    <small class="text-muted text-uppercase d-block">
+                                                        {{ 'SubscriptionStartDate' | localize }}
+                                                    </small>
+                                                    <h3 class="d-inline">
+                                                        {{ tenant.creationTimeString }}
+                                                    </h3>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <small class="text-muted text-uppercase d-block">
+                                                        {{ 'SubscriptionEndDate' | localize }}
+                                                    </small>
+                                                    <h3 class="d-inline">
+                                                        {{ tenant.subscriptionDateString }}
+                                                    </h3>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="card-body">
                                         <small class="text-muted text-uppercase d-block mb-5">
-                                            {{'WhatsIncludedInYourPlan' | localize}}
+                                            {{ 'WhatsIncludedInYourPlan' | localize }}
                                         </small>
                                         <div *ngIf="tenant.featureValues && tenant.featureValues.length">
                                             <span
@@ -79,13 +79,13 @@
                                         </div>
                                         <div *ngIf="!tenant.featureValues || !tenant.featureValues.length">
                                             <p>
-                                                {{'NoFeaturesInYourPlan' | localize}}
+                                                {{ 'NoFeaturesInYourPlan' | localize }}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="card-footer">
                                         <div
-                                            class="form-group row"
+                                            class="mb-5 row"
                                             [hidden]="
                                                 tenant.subscriptionPaymentType !=
                                                 subscriptionPaymentType.RecurringAutomatic
@@ -95,7 +95,7 @@
                                                 <a
                                                     id="btnDisableRecurringPayments"
                                                     href="javascript:;"
-                                                    class="btn btn-secondary btn-lg btn-block"
+                                                    class="btn btn-secondary btn-lg w-100"
                                                     (click)="disableRecurringPayments()"
                                                 >
                                                     {{ 'DisableRecurringPayments' | localize }}
@@ -104,7 +104,7 @@
                                         </div>
 
                                         <div
-                                            class="form-group row"
+                                            class="mb-5 row"
                                             [hidden]="
                                                 tenant.subscriptionPaymentType !=
                                                 subscriptionPaymentType.RecurringManual
@@ -114,49 +114,64 @@
                                                 <a
                                                     id="btnEnableRecurringPayments"
                                                     href="javascript:;"
-                                                    class="btn btn-info btn-lg btn-block"
+                                                    class="btn btn-info btn-lg w-100"
                                                     (click)="enableRecurringPayments()"
                                                 >
                                                     {{ 'EnableRecurringPayments' | localize }}
                                                 </a>
                                             </div>
                                         </div>
-                                        <a
+                                        <div
+                                            class="mb-5 row"
                                             *ngIf="
                                                 !hasRecurringSubscription() &&
                                                 tenant.edition &&
                                                 !tenant.edition.isFree &&
                                                 !tenant.isInTrialPeriod
                                             "
-                                            [routerLink]="['/account/extend']"
-                                            [queryParams]="{ editionPaymentType: editionPaymentType.Extend }"
-                                            class="btn btn-info btn-lg btn-block"
                                         >
-                                            {{ 'Extend' | localize }}
-                                        </a>
-                                        <a
-                                            *ngIf="tenant.isInTrialPeriod"
-                                            [routerLink]="['/account/buy']"
-                                            [queryParams]="{
-                                                editionPaymentType: editionPaymentType.BuyNow,
-                                                editionId: tenant.edition.id,
-                                                tenantId: tenant.id
-                                            }"
-                                            class="btn btn-info btn-lg btn-block"
-                                        >
-                                            {{ 'BuyNow' | localize }}
-                                        </a>
-                                        <a
+                                            <div class="col-md-12">
+                                                <a
+                                                    [routerLink]="['/account/extend']"
+                                                    [queryParams]="{ editionPaymentType: editionPaymentType.Extend }"
+                                                    class="btn btn-info btn-lg w-100"
+                                                >
+                                                    {{ 'Extend' | localize }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="mb-5 row" *ngIf="tenant.isInTrialPeriod">
+                                            <div class="col-md-12">
+                                                <a
+                                                    [routerLink]="['/account/buy']"
+                                                    [queryParams]="{
+                                                        editionPaymentType: editionPaymentType.BuyNow,
+                                                        editionId: tenant.edition.id,
+                                                        tenantId: tenant.id
+                                                    }"
+                                                    class="btn btn-info btn-lg w-100"
+                                                >
+                                                    {{ 'BuyNow' | localize }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="mb-5 row"
                                             *ngIf="
                                                 tenant.edition &&
                                                 !tenant.edition.isHighestEdition &&
                                                 !tenant.isInTrialPeriod
                                             "
-                                            [routerLink]="['/account/select-edition']"
-                                            class="btn btn-warning btn-lg btn-block"
                                         >
-                                            {{ 'Upgrade' | localize }}
-                                        </a>
+                                            <div class="col-md-12">
+                                                <a
+                                                    [routerLink]="['/account/select-edition']"
+                                                    class="btn btn-warning btn-lg w-100"
+                                                >
+                                                    {{ 'Upgrade' | localize }}
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </form>

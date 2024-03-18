@@ -107,8 +107,6 @@ export class CommonLookupModalComponent extends AppComponentBase {
         const skipCount = this.primengTableHelper.getSkipCount(this.paginator, event);
         if (this.primengTableHelper.shouldResetPaging(event)) {
             this.paginator.changePage(0);
-
-            return;
         }
 
         this.primengTableHelper.showLoadingIndicator();

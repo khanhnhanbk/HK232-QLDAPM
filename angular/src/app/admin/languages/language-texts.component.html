@@ -12,8 +12,8 @@
                         <div>
                             <div class="row align-items-center m--margin-bottom-10">
                                 <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="TextBaseLanguageSelectionCombobox">
+                                    <div class="mb-5">
+                                        <label class="form-label" for="TextBaseLanguageSelectionCombobox">
                                             {{ 'BaseLanguage' | localize }}
                                         </label>
                                         <select
@@ -33,8 +33,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="TextTargetLanguageSelectionCombobox">
+                                    <div class="mb-5">
+                                        <label class="form-label" for="TextTargetLanguageSelectionCombobox">
                                             {{ 'TargetLanguage' | localize }}
                                         </label>
                                         <select
@@ -54,8 +54,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="TextSourceSelectionCombobox">{{ 'Source' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="TextSourceSelectionCombobox">{{ 'Source' | localize }}</label>
                                         <select
                                             #sourceNameCombobox
                                             name="sourceName"
@@ -69,8 +69,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-md-3">
-                                    <div class="form-group">
-                                        <label for="TargetValueFilterSelectionCombobox">
+                                    <div class="mb-5">
+                                        <label class="form-label" for="TargetValueFilterSelectionCombobox">
                                             {{ 'TargetValue' | localize }}
                                         </label>
                                         <select
@@ -96,12 +96,10 @@
                                             placeholder="{{ 'SearchWithThreeDot' | localize }}"
                                             type="text"
                                         />
-                                        <div class="input-group-append">
-                                            <button (click)="applyFilters()" class="btn btn-primary" type="submit">
-                                                <i class="icon-refresh"></i>
-                                                {{ 'Refresh' | localize }}
-                                            </button>
-                                        </div>
+                                        <button (click)="applyFilters($event)" class="btn btn-primary" type="submit">
+                                            <i class="icon-refresh"></i>
+                                            {{ 'Refresh' | localize }}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +155,7 @@
                                         </td>
                                         <td>
                                             <button
-                                                class="btn btn-outline-primary btn-sm btn-icon"
+                                                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
                                                 (click)="
                                                     editTextModal.show(
                                                         baseLanguageName,

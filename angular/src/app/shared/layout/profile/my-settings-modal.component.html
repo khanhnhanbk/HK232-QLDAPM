@@ -16,14 +16,13 @@
                     <h5 class="modal-title">
                         <span>{{ 'MySettings' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" [attr.aria-label]="l('Close')" (click)="close()">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" [attr.aria-label]="l('Close')" (click)="close()">
                     </button>
                 </div>
                 <div class="modal-body" *ngIf="user">
                     <tabset>
                         <tab heading="{{ 'Profile' | localize }}">
-                            <div class="form-group">
+                            <div class="mb-5">
                                 <label for="Name">{{ 'FirstName' | localize }} *</label>
                                 <input
                                     id="Name"
@@ -38,7 +37,7 @@
                                 <validation-messages [formCtrl]="nameInput"></validation-messages>
                             </div>
 
-                            <div class="form-group">
+                            <div class="mb-5">
                                 <label for="Surname">{{ 'Surname' | localize }} *</label>
                                 <input
                                     id="Surname"
@@ -53,7 +52,7 @@
                                 <validation-messages [formCtrl]="surnameInput"></validation-messages>
                             </div>
 
-                            <div class="form-group">
+                            <div class="mb-5">
                                 <label for="EmailAddress">{{ 'EmailAddress' | localize }} *</label>
                                 <input
                                     id="EmailAddress"
@@ -69,7 +68,7 @@
                                 <validation-messages [formCtrl]="emailAddressInput"></validation-messages>
                             </div>
                             <div *ngIf="smsEnabled">
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <label>{{ 'PhoneNumber' | localize }}</label>
                                     <div class="input-group">
                                         <input
@@ -115,7 +114,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="mb-5">
                                 <label for="UserName">{{ 'UserName' | localize }} *</label>
                                 <input
                                     id="UserName"
@@ -134,7 +133,7 @@
                                 <validation-messages [formCtrl]="userNameInput"></validation-messages>
                             </div>
 
-                            <div class="form-group" *ngIf="showTimezoneSelection">
+                            <div class="mb-5" *ngIf="showTimezoneSelection">
                                 <label for="Timezone">{{ 'Timezone' | localize }}</label>
                                 <timezone-combo
                                     name="Timezone"

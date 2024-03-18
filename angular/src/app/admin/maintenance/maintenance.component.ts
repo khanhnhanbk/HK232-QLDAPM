@@ -74,23 +74,23 @@ export class MaintenanceComponent extends AppComponentBase implements OnInit {
 
     getLogClass(log: string): string {
         if (log.startsWith('DEBUG')) {
-            return 'label label-inline label-dark';
+            return 'badge badge-dark';
         }
 
         if (log.startsWith('INFO')) {
-            return 'label label-inline label-info';
+            return 'badge badge-info';
         }
 
         if (log.startsWith('WARN')) {
-            return 'label label-inline label-warning';
+            return 'badge badge-warning';
         }
 
         if (log.startsWith('ERROR')) {
-            return 'label label-inline label-danger';
+            return 'badge badge-danger';
         }
 
         if (log.startsWith('FATAL')) {
-            return 'label label-inline label-danger';
+            return 'badge badge-danger';
         }
 
         return '';

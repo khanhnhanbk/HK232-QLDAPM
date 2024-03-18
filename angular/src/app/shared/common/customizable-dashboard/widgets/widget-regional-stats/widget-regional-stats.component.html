@@ -24,9 +24,13 @@
                 <tbody>
                     <tr *ngFor="let stat of regionalStatsTable.stats; let index = index">
                         <td>
-                            <label class="checkbox">
-                                <input class="form-control" type="checkbox" />
-                                <span></span>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
+                                </span>
                             </label>
                         </td>
                         <td>{{ stat.countryName }}</td>

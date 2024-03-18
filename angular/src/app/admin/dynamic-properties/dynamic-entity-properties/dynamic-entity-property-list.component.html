@@ -1,12 +1,14 @@
-<div class="row justify-content-end p-5">
-    <button
-        *ngIf="'Pages.Administration.DynamicEntityProperties.Create' | permission"
-        class="btn btn-primary"
-        (click)="addNewDynamicEntityProperty()"
-    >
-        <i class="fa fa-plus"></i>
-        {{ 'AddNewDynamicEntityProperty' | localize }}
-    </button>
+<div class="row justify-content-end">
+    <div class="col">
+        <button
+            *ngIf="'Pages.Administration.DynamicEntityProperties.Create' | permission"
+            class="btn btn-primary float-end"
+            (click)="addNewDynamicEntityProperty()"
+        >
+            <i class="fa fa-plus"></i>
+            {{ 'AddNewDynamicEntityProperty' | localize }}
+        </button>
+    </div>
 </div>
 <div class="row align-items-center">
     <!--<Primeng-TurboTable-Start>-->

@@ -1,59 +1,35 @@
-.kt-header-mobile .kt-header__brand-logo-default {
-  height: 52px !important;
-  padding-top: 10px;
-  padding-bottom: 10px;
+
+body:not(.dark-mode):not(.account) {
+  background-image: url(/assets/metronic/themes/theme12/images/bg/page-bg.jpg);
 }
 
-.cc-window {
-  background-color: #282a3a;
+.aside-enabled .wrapper{
+  padding-right: 0px !important;
 }
 
-.cc-btn {
-  background-color: #5867dd;
-  border-color: #5867dd;
-  color: #ffffff;
+.menu-item .menu-link .menu-title{
+  flex-grow: inherit;
 }
 
-.cc-message {
-  color: #fefefe;
+#kt_quick_user_toggle{
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.kt-badge.kt-badge--inline {
-  border-radius: 0px;
+.aside-enabled.header-fixed[data-kt-sticky-header=on] .header{
+  right: 0px;
 }
 
-.kt-user-card .kt-user-card__name {
-  color: #6c7293 !important;
+body[data-kt-sticky-header="on"] .header-container{
+  padding-left: 30px !important;
 }
 
-.kt-header__topbar .subscription-warning {
-  padding-top: 24px;
-}
+@media (max-width: 991.98px) {
+    #kt_quick_user_toggle {
+      padding-top: 8px;
+    }
 
-.kt-header__topbar .subscription-warning span {
-  color: #fff;
-}
-
-.unread-notification-count {
-  position: absolute;
-  top: 14px;
-  right: 8px;
-  font-size: 1.0rem !important;
-}
-
-.menuSearchBarContainer {
-  width: calc(100% - 20px);
-  margin: 0 10px;
-}
-
-.menuSearchBarInput {
-  background-color: rgb(18, 18, 30) !important;
-  border: 1px solid rgb(44, 45, 68) !important;
-  color: #9899ac !important;
-  width: calc(100% - 20px);
-}
-
-.menuSearchBarInput:focus {
-  border-color: #7380fc !important;
-  color: #fff !important;
+    #kt_header{
+      z-index: 99;
+  }
 }

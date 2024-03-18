@@ -33,6 +33,16 @@
                 "glob": "abp.signalr-client.js",
                 "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
                 "output": "/assets/abp"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "node_modules/primeng/resources/themes/mdc-light-indigo/",
+                "output": "assets/primeng/themes/mdc-light-indigo/"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "node_modules/primeng/resources/themes/mdc-dark-indigo/",
+                "output": "assets/primeng/themes/mdc-dark-indigo/"
               }
             ],
             "styles": [
@@ -41,13 +51,12 @@
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeng/resources/themes/fluent-light/theme.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/sweetalert2/dist/sweetalert2.css",
               "node_modules/cookieconsent/build/cookieconsent.min.css",
 
               "src/assets/primeng/file-upload/css/primeng.file-upload.css",
-              "src/assets/primeng/autocomplete/css/primeng.autocomplete.css",
+              "src/assets/primeng/autocomplete/css/primeng.autocomplete.less",
               "src/assets/primeng/tree/css/primeng.tree.css",
               "src/assets/primeng/context-menu/css/primeng.context-menu.css",
 
@@ -118,7 +127,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -127,6 +135,27 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "k8s": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.k8s.ts"
                 }
               ]
             }
@@ -144,6 +173,9 @@
             },
             "production": {
               "browserTarget": "abp-zero-template:build:production"
+            },
+            "k8s": {
+              "browserTarget": "abp-zero-template:build:k8s"
             }
           }
         },
@@ -166,13 +198,12 @@
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeng/resources/themes/fluent-light/theme.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/sweetalert2/dist/sweetalert2.css",
               "node_modules/cookieconsent/build/cookieconsent.min.css",
 
               "src/assets/primeng/file-upload/css/primeng.file-upload.css",
-              "src/assets/primeng/autocomplete/css/primeng.autocomplete.css",
+              "src/assets/primeng/autocomplete/css/primeng.autocomplete.less",
               "src/assets/primeng/tree/css/primeng.tree.css",
               "src/assets/primeng/context-menu/css/primeng.context-menu.css",
 
@@ -218,15 +249,18 @@
                 "glob": "abp.signalr-client.js",
                 "input": "node_modules/abp-web-resources/Abp/Framework/scripts/libs",
                 "output": "/assets/abp"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "node_modules/primeng/resources/themes/mdc-light-indigo/",
+                "output": "assets/primeng/themes/mdc-light-indigo/"
+              },
+              {
+                "glob": "**/*.*",
+                "input": "node_modules/primeng/resources/themes/mdc-dark-indigo/",
+                "output": "assets/primeng/themes/mdc-dark-indigo/"
               }
             ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["src/tsconfig.app.json"],
-            "exclude": []
           }
         }
       }
@@ -242,13 +276,6 @@
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "abp-zero-template:serve",
             "port": 4200
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["e2e/tsconfig.json"],
-            "exclude": []
           }
         }
       }

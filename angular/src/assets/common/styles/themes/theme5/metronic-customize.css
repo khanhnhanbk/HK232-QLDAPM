@@ -29,3 +29,7 @@ p-autoComplete{
 .menuSearchBarContainer{
     width: calc(100% - 20px);
 }
+
+#kt_chat_contacts_header {
+    padding: 0 1rem !important;
+  }

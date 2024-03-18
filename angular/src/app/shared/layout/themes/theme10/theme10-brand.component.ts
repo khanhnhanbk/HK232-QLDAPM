@@ -16,8 +16,4 @@ export class Theme10BrandComponent extends AppComponentBase {
     constructor(injector: Injector, @Inject(DOCUMENT) private document: Document) {
         super(injector);
     }
-
-    clickTopbarToggle(): void {
-        this.document.body.classList.toggle('m-topbar--on');
-    }
 }

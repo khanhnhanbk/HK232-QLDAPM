@@ -18,24 +18,23 @@
                     </h4>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>{{ 'Key' | localize }}</label>
+                    <div class="mb-5">
+                        <label class="form-label">{{ 'Key' | localize }}</label>
                         <div>
                             <strong>{{ model.key }}</strong>
                         </div>
                     </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <label for="BaseLanguageDisplayName">
-                            <i class="{{ baseLanguage.icon }}"></i>
+                    <div class="mb-5 form-md-line-input form-md-floating-label no-hint">
+                        <label class="form-label" for="BaseLanguageDisplayName">
+                            <i class="d-inline-block {{ baseLanguage.icon }}"></i>
                             {{ baseLanguage.displayName }}
                         </label>
                         <textarea
@@ -47,9 +46,9 @@
                             name="baseText"
                         ></textarea>
                     </div>
-                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                        <label for="TargetLanguageDisplayName">
-                            <i class="{{ targetLanguage.icon }}"></i>
+                    <div class="mb-5 form-md-line-input form-md-floating-label no-hint">
+                        <label class="form-label" for="TargetLanguageDisplayName">
+                            <i class="d-inline-block {{ targetLanguage.icon }}"></i>
                             {{ targetLanguage.displayName }}
                         </label>
                         <textarea

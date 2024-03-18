@@ -20,17 +20,32 @@ export class DynamicResourcesHelper {
             document.documentElement.setAttribute('dir', 'rtl');
         }
 
-        const cssPostfix = isRtl ? '-rtl' : '';
+        const cssPrefix = ThemeHelper.darkMode() ? '.dark' : '';
+        const cssPostfix = isRtl ? '.rtl' : '';
         const styleLoaderService = new StyleLoaderService();
 
         let styleUrls = [
             AppConsts.appBaseUrl +
                 '/assets/metronic/themes/' +
                 theme +
-                '/css/style.bundle' +
+                '/css/style' +
+                cssPrefix +
+                '.bundle' +
                 cssPostfix.replace('-', '.') +
                 '.min.css',
-            AppConsts.appBaseUrl + '/assets/primeng/datatable/css/primeng.datatable' + cssPostfix + '.min.css',
+            AppConsts.appBaseUrl +
+                '/assets/metronic/themes/' +
+                theme +
+                '/plugins/global/plugins' +
+                cssPrefix +
+                '.bundle' +
+                cssPostfix.replace('-', '.') +
+                '.min.css',
+            AppConsts.appBaseUrl +
+                '/assets/primeng/themes/mdc-' +
+                (ThemeHelper.darkMode() ? 'dark' : 'light') +
+                '-indigo/theme.css', // PrimeNG Dark mode styles
+            AppConsts.appBaseUrl + '/assets/primeng/datatable/css/primeng.datatable' + cssPostfix + '.min.css', // PrimeNG RTL styles
             AppConsts.appBaseUrl + '/assets/common/styles/metronic-customize.min.css',
             AppConsts.appBaseUrl + '/assets/common/styles/themes/' + theme + '/metronic-customize.min.css',
             AppConsts.appBaseUrl + '/assets/common/styles/metronic-customize-angular.min.css',

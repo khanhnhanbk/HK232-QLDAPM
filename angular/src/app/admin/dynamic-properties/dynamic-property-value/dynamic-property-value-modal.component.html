@@ -21,12 +21,11 @@
                 </h4>
                 <button
                     type="button"
-                    class="close"
+                    class="btn-close"
                     (click)="close()"
                     [attr.aria-label]="l('Close')"
                     [disabled]="saving"
                 >
-                    <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="modal-body" *ngIf="dynamicPropertyValue">
@@ -43,7 +42,7 @@
                     </button>
                 </div>
                 <div class="row" *ngIf="createOrEditValueEnabled">
-                    <div class="form-group col">
+                    <div class="mb-5 col">
                         <label for="Name">{{ 'Value' | localize }} *</label>
 
                         <div class="input-group">

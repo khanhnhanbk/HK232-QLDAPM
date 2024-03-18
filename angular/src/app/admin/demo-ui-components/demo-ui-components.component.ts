@@ -10,4 +10,10 @@ export class DemoUiComponentsComponent extends AppComponentBase {
     constructor(injector: Injector) {
         super(injector);
     }
+
+    alertVisible = true;
+
+    hideAlert(): void{
+        this.alertVisible = false;
+    }
 }

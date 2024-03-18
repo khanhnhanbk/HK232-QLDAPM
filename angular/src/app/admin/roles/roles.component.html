@@ -5,7 +5,7 @@
                 <button
                     (click)="createRole()"
                     *ngIf="'Pages.Administration.Roles.Create' | permission"
-                    class="btn btn-primary"
+                    class="btn btn-primary float-end"
                 >
                     <i class="fa fa-plus"></i>
                     {{ 'CreateNewRole' | localize }}
@@ -18,16 +18,16 @@
                 <div class="card-body">
                     <div class="form">
                         <div class="row">
-                            <div class="col-xl-6">
-                                <div class="form-group">
+                            <div class="col-6">
+                                <div class="mb-5">
                                     <permission-tree-modal
                                         #permissionFilterTreeModal
                                         (onModalclose)="getRoles()"
                                     ></permission-tree-modal>
                                 </div>
                             </div>
-                            <div class="col-xl-6 text-right">
-                                <button name="RefreshButton" class="btn btn-primary" (click)="getRoles()">
+                            <div class="col-6 text-end">
+                                <button name="RefreshButton" class="btn btn-primary float-end" (click)="getRoles()">
                                     <i class="la la-refresh"></i>
                                     {{ 'Refresh' | localize }}
                                 </button>
@@ -142,7 +142,7 @@
                                                 {{ record.displayName }}
                                                 <span
                                                     *ngIf="record.isStatic"
-                                                    class="label label-primary label-inline m-1"
+                                                    class="badge badge-primary m-1"
                                                     data-toggle="tooltip"
                                                     title="{{ 'StaticRole_Tooltip' | localize }}"
                                                     data-placement="top"
@@ -151,7 +151,7 @@
                                                 </span>
                                                 <span
                                                     *ngIf="record.isDefault"
-                                                    class="label label-dark label-inline m-1"
+                                                    class="badge badge-dark m-1"
                                                     data-toggle="tooltip"
                                                     title="{{ 'DefaultRole_Description' | localize }}"
                                                     data-placement="top"

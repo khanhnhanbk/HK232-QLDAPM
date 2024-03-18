@@ -1,17 +1,18 @@
 import { IThemeAssetContributor } from '@app/shared/layout/themes/ThemeAssetContributor';
 import { ThemeHelper } from '@app/shared/layout/themes/ThemeHelper';
 import { DefaultThemeAssetContributor } from '@app/shared/layout/themes/default/DefaultThemeAssetContributor';
-import { Theme8ThemeAssetContributor } from '@app/shared/layout/themes/theme8/Theme8ThemeAssetContributor';
 import { Theme2ThemeAssetContributor } from '@app/shared/layout/themes/theme2/Theme2ThemeAssetContributor';
-import { Theme11ThemeAssetContributor } from '@app/shared/layout/themes/theme11/Theme11ThemeAssetContributor';
-import { Theme10ThemeAssetContributor } from '@app/shared/layout/themes/theme10/Theme10ThemeAssetContributor';
-import { Theme9ThemeAssetContributor } from '@app/shared/layout/themes/theme9/Theme9ThemeAssetContributor';
-import { Theme7ThemeAssetContributor } from '@app/shared/layout/themes/theme7/Theme7ThemeAssetContributor';
-import { Theme6ThemeAssetContributor } from '@app/shared/layout/themes/theme6/Theme6ThemeAssetContributor';
-import { Theme5ThemeAssetContributor } from '@app/shared/layout/themes/theme5/Theme5ThemeAssetContributor';
-import { Theme4ThemeAssetContributor } from '@app/shared/layout/themes/theme4/Theme4ThemeAssetContributor';
 import { Theme3ThemeAssetContributor } from '@app/shared/layout/themes/theme3/Theme3ThemeAssetContributor';
-
+import { Theme4ThemeAssetContributor } from '@app/shared/layout/themes/theme4/Theme4ThemeAssetContributor';
+import { Theme5ThemeAssetContributor } from '@app/shared/layout/themes/theme5/Theme5ThemeAssetContributor';
+import { Theme6ThemeAssetContributor } from '@app/shared/layout/themes/theme6/Theme6ThemeAssetContributor';
+import { Theme7ThemeAssetContributor } from '@app/shared/layout/themes/theme7/Theme7ThemeAssetContributor';
+import { Theme8ThemeAssetContributor } from '@app/shared/layout/themes/theme8/Theme8ThemeAssetContributor';
+import { Theme9ThemeAssetContributor } from '@app/shared/layout/themes/theme9/Theme9ThemeAssetContributor';
+import { Theme10ThemeAssetContributor } from '@app/shared/layout/themes/theme10/Theme10ThemeAssetContributor';
+import { Theme11ThemeAssetContributor } from '@app/shared/layout/themes/theme11/Theme11ThemeAssetContributor';
+import { Theme12ThemeAssetContributor } from '@app/shared/layout/themes/theme12/Theme12ThemeAssetContributor';
+import { Theme13ThemeAssetContributor } from '@app/shared/layout/themes/theme13/Theme13ThemeAssetContributor';
 export class ThemeAssetContributorFactory {
     static getCurrent(): IThemeAssetContributor {
         let theme = ThemeHelper.getTheme();
@@ -58,6 +59,14 @@ export class ThemeAssetContributorFactory {
 
         if (theme === 'theme11') {
             return new Theme11ThemeAssetContributor();
+        }
+
+        if (theme === 'theme12') {
+            return new Theme12ThemeAssetContributor();
+        }
+
+        if (theme === 'theme13') {
+            return new Theme13ThemeAssetContributor();
         }
 
         return null;

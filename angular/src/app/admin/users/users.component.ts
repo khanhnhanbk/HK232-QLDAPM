@@ -70,7 +70,6 @@ export class UsersComponent extends AppComponentBase implements AfterViewInit {
     getUsers(event?: LazyLoadEvent) {
         if (this.primengTableHelper.shouldResetPaging(event)) {
             this.paginator.changePage(0);
-
             return;
         }
 

@@ -2284,6 +2284,79 @@ export class DashboardCustomizationServiceProxy {
     }
 
     /**
+     * @param dashboardName (optional) 
+     * @param application (optional) 
+     * @param pageId (optional) 
+     * @return Success
+     */
+    getAllAvailableWidgetDefinitionsForPage(dashboardName: string | undefined, application: string | undefined, pageId: string | undefined): Observable<WidgetOutput[]> {
+        let url_ = this.baseUrl + "/api/services/app/DashboardCustomization/GetAllAvailableWidgetDefinitionsForPage?";
+        if (dashboardName === null)
+            throw new Error("The parameter 'dashboardName' cannot be null.");
+        else if (dashboardName !== undefined)
+            url_ += "DashboardName=" + encodeURIComponent("" + dashboardName) + "&";
+        if (application === null)
+            throw new Error("The parameter 'application' cannot be null.");
+        else if (application !== undefined)
+            url_ += "Application=" + encodeURIComponent("" + application) + "&";
+        if (pageId === null)
+            throw new Error("The parameter 'pageId' cannot be null.");
+        else if (pageId !== undefined)
+            url_ += "PageId=" + encodeURIComponent("" + pageId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllAvailableWidgetDefinitionsForPage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllAvailableWidgetDefinitionsForPage(<any>response_);
+                } catch (e) {
+                    return <Observable<WidgetOutput[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<WidgetOutput[]>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetAllAvailableWidgetDefinitionsForPage(response: HttpResponseBase): Observable<WidgetOutput[]> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(WidgetOutput.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<WidgetOutput[]>(<any>null);
+    }
+
+    /**
      * @param application (optional) 
      * @return Success
      */
@@ -6371,7 +6444,7 @@ export class NotificationServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    setNotificationAsRead(body: EntityDtoOfGuid | undefined): Observable<void> {
+    setNotificationAsRead(body: EntityDtoOfGuid | undefined): Observable<SetNotificationAsReadOutput> {
         let url_ = this.baseUrl + "/api/services/app/Notification/SetNotificationAsRead";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6383,6 +6456,7 @@ export class NotificationServiceProxy {
             responseType: "blob",
             headers: new HttpHeaders({
                 "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
             })
         };
 
@@ -6393,14 +6467,14 @@ export class NotificationServiceProxy {
                 try {
                     return this.processSetNotificationAsRead(<any>response_);
                 } catch (e) {
-                    return <Observable<void>><any>_observableThrow(e);
+                    return <Observable<SetNotificationAsReadOutput>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<void>><any>_observableThrow(response_);
+                return <Observable<SetNotificationAsReadOutput>><any>_observableThrow(response_);
         }));
     }
 
-    protected processSetNotificationAsRead(response: HttpResponseBase): Observable<void> {
+    protected processSetNotificationAsRead(response: HttpResponseBase): Observable<SetNotificationAsReadOutput> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -6409,14 +6483,17 @@ export class NotificationServiceProxy {
         let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
         if (status === 200) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return _observableOf<void>(<any>null);
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = SetNotificationAsReadOutput.fromJS(resultData200);
+            return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<void>(<any>null);
+        return _observableOf<SetNotificationAsReadOutput>(<any>null);
     }
 
     /**
@@ -10426,10 +10503,11 @@ export class TenantCustomizationServiceProxy {
 
     /**
      * @param tenantId (optional) 
+     * @param extension (optional) 
      * @return Success
      */
-    getTenantLogo(skin: string, tenantId: number | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/TenantCustomization/GetTenantLogo/{skin}/{tenantId}?";
+    getTenantLogo(skin: string, tenantId: number | undefined, extension: string | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/TenantCustomization/GetTenantLogo/{skin}/{tenantId}/{extension}?";
         if (skin === undefined || skin === null)
             throw new Error("The parameter 'skin' must be defined.");
         url_ = url_.replace("{skin}", encodeURIComponent("" + skin));
@@ -10437,6 +10515,10 @@ export class TenantCustomizationServiceProxy {
             throw new Error("The parameter 'tenantId' cannot be null.");
         else if (tenantId !== undefined)
             url_ += "tenantId=" + encodeURIComponent("" + tenantId) + "&";
+        if (extension === null)
+            throw new Error("The parameter 'extension' cannot be null.");
+        else if (extension !== undefined)
+            url_ += "extension=" + encodeURIComponent("" + extension) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -20422,6 +20504,7 @@ export class HostUserManagementSettingsEditDto implements IHostUserManagementSet
     useCaptchaOnLogin!: boolean;
     allowUsingGravatarProfilePicture!: boolean;
     sessionTimeOutSettings!: SessionTimeOutSettingsEditDto;
+    userPasswordSettings!: UserPasswordSettingsEditDto;
 
     constructor(data?: IHostUserManagementSettingsEditDto) {
         if (data) {
@@ -20441,6 +20524,7 @@ export class HostUserManagementSettingsEditDto implements IHostUserManagementSet
             this.useCaptchaOnLogin = _data["useCaptchaOnLogin"];
             this.allowUsingGravatarProfilePicture = _data["allowUsingGravatarProfilePicture"];
             this.sessionTimeOutSettings = _data["sessionTimeOutSettings"] ? SessionTimeOutSettingsEditDto.fromJS(_data["sessionTimeOutSettings"]) : <any>undefined;
+            this.userPasswordSettings = _data["userPasswordSettings"] ? UserPasswordSettingsEditDto.fromJS(_data["userPasswordSettings"]) : <any>undefined;
         }
     }
 
@@ -20460,6 +20544,7 @@ export class HostUserManagementSettingsEditDto implements IHostUserManagementSet
         data["useCaptchaOnLogin"] = this.useCaptchaOnLogin;
         data["allowUsingGravatarProfilePicture"] = this.allowUsingGravatarProfilePicture;
         data["sessionTimeOutSettings"] = this.sessionTimeOutSettings ? this.sessionTimeOutSettings.toJSON() : <any>undefined;
+        data["userPasswordSettings"] = this.userPasswordSettings ? this.userPasswordSettings.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -20472,6 +20557,7 @@ export interface IHostUserManagementSettingsEditDto {
     useCaptchaOnLogin: boolean;
     allowUsingGravatarProfilePicture: boolean;
     sessionTimeOutSettings: SessionTimeOutSettingsEditDto;
+    userPasswordSettings: UserPasswordSettingsEditDto;
 }
 
 export enum HttpStatusCode {
@@ -24971,6 +25057,42 @@ export interface ISetDefaultLanguageInput {
     name: string;
 }
 
+export class SetNotificationAsReadOutput implements ISetNotificationAsReadOutput {
+    success!: boolean;
+
+    constructor(data?: ISetNotificationAsReadOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.success = _data["success"];
+        }
+    }
+
+    static fromJS(data: any): SetNotificationAsReadOutput {
+        data = typeof data === 'object' ? data : {};
+        let result = new SetNotificationAsReadOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["success"] = this.success;
+        return data; 
+    }
+}
+
+export interface ISetNotificationAsReadOutput {
+    success: boolean;
+}
+
 export enum SettingScopes {
     Application = 1,
     Tenant = 2,
@@ -26250,9 +26372,8 @@ export interface IThemeFooterSettingsDto {
 }
 
 export class ThemeHeaderSettingsDto implements IThemeHeaderSettingsDto {
-    desktopFixedHeader!: boolean;
-    mobileFixedHeader!: boolean;
-    headerSkin!: string | undefined;
+    readonly desktopFixedHeader!: boolean;
+    readonly mobileFixedHeader!: boolean;
     minimizeDesktopHeaderType!: string | undefined;
 
     constructor(data?: IThemeHeaderSettingsDto) {
@@ -26266,9 +26387,8 @@ export class ThemeHeaderSettingsDto implements IThemeHeaderSettingsDto {
 
     init(_data?: any) {
         if (_data) {
-            this.desktopFixedHeader = _data["desktopFixedHeader"];
-            this.mobileFixedHeader = _data["mobileFixedHeader"];
-            this.headerSkin = _data["headerSkin"];
+            (<any>this).desktopFixedHeader = _data["desktopFixedHeader"];
+            (<any>this).mobileFixedHeader = _data["mobileFixedHeader"];
             this.minimizeDesktopHeaderType = _data["minimizeDesktopHeaderType"];
         }
     }
@@ -26284,7 +26404,6 @@ export class ThemeHeaderSettingsDto implements IThemeHeaderSettingsDto {
         data = typeof data === 'object' ? data : {};
         data["desktopFixedHeader"] = this.desktopFixedHeader;
         data["mobileFixedHeader"] = this.mobileFixedHeader;
-        data["headerSkin"] = this.headerSkin;
         data["minimizeDesktopHeaderType"] = this.minimizeDesktopHeaderType;
         return data; 
     }
@@ -26293,12 +26412,12 @@ export class ThemeHeaderSettingsDto implements IThemeHeaderSettingsDto {
 export interface IThemeHeaderSettingsDto {
     desktopFixedHeader: boolean;
     mobileFixedHeader: boolean;
-    headerSkin: string | undefined;
     minimizeDesktopHeaderType: string | undefined;
 }
 
 export class ThemeLayoutSettingsDto implements IThemeLayoutSettingsDto {
     layoutType!: string | undefined;
+    darkMode!: boolean;
 
     constructor(data?: IThemeLayoutSettingsDto) {
         if (data) {
@@ -26312,6 +26431,7 @@ export class ThemeLayoutSettingsDto implements IThemeLayoutSettingsDto {
     init(_data?: any) {
         if (_data) {
             this.layoutType = _data["layoutType"];
+            this.darkMode = _data["darkMode"];
         }
     }
 
@@ -26325,12 +26445,14 @@ export class ThemeLayoutSettingsDto implements IThemeLayoutSettingsDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["layoutType"] = this.layoutType;
+        data["darkMode"] = this.darkMode;
         return data; 
     }
 }
 
 export interface IThemeLayoutSettingsDto {
     layoutType: string | undefined;
+    darkMode: boolean;
 }
 
 export class ThemeMenuSettingsDto implements IThemeMenuSettingsDto {
@@ -26461,8 +26583,9 @@ export class ThemeSubHeaderSettingsDto implements IThemeSubHeaderSettingsDto {
     fixedSubHeader!: boolean;
     subheaderStyle!: string | undefined;
     subheaderSize!: number;
-    titleStlye!: string | undefined;
+    titleStyle!: string | undefined;
     containerStyle!: string | undefined;
+    subContainerStyle!: string | undefined;
 
     constructor(data?: IThemeSubHeaderSettingsDto) {
         if (data) {
@@ -26478,8 +26601,9 @@ export class ThemeSubHeaderSettingsDto implements IThemeSubHeaderSettingsDto {
             this.fixedSubHeader = _data["fixedSubHeader"];
             this.subheaderStyle = _data["subheaderStyle"];
             this.subheaderSize = _data["subheaderSize"];
-            this.titleStlye = _data["titleStlye"];
+            this.titleStyle = _data["titleStyle"];
             this.containerStyle = _data["containerStyle"];
+            this.subContainerStyle = _data["subContainerStyle"];
         }
     }
 
@@ -26495,8 +26619,9 @@ export class ThemeSubHeaderSettingsDto implements IThemeSubHeaderSettingsDto {
         data["fixedSubHeader"] = this.fixedSubHeader;
         data["subheaderStyle"] = this.subheaderStyle;
         data["subheaderSize"] = this.subheaderSize;
-        data["titleStlye"] = this.titleStlye;
+        data["titleStyle"] = this.titleStyle;
         data["containerStyle"] = this.containerStyle;
+        data["subContainerStyle"] = this.subContainerStyle;
         return data; 
     }
 }
@@ -26505,8 +26630,9 @@ export interface IThemeSubHeaderSettingsDto {
     fixedSubHeader: boolean;
     subheaderStyle: string | undefined;
     subheaderSize: number;
-    titleStlye: string | undefined;
+    titleStyle: string | undefined;
     containerStyle: string | undefined;
+    subContainerStyle: string | undefined;
 }
 
 export class TopStatsData implements ITopStatsData {
@@ -27770,6 +27896,54 @@ export interface IUserNotification {
 export enum UserNotificationState {
     Unread = 0,
     Read = 1,
+}
+
+export class UserPasswordSettingsEditDto implements IUserPasswordSettingsEditDto {
+    enableCheckingLastXPasswordWhenPasswordChange!: boolean;
+    checkingLastXPasswordCount!: number;
+    enablePasswordExpiration!: boolean;
+    passwordExpirationDayCount!: number;
+
+    constructor(data?: IUserPasswordSettingsEditDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.enableCheckingLastXPasswordWhenPasswordChange = _data["enableCheckingLastXPasswordWhenPasswordChange"];
+            this.checkingLastXPasswordCount = _data["checkingLastXPasswordCount"];
+            this.enablePasswordExpiration = _data["enablePasswordExpiration"];
+            this.passwordExpirationDayCount = _data["passwordExpirationDayCount"];
+        }
+    }
+
+    static fromJS(data: any): UserPasswordSettingsEditDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new UserPasswordSettingsEditDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["enableCheckingLastXPasswordWhenPasswordChange"] = this.enableCheckingLastXPasswordWhenPasswordChange;
+        data["checkingLastXPasswordCount"] = this.checkingLastXPasswordCount;
+        data["enablePasswordExpiration"] = this.enablePasswordExpiration;
+        data["passwordExpirationDayCount"] = this.passwordExpirationDayCount;
+        return data; 
+    }
+}
+
+export interface IUserPasswordSettingsEditDto {
+    enableCheckingLastXPasswordWhenPasswordChange: boolean;
+    checkingLastXPasswordCount: number;
+    enablePasswordExpiration: boolean;
+    passwordExpirationDayCount: number;
 }
 
 export class UserRoleDto implements IUserRoleDto {

@@ -121,6 +121,8 @@ export abstract class AppComponentBase implements OnDestroy {
     get containerClass(): string {
         if (this.appSession.theme.baseSettings.layout.layoutType === 'fluid') {
             return 'container-fluid';
+        } else if (this.appSession.theme.baseSettings.layout.layoutType === 'fluid-xxl') {
+            return 'container-xxl';
         }
 
         return 'container';

@@ -7,7 +7,7 @@ import { ImpersonationService } from '@app/admin/users/impersonation.service';
 @Component({
     selector: 'active-delegated-users-combo',
     template: `
-        <div *ngIf="delegations?.length" class="topbar-item active-user-delegations">
+        <div *ngIf="delegations?.length" class="d-flex align-items-center active-user-delegations">
             <div [class]="customStyle">
                 <select
                     class="form-control form-control-sm"
@@ -42,7 +42,7 @@ export class ActiveDelegatedUsersComboComponent extends AppComponentBase impleme
     currentSelectedUserDelegationId = 0;
     @HostBinding('style.display') public display = 'flex';
 
-    @Input() customStyle = 'btn btn-clean btn-lg mr-1 mt-2';
+    @Input() customStyle = 'btn btn-clean btn-lg me-1 mt-2';
 
     constructor(
         private _userDelegationService: UserDelegationServiceProxy,

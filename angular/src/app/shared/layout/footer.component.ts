@@ -12,7 +12,7 @@ export class FooterComponent extends AppComponentBase implements OnInit {
     @Input() useBottomDiv = true;
     webAppGuiVersion: string;
 
-    footerStyle = 'footer bg-white py-4 d-flex flex-lg-column';
+    footerStyle = 'footer py-4 d-flex flex-lg-column';
 
     constructor(injector: Injector) {
         super(injector);

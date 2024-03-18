@@ -14,8 +14,9 @@ import { UrlHelper } from '@shared/helpers/UrlHelper';
 export class HeaderNotificationsComponent extends AppComponentBase implements OnInit {
     notifications: IFormattedUserNotification[] = [];
     unreadNotificationCount = 0;
-    @Input() isDropup = false;
-    @Input() customStyle = 'btn btn-icon btn-dropdown btn-clean btn-lg mr-1';
+    
+    @Input() customStyle = 'btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px me-2';
+    @Input() iconStyle = 'flaticon-alert-2 unread-notification fs-4';
 
     constructor(
         injector: Injector,
@@ -69,7 +70,7 @@ export class HeaderNotificationsComponent extends AppComponentBase implements On
             });
         });
 
-        function onNotificationsRead(userNotificationId) {
+        function onNotificationsRead(userNotificationId, success) {
             for (let i = 0; i < self.notifications.length; i++) {
                 if (self.notifications[i].userNotificationId === userNotificationId) {
                     self.notifications[i].state = 'READ';
@@ -77,12 +78,14 @@ export class HeaderNotificationsComponent extends AppComponentBase implements On
                 }
             }
 
-            self.unreadNotificationCount -= 1;
+            if(success){
+                self.unreadNotificationCount -= 1;
+            }
         }
 
-        this.subscribeToEvent('app.notifications.read', (userNotificationId) => {
+        this.subscribeToEvent('app.notifications.read', (userNotificationId, success) => {
             self._zone.run(() => {
-                onNotificationsRead(userNotificationId);
+                onNotificationsRead(userNotificationId, success);
             });
         });
     }

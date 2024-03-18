@@ -1,12 +1,11 @@
+<!--begin::Signin-->
 <div class="login-form" [@routerTransition]>
     <div class="pb-13 pt-lg-0 pt-5">
-        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-            {{ 'LogIn' | localize }}
-        </h3>
+        <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ 'LogIn' | localize }}</h3>
     </div>
     <!--begin::Form-->
-    <form #loginForm="ngForm" class="login-form form" method="post" method="post" (ngSubmit)="login()">
-        <div class="form-group">
+    <form #loginForm="ngForm" class="login-form form" method="post"  (ngSubmit)="login()">
+        <div class="mb-5">
             <input
                 #userNameOrEmailAddressInput="ngModel"
                 [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress"
@@ -24,7 +23,7 @@
             ></validation-messages>
         </div>
 
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 #passwordInput="ngModel"
                 [(ngModel)]="loginService.authenticateModel.password"
@@ -39,30 +38,26 @@
             <validation-messages [formCtrl]="passwordInput" *ngIf="!passwordInput.touched"></validation-messages>
         </div>
 
-        <div class="form-group d-flex justify-content-between mt-4">
-            <label class="checkbox checkbox-outline">
-                <input [(ngModel)]="loginService.rememberMe" type="checkbox" name="rememberMe" value="true" />
-                <span class="ml-2"></span>
-                {{ 'RememberMe' | localize }}
+        <div class="mb-5 d-flex justify-content-between mt-4">
+            <label class="form-check form-check-custom form-check-solid">
+                <input type="checkbox" name="rememberMe" class="form-check-input" value="true" [(ngModel)]="loginService.rememberMe">
+                <span class="form-check-label">
+                    {{ 'RememberMe' | localize }}
+                </span>
             </label>
-            <a
-                routerLink="/account/forgot-password"
-                id="forget-password"
-                class="text-primary font-size-h6 font-weight-bolder text-hover-primary"
-            >
-                {{ 'ForgotPassword' | localize }}
-            </a>
+            <a routerLink="/account/forgot-password"
+               id="forget-password" class="text-primary font-size-h6 font-weight-bolder text-hover-primary">{{ 'ForgotPassword' | localize }}</a>
         </div>
 
+        <!--begin::Action-->
         <div class="pb-lg-0 pb-5">
-            <button
-                type="submit"
-                class="btn btn-block btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-                [disabled]="!loginForm.form.valid"
-            >
-                {{ 'LogIn' | localize }}
-            </button>
+            <button type="submit"
+                    [disabled]="!loginForm.form.valid"
+                    class="btn w-100 btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 me-3">{{ 'LogIn' | localize }}</button>
         </div>
+
+
+        <!--end::Action-->
     </form>
 
     <!--end::Form-->
@@ -73,9 +68,7 @@
         *ngIf="(multiTenancySideIsTeanant || !isMultiTenancyEnabled) && loginService.externalLoginProviders.length > 0"
     >
         <div class="divider">
-            <span></span>
             <span>{{ 'LoginWith' | localize }}</span>
-            <span></span>
         </div>
     </div>
 
@@ -85,7 +78,7 @@
     >
         <a
             *ngFor="let provider of loginService.externalLoginProviders"
-            class="btn btn-sm btn-light-primary font-weight-bolder py-2 mb-2 ml-0 mr-2"
+            class="btn btn-sm btn-light-primary font-weight-bolder py-2 mb-2 ml-0 me-2"
             (click)="externalLogin(provider)"
             title="{{ provider.name }}"
         >
@@ -98,17 +91,17 @@
 
 <div class="mt-5">
     <div>
-        <span>
-            {{ 'NotAMemberYet' | localize }}
-        </span>
+        <span>{{ 'NotAMemberYet' | localize }}</span>
     </div>
     <span *ngIf="isSelfRegistrationAllowed">
         <a routerLink="/account/register">{{ 'CreateAnAccount' | localize }}</a>
-        <span>|</span>
-    </span>
+        <span class="pipe-divider"> | </span>
+   </span>
+
     <span *ngIf="!multiTenancySideIsTeanant && isTenantSelfRegistrationAllowed">
         <a routerLink="/account/select-edition">{{ 'NewTenant' | localize }}</a>
-        <span>|</span>
+        <span class="pipe-divider"> | </span>
     </span>
+
     <a routerLink="/account/email-activation" id="email-activation-btn">{{ 'EmailActivation' | localize }}</a>
 </div>

@@ -6,15 +6,16 @@
                 <div class="card-body">
                     <tabset>
                         <tab heading="{{ 'OperationLogs' | localize }}">
-                            <div class="row m-2">
-                                <div class="col-sm-12 text-right">
-                                    <button type="button" class="btn btn-success" (click)="exportToExcelAuditLogs()">
-                                        <i class="far fa-file-excel"></i>
-                                        {{ 'ExportToExcel' | localize }}
-                                    </button>
-                                    <button type="button" class="btn btn-primary" (click)="getAuditLogs()">
+                            <div class="row m-2 mt-5">
+                                <div class="col-sm-12 text-end">
+                                    <button type="button" class="btn btn-primary float-end" (click)="getAuditLogs()">
                                         <i class="fa fa-sync"></i>
                                         {{ 'Refresh' | localize }}
+                                    </button>
+
+                                    <button type="button" class="btn btn-success float-end me-1" (click)="exportToExcelAuditLogs()">
+                                        <i class="far fa-file-excel"></i>
+                                        {{ 'ExportToExcel' | localize }}
                                     </button>
                                 </div>
                             </div>
@@ -23,8 +24,8 @@
                                 <form #auditFilterForm="ngForm" (ngSubmit)="getAuditLogs()">
                                     <div class="row align-items-center mb-2">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="StartEndRange">{{ 'DateRange' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="StartEndRange">{{ 'DateRange' | localize }}</label>
                                                 <input
                                                     class="form-control"
                                                     id="StartEndRange"
@@ -38,8 +39,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="UsernameAuditLog">{{ 'UserName' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="UsernameAuditLog">{{ 'UserName' | localize }}</label>
                                                 <input
                                                     id="UsernameAuditLog"
                                                     type="text"
@@ -53,8 +54,8 @@
 
                                     <div *ngIf="advancedFiltersAreShown" class="row">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="ServiceName">{{ 'Service' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="ServiceName">{{ 'Service' | localize }}</label>
                                                 <input
                                                     id="ServiceName"
                                                     name="ServiceName"
@@ -65,7 +66,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label style="display: block">{{ 'Duration' | localize }}</label>
+                                            <label class="form-label d-block">{{ 'Duration' | localize }}</label>
                                             <div class="input-group" style="width: 250px !important">
                                                 <input
                                                     type="text"
@@ -78,9 +79,7 @@
                                                     ng-maxlength="8"
                                                     [(ngModel)]="minExecutionDuration"
                                                 />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">---</span>
-                                                </div>
+                                                <span class="input-group-text">---</span>
                                                 <input
                                                     type="text"
                                                     name="MaxExecutionDuration"
@@ -95,8 +94,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="MethodName">{{ 'Action' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="MethodName">{{ 'Action' | localize }}</label>
                                                 <input
                                                     id="MethodName"
                                                     type="text"
@@ -107,8 +106,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="HasException">{{ 'ErrorState' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="HasException">{{ 'ErrorState' | localize }}</label>
                                                 <select
                                                     id="HasException"
                                                     name="HasException"
@@ -123,8 +122,8 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="BrowserInfo">{{ 'Browser' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="BrowserInfo">{{ 'Browser' | localize }}</label>
                                                 <input
                                                     id="BrowserInfo"
                                                     type="text"
@@ -135,7 +134,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group"></div>
+                                            <div class="mb-5"></div>
                                         </div>
                                     </div>
                                     <div class="row mb-2">
@@ -217,7 +216,7 @@
                                                 <td style="width: 75px">
                                                     <div class="text-center">
                                                         <button
-                                                            class="btn btn-outline-primary btn-sm btn-icon"
+                                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
                                                             (click)="showAuditLogDetails(record)"
                                                         >
                                                             <i class="la la-search" [attr.aria-label]="l('Search')"></i>
@@ -299,28 +298,30 @@
                             </div>
                         </tab>
                         <tab heading="{{ 'ChangeLogs' | localize }}">
-                            <div class="row m-2">
-                                <div class="col-sm-12 text-right">
+                            <div class="row m-2 mt-5">
+                                <div class="col-sm-12 text-end">
+                                    <button type="button" class="btn btn-primary float-end" (click)="getEntityChanges()">
+                                        <i class="fa fa-sync"></i>
+                                        {{ 'Refresh' | localize }}
+                                    </button>
+
                                     <button
                                         type="button"
-                                        class="btn btn-success"
+                                        class="btn btn-success float-end me-1"
                                         (click)="exportToExcelEntityChanges()"
                                     >
                                         <i class="far fa-file-excel"></i>
                                         {{ 'ExportToExcel' | localize }}
                                     </button>
-                                    <button type="button" class="btn btn-primary" (click)="getEntityChanges()">
-                                        <i class="fa fa-sync"></i>
-                                        {{ 'Refresh' | localize }}
-                                    </button>
+
                                 </div>
                             </div>
                             <div class="form">
                                 <form #entityChangeFilterForm="ngForm" (ngSubmit)="getEntityChanges()">
                                     <div class="row align-items-center mb-2">
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="StartEndRangeEntityChange">
+                                            <div class="mb-5">
+                                                <label class="form-label" for="StartEndRangeEntityChange">
                                                     {{ 'DateRange' | localize }}
                                                 </label>
                                                 <input
@@ -336,8 +337,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="UserNameEntityChange">{{ 'UserName' | localize }}</label>
+                                            <div class="mb-5">
+                                                <label class="form-label" for="UserNameEntityChange">{{ 'UserName' | localize }}</label>
                                                 <input
                                                     id="UserNameEntityChange"
                                                     type="text"
@@ -348,9 +349,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="EntityTypeFullName">{{ 'Object' | localize }}</label>
-
+                                            <div class="mb-5">
+                                                <label class="form-label" for="EntityTypeFullName">{{ 'Object' | localize }}</label>
                                                 <select
                                                     id="EntityTypeFullName"
                                                     name="EntityTypeFullName"
@@ -416,7 +416,7 @@
                                                 <td style="width: 40px">
                                                     <div class="text-center">
                                                         <button
-                                                            class="btn btn-outline-primary btn-sm btn-icon"
+                                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
                                                             (click)="showEntityChangeDetails(record)"
                                                         >
                                                             <i class="la la-search" [attr.aria-label]="l('Search')"></i>

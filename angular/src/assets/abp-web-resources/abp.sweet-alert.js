@@ -54,7 +54,7 @@ var abp = abp || {};
         }
         const { isHtml, ...optionsSafe } = options;
         return Swal.fire(optionsSafe).then(function(result) {
-            callback && callback(result.value);
+            callback && callback(result.value, result);
         });
     };
 })();

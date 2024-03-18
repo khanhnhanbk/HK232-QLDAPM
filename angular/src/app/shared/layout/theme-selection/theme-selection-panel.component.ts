@@ -1,7 +1,6 @@
 import { Component, Injector, ViewEncapsulation, ElementRef, HostBinding, OnInit } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { UiCustomizationSettingsServiceProxy } from '@shared/service-proxies/service-proxies';
-import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/offcanvas.directive';
 
 @Component({
     templateUrl: './theme-selection-panel.component.html',
@@ -11,14 +10,6 @@ import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/off
 })
 export class ThemeSelectionPanelComponent extends AppComponentBase implements OnInit {
     currentThemeName = '';
-
-    offcanvasOptions: OffcanvasOptions = {
-        overlay: true,
-        baseClass: 'offcanvas',
-        placement: 'right',
-        closeBy: 'kt_demo_panel_close',
-        toggleBy: 'kt_theme_selection_panel_toggle',
-    };
 
     constructor(injector: Injector, private _uiCustomizationService: UiCustomizationSettingsServiceProxy) {
         super(injector);

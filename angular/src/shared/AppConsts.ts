@@ -33,5 +33,5 @@ export class AppConsts {
     /// Gets current version of the application.
     /// It's also shown in the web page.
     /// </summary>
-    static readonly WebAppGuiVersion = '11.0.0';
+    static readonly WebAppGuiVersion = '11.1.0';
 }

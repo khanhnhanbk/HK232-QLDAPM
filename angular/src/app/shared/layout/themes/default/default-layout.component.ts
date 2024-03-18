@@ -1,11 +1,9 @@
 import { Injector, Component, OnInit, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { ThemesLayoutBaseComponent } from '@app/shared/layout/themes/themes-layout-base.component';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { DOCUMENT } from '@angular/common';
-import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/offcanvas.directive';
 import { AppConsts } from '@shared/AppConsts';
-import { ToggleOptions } from '@metronic/app/core/_base/layout/directives/toggle.directive';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 
 @Component({
@@ -14,26 +12,20 @@ import { DateTimeService } from '@app/shared/common/timing/date-time.service';
     animations: [appModuleAnimation()],
 })
 export class DefaultLayoutComponent extends ThemesLayoutBaseComponent implements OnInit {
-    menuCanvasOptions: OffcanvasOptions = {
-        baseClass: 'aside',
-        overlay: true,
-        closeBy: 'kt_aside_close_btn',
-        toggleBy: 'kt_aside_mobile_toggle',
-    };
-
-    userMenuToggleOptions: ToggleOptions = {
-        target: this.document.body,
-        targetState: 'topbar-mobile-on',
-        toggleState: 'active',
-    };
-
+    
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
 
-    constructor(injector: Injector, @Inject(DOCUMENT) private document: Document, _dateTimeService: DateTimeService) {
+    constructor(
+        injector: Injector, 
+        _dateTimeService: DateTimeService,
+        @Inject(DOCUMENT) private document: Document) {
         super(injector, _dateTimeService);
     }
 
     ngOnInit() {
         this.installationMode = UrlHelper.isInstallUrl(location.href);
+        if(this.currentTheme.baseSettings.menu.defaultMinimizedAside){
+            this.document.body.setAttribute('data-kt-aside-minimize','on');
+        }
     }
 }

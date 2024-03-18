@@ -12,7 +12,8 @@ export class ChatToggleButtonComponent extends ThemesLayoutBaseComponent impleme
     chatConnected = false;
     isHost = false;
 
-    @Input() customStyle = 'btn btn-icon btn-dropdown btn-clean btn-lg mr-1';
+    @Input() customStyle = 'btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px me-2';
+    @Input() iconStyle = 'flaticon-chat-2 fs-4';
 
     public constructor(
         injector: Injector,

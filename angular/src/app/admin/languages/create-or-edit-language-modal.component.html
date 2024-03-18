@@ -18,16 +18,15 @@
                     </h4>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="mb-5">
                         <p-dropdown
                             #languageCombobox
                             [options]="languageNamesSelectItems"
@@ -36,11 +35,12 @@
                             [itemSize]="30"
                             name="languageName"
                             [(ngModel)]="language.name"
+                            [appendTo]="null"
                             [style]="{ width: '100%' }"
                         ></p-dropdown>
                         <validation-messages [formCtrl]="languageCombobox"></validation-messages>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-5">
                         <p-dropdown
                             #iconCombobox
                             name="languageIcon"
@@ -49,6 +49,7 @@
                             [filter]="true"
                             [virtualScroll]="true"
                             [itemSize]="30"
+                            [appendTo]="null"
                             [style]="{ width: '100%' }"
                         >
                             <ng-template let-item pTemplate="selectedItem">
@@ -61,18 +62,18 @@
                             </ng-template>
                         </p-dropdown>
                     </div>
-                    <div class="checkbox-list">
-                        <label for="EditLanguage_IsEnabled" class="checkbox">
-                            <input
-                                id="EditLanguage_IsEnabled"
-                                type="checkbox"
-                                name="languageIsEnabled"
-                                [(ngModel)]="language.isEnabled"
-                            />
-                            <span></span>
+                    <label class="form-check form-check-custom form-check-solid py-1">
+                        <input
+                            id="EditLanguage_IsEnabled"
+                            type="checkbox"
+                            name="languageIsEnabled"
+                            [(ngModel)]="language.isEnabled"
+                            class="form-check-input"
+                        />
+                        <span class="form-check-label">
                             {{ 'IsEnabled' | localize }}
-                        </label>
-                    </div>
+                        </span>
+                    </label>
                 </div>
                 <div class="modal-footer">
                     <button

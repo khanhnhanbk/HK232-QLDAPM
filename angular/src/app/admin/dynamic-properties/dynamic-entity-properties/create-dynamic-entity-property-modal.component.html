@@ -17,18 +17,17 @@
                     </h4>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group col-12">
-                        <div class="form-group">
-                            <label for="Name">{{ 'Parameter' | localize }} *</label>
+                    <div class="mb-5 col-12">
+                        <div class="mb-5">
+                            <label class="form-label" for="Name">{{ 'Parameter' | localize }} *</label>
                             <select class="form-control" [(ngModel)]="dynamicEntityProperty.dynamicPropertyId" required>
                                 <option value="">{{ 'SelectADynamicProperty' | localize }}</option>
                                 <option *ngFor="let parameter of allDynamicProperties" [value]="parameter.id">

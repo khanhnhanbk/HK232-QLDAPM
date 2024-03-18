@@ -3,8 +3,6 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { ThemesLayoutBaseComponent } from '@app/shared/layout/themes/themes-layout-base.component';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { AppConsts } from '@shared/AppConsts';
-import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/offcanvas.directive';
-import { ToggleOptions } from '@metronic/app/core/_base/layout/directives/toggle.directive';
 import { DOCUMENT } from '@angular/common';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 

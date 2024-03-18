@@ -1,14 +1,13 @@
 import { PermissionCheckerService } from 'abp-ng2-module';
 import { Component, Injector, OnInit, ViewEncapsulation } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationCancel, Router } from '@angular/router';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppMenu } from './app-menu';
 import { AppNavigationService } from './app-navigation.service';
 import * as objectPath from 'object-path';
 import { filter } from 'rxjs/operators';
-import { MenuOptions } from '@metronic/app/core/_base/layout/directives/menu.directive';
-import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/offcanvas.directive';
 import { ThemeAssetContributorFactory } from '@shared/helpers/ThemeAssetContributorFactory';
+import { MenuComponent, DrawerComponent, ToggleComponent, ScrollComponent } from '@metronic/app/kt/components';
 
 @Component({
     templateUrl: './top-bar-menu.component.html',
@@ -20,25 +19,6 @@ export class TopBarMenuComponent extends AppComponentBase implements OnInit {
     currentRouteUrl: any = '';
     menuDepth: 0;
     menuWrapperStyle = '';
-
-    menuOptions: MenuOptions = {
-        submenu: {
-            desktop: 'dropdown',
-            tablet: 'accordion',
-            mobile: 'accordion',
-        },
-
-        accordion: {
-            expandAll: false,
-        },
-    };
-
-    offcanvasOptions: OffcanvasOptions = {
-        overlay: true,
-        baseClass: 'header-menu-wrapper',
-        closeBy: 'kt_header_menu_mobile_close_btn',
-        toggleBy: 'kt_header_mobile_toggle',
-    };
 
     constructor(
         injector: Injector,
@@ -57,6 +37,21 @@ export class TopBarMenuComponent extends AppComponentBase implements OnInit {
         this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
             this.currentRouteUrl = this.router.url;
         });
+
+        this.router.events
+            .pipe(filter((event) => event instanceof NavigationEnd || event instanceof NavigationCancel))
+            .subscribe((event) => {
+                this.reinitializeMenu();
+            });
+    }
+
+    reinitializeMenu(): void {
+        setTimeout(() => {
+            MenuComponent.reinitialization();
+            DrawerComponent.reinitialization();
+            ToggleComponent.reinitialization();
+            ScrollComponent.reinitialization();
+        }, 50);
     }
 
     showMenuItem(menuItem): boolean {
@@ -64,52 +59,23 @@ export class TopBarMenuComponent extends AppComponentBase implements OnInit {
     }
 
     getItemCssClasses(item, parentItem, depth) {
-        let isRootLevel = item && !parentItem;
-
-        let cssClasses = 'menu-item menu-item-rel';
-
-        if (objectPath.get(item, 'items.length')) {
-            cssClasses += ' menu-item-submenu';
-        }
+        let cssClasses = 'menu-item';
 
         if (objectPath.get(item, 'icon-only')) {
             cssClasses += ' menu-item-icon-only';
-        }
-
-        if (this.isMenuItemIsActive(item)) {
-            cssClasses += ' menu-item-active';
-        }
-
-        if (item.items.length) {
-            cssClasses += ' menu-item-submenu menu-item-rel';
-            if (depth && depth === 1) {
-                cssClasses += ' menu-item-open-dropdown';
-            }
-        } else if (item.items.length) {
-            if (depth && depth >= 1) {
-                cssClasses += ' menu-item-submenu';
-            } else {
-                cssClasses += ' menu-item-rel';
-            }
         }
 
         return cssClasses;
     }
 
     getAnchorItemCssClasses(item, parentItem): string {
-        let isRootLevel = item && !parentItem;
-        let cssClasses = 'menu-link';
-
-        if (isRootLevel || item.items.length) {
-            cssClasses += ' menu-toggle';
-        }
+        let cssClasses = 'menu-link without-sub';
 
         return cssClasses;
     }
 
     getSubmenuCssClasses(item, parentItem, depth): string {
-        let cssClasses = 'menu-submenu menu-submenu-classic';
-        return (cssClasses += ' menu-submenu-' + (depth >= 1 ? 'right' : 'left'));
+        return 'menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px';
     }
 
     isMenuItemIsActive(item): boolean {

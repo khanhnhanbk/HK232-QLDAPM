@@ -85,13 +85,16 @@ body .p-fileupload .p-fileupload-buttonbar.p-widget-header {
         display: none;
     }
 
-    
 
     .p-fileupload-choose.p-button,
     .p-fileupload-choose.p-button .p-widget,
     .p-fileupload-choose.p-button .p-state-default {
         background-color: #fff !important;
         color: #b2b1c5 !important;
+
+        &:hover{
+            background-color: #F1FAFF !important;
+        }
     }
 
     .p-fileupload-buttonbar{
@@ -106,6 +109,7 @@ body .p-fileupload .p-fileupload-buttonbar.p-widget-header {
     
     .p-fileupload-choose{
         margin:0px !important;
+        padding: 0px !important;
 
         &.p-focus{
             box-shadow: none;
@@ -118,8 +122,6 @@ body .p-fileupload .p-fileupload-buttonbar.p-widget-header {
 
     .p-fileupload-choose {
         border: none !important;
-        height: 40px !important;
-        width: 40px !important;
     }
 
     .ui-fileupload-content{
@@ -134,4 +136,8 @@ body .p-fileupload .p-fileupload-buttonbar.p-widget-header {
         padding-right: 10px;
       }
     }
+  }
+
+  #kt_drawer_chat_messenger .card-body{
+      max-height: calc(~"100vh - 230px");
   }

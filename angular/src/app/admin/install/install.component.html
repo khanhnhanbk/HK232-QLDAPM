@@ -19,7 +19,7 @@
                                         Connection String
                                     </h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         class="form-control"
@@ -34,7 +34,7 @@
                                 <div class="font-size-lg text-dark font-weight-bold mb-6">
                                     <h5 class="font-size-lg text-dark font-weight-bold mb-6-title">Admin Password</h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="password"
                                         class="form-control"
@@ -48,7 +48,7 @@
                                 <div class="font-size-lg text-dark font-weight-bold mb-6">
                                     <h5 class="font-size-lg text-dark font-weight-bold mb-6-title">Client Side URL</h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         class="form-control"
@@ -61,7 +61,7 @@
                                 <div class="font-size-lg text-dark font-weight-bold mb-6">
                                     <h5 class="font-size-lg text-dark font-weight-bold mb-6-title">Server Side URL</h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         class="form-control"
@@ -75,7 +75,7 @@
                                 <div class="font-size-lg text-dark font-weight-bold mb-6">
                                     <h5 class="font-size-lg text-dark font-weight-bold mb-6-title">Default Language</h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <select
                                         class="form-control"
                                         [(ngModel)]="setupSettings.defaultLanguage"
@@ -90,7 +90,7 @@
                                 <div class="font-size-lg text-dark font-weight-bold mb-6">
                                     <h5 class="font-size-lg text-dark font-weight-bold mb-6-title">SMTP Settings</h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="email"
                                         placeholder="Default from address"
@@ -99,7 +99,7 @@
                                         name="defaultFromAddress"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         placeholder="Default from displayName"
@@ -108,7 +108,7 @@
                                         name="defaultFromDisplayName"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         placeholder="SMTP host"
@@ -117,7 +117,7 @@
                                         name="smtpHost"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="number"
                                         placeholder="SMTP port"
@@ -126,34 +126,37 @@
                                         name="smtpPort"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <label class="control-label col-md-12"></label>
-                                    <div class="checkbox-inline">
-                                        <label class="checkbox">
-                                            <input
-                                                id="Settings_SmtpEnableSsl"
-                                                type="checkbox"
-                                                [(ngModel)]="setupSettings.smtpSettings.smtpEnableSsl"
-                                                name="smtpEnableSsl"
-                                                value="true"
-                                            />
-                                            <span></span>
-                                            UseSsl
-                                        </label>
-                                        <label class="checkbox">
-                                            <input
-                                                id="Settings_SmtpUseDefaultCredentials"
-                                                type="checkbox"
-                                                [(ngModel)]="setupSettings.smtpSettings.smtpUseDefaultCredentials"
-                                                name="smtpUseDefaultCredentials"
-                                                value="true"
-                                            />
-                                            <span></span>
-                                            Use Default Credentials
-                                        </label>
-                                    </div>
+                                    <label class="form-check form-check-custom form-check-solid py-1">
+                                        <input
+                                            id="Settings_SmtpEnableSsl"
+                                            type="checkbox"
+                                            name="smtpEnableSsl"
+                                            [(ngModel)]="setupSettings.smtpSettings.smtpEnableSsl"
+                                            class="form-check-input"
+                                            value="true"
+                                        />
+                                        <span class="form-check-label">
+                                            {{ 'UseSsl' | localize }}
+                                        </span>
+                                    </label>
+
+                                    <label class="form-check form-check-custom form-check-solid py-1">
+                                        <input
+                                            id="Settings_SmtpUseDefaultCredentials"
+                                            type="checkbox"
+                                            name="smtpUseDefaultCredentials"
+                                            [(ngModel)]="setupSettings.smtpSettings.smtpUseDefaultCredentials"
+                                            class="form-check-input"
+                                            value="true"
+                                        />
+                                        <span class="form-check-label">
+                                            {{ 'Use Default Credentials' | localize }}
+                                        </span>
+                                    </label>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         placeholder="Domain name"
@@ -162,7 +165,7 @@
                                         name="smtpDomain"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         placeholder="User name"
@@ -171,7 +174,7 @@
                                         name="smtpUserName"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="password"
                                         placeholder="Password"
@@ -185,7 +188,7 @@
                                 <div class="font-size-lg text-dark font-weight-bold mb-6">
                                     <h5 class="font-size-lg text-dark font-weight-bold mb-6-title">Invoice Info</h5>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <input
                                         type="text"
                                         class="form-control"
@@ -194,7 +197,7 @@
                                         placeholder="Legal name"
                                     />
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <textarea
                                         class="form-control"
                                         name="billAddress"

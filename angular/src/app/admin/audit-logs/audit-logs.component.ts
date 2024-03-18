@@ -74,8 +74,6 @@ export class AuditLogsComponent extends AppComponentBase implements AfterViewIni
     getAuditLogs(event?: LazyLoadEvent) {
         if (this.primengTableHelperAuditLogs.shouldResetPaging(event)) {
             this.paginatorAuditLogs.changePage(0);
-
-            return;
         }
 
         this.primengTableHelperAuditLogs.showLoadingIndicator();
@@ -109,8 +107,6 @@ export class AuditLogsComponent extends AppComponentBase implements AfterViewIni
 
         if (this.primengTableHelperEntityChanges.shouldResetPaging(event)) {
             this.paginatorEntityChanges.changePage(0);
-
-            return;
         }
 
         this.primengTableHelperEntityChanges.showLoadingIndicator();

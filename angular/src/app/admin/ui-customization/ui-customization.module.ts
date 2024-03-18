@@ -14,6 +14,8 @@ import { Theme8ThemeUiSettingsComponent } from './theme8-theme-ui-settings.compo
 import { Theme9ThemeUiSettingsComponent } from './theme9-theme-ui-settings.component';
 import { Theme10ThemeUiSettingsComponent } from './theme10-theme-ui-settings.component';
 import { Theme11ThemeUiSettingsComponent } from './theme11-theme-ui-settings.component';
+import { Theme12ThemeUiSettingsComponent } from './theme12-theme-ui-settings.component';
+import { Theme13ThemeUiSettingsComponent } from './theme13-theme-ui-settings.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +32,8 @@ import { Theme11ThemeUiSettingsComponent } from './theme11-theme-ui-settings.com
         Theme9ThemeUiSettingsComponent,
         Theme10ThemeUiSettingsComponent,
         Theme11ThemeUiSettingsComponent,
+        Theme12ThemeUiSettingsComponent,
+        Theme13ThemeUiSettingsComponent,
     ],
     imports: [AppSharedModule, AdminSharedModule, UICustomizationRoutingModule],
 })

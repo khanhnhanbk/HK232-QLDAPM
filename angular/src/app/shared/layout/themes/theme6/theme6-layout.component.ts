@@ -3,7 +3,6 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { ThemesLayoutBaseComponent } from '@app/shared/layout/themes/themes-layout-base.component';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { AppConsts } from '@shared/AppConsts';
-import { ToggleOptions } from '@metronic/app/core/_base/layout/directives/toggle.directive';
 import { DOCUMENT } from '@angular/common';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 
@@ -13,11 +12,6 @@ import { DateTimeService } from '@app/shared/common/timing/date-time.service';
     animations: [appModuleAnimation()],
 })
 export class Theme6LayoutComponent extends ThemesLayoutBaseComponent implements OnInit {
-    userMenuToggleOptions: ToggleOptions = {
-        target: 'kt_aside',
-        targetState: 'aside-on',
-        toggleState: 'active',
-    };
 
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
 

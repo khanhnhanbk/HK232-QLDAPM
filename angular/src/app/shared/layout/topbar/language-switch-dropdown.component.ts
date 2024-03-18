@@ -13,7 +13,7 @@ export class LanguageSwitchDropdownComponent extends ThemesLayoutBaseComponent i
     currentLanguage: abp.localization.ILanguageInfo;
 
     @Input() isDropup = false;
-    @Input() customStyle = 'btn btn-icon btn-dropdown btn-clean btn-lg mr-1';
+    @Input() customStyle = 'btn btn-icon btn-active-light-primary position-relative w-30px h-30px w-md-40px h-md-40px me-2';
 
     public constructor(
         injector: Injector,

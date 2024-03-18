@@ -5,13 +5,12 @@ import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 @Component({
     selector: 'friend-profile-picture',
     template: `
-        <img [src]="profilePicture" class="{{ cssClass }}" alt="..." />
+        <img [src]="profilePicture" alt="..." />
     `,
 })
 export class FriendProfilePictureComponent implements AfterViewInit {
     @Input() userId: number;
     @Input() tenantId: number;
-    @Input() cssClass = 'media-object';
 
     profilePicture = AppConsts.appBaseUrl + '/assets/common/images/default-profile-picture.png';
 

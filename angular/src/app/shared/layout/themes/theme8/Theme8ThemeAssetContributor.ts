@@ -6,7 +6,7 @@ export class Theme8ThemeAssetContributor implements IThemeAssetContributor {
         return [AppConsts.appBaseUrl + '/assets/fonts/fonts-asap-condensed.min.css'];
     }
 
-    public getAdditionalBodyStle(): string {
+    public getAdditionalBodyStyle(): string {
         return '';
     }
 
@@ -15,7 +15,7 @@ export class Theme8ThemeAssetContributor implements IThemeAssetContributor {
     }
 
     public getSubheaderStyle(): string {
-        return 'text-dark font-weight-bold my-1 mr-5';
+        return 'text-dark font-weight-bold my-2 me-5';
     }
 
     public getFooterStyle(): string {

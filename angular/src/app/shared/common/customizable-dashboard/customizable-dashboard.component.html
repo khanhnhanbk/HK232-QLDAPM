@@ -1,7 +1,7 @@
 <div [@routerTransition]>
     <div class="content d-flex flex-column flex-column-fluid">
         <sub-header [title]="'Dashboard' | localize" [description]="'DashboardHeaderInfo' | localize">
-            <div role="actions">
+            <div role="actions" class="d-flex align-items-center">
                 <button
                     type="button"
                     *ngIf="!loading && userDashboard && userDashboard.filters && userDashboard.filters.length > 0"
@@ -12,16 +12,17 @@
                     {{ 'Filter' | localize }}
                 </button>
 
-                <span class="switch m-0 p-0" [class]="{ 'switch-primary': editModeEnabled }">
-                    <label class="m-0 p-0" style="margin-bottom: -10px !important">
-                        <input type="checkbox" [checked]="editModeEnabled" (change)="changeEditMode()" />
-                        <span class="m-0 p-0"></span>
-                    </label>
-                </span>
-
-                <strong class="p-2 pt-4 dashboard-header-text-edit-mode">
-                    {{ 'EditMode' | localize }}
-                </strong>
+                <label class="form-check form-check-custom form-check-solid form-switch">
+                    <input
+                        type="checkbox"
+                        class="form-check-input"
+                        (change)="changeEditMode()"
+                        [checked]="editModeEnabled"
+                    />
+                    <span class="form-check-label">
+                        {{ 'EditMode' | localize }}
+                    </span>
+                </label>
             </div>
         </sub-header>
 
@@ -60,8 +61,8 @@
                         </tab>
                     </tabset>
                 </div>
-                <div class="div-dashboard-customization" *ngIf="editModeEnabled">
-                    <div class="vr">
+                <div class="div-dashboard-customization d-flex w-auto shadow-lg" *ngIf="editModeEnabled">
+                    <div class="me-1 border-right">
                         <button
                             type="button"
                             id="AddWidgetButton"
@@ -74,7 +75,7 @@
                         </button>
                         &nbsp;
                     </div>
-                    <div class="vr">
+                    <div class="ms-1 me-1 border-right">
                         <div
                             class="btn-group"
                             dropdown
@@ -102,8 +103,8 @@
                                 aria-labelledby="dropdownButtonAddPage"
                             >
                                 <li role="menuitem">
-                                    <div class="form-group">
-                                        <label for="PageNameInput">{{ 'NewPageName' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label>{{ 'NewPageName' | localize }}</label>
                                         <input
                                             type="text"
                                             class="form-control"
@@ -111,7 +112,7 @@
                                             [(ngModel)]="addPageInput"
                                         />
                                     </div>
-                                    <button class="btn btn-sm btn-block btn-info" (click)="addNewPage(addPageInput)">
+                                    <button class="btn btn-sm w-100 btn-info" (click)="addNewPage(addPageInput)">
                                         {{ 'Save' | localize }}
                                     </button>
                                 </li>
@@ -145,8 +146,8 @@
                                 aria-labelledby="dropdownButtonRenamePage"
                             >
                                 <li role="menuitem">
-                                    <div class="form-group">
-                                        <label for="PageNameInput">{{ 'PageNewName' | localize }}</label>
+                                    <div class="mb-5">
+                                        <label>{{ 'PageNewName' | localize }}</label>
                                         <input
                                             type="text"
                                             class="form-control"
@@ -154,7 +155,7 @@
                                             [(ngModel)]="renamePageInput"
                                         />
                                     </div>
-                                    <button (click)="renamePage(renamePageInput)" class="btn btn-sm btn-block btn-info">
+                                    <button (click)="renamePage(renamePageInput)" class="btn btn-sm w-100 btn-info">
                                         {{ 'Save' | localize }}
                                     </button>
                                 </li>
@@ -176,14 +177,16 @@
                         </button>
                         &nbsp;
                     </div>
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-success btn-elevate-hover btn-pill"
-                        (click)="savePage()"
-                    >
-                        <i class="fa fa-save"></i>
-                        {{ 'Save' | localize }}
-                    </button>
+                    <div class="ms-1">
+                        <button
+                            type="button"
+                            class="btn btn-sm btn-success btn-elevate-hover btn-pill"
+                            (click)="savePage()"
+                        >
+                            <i class="fa fa-save"></i>
+                            {{ 'Save' | localize }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -204,8 +207,7 @@
                     <h5 class="modal-title">
                         <span>{{ 'DashboardFilters' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')">
                     </button>
                 </div>
                 <div class="modal-body" *ngIf="userDashboard">

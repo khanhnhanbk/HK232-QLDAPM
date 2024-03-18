@@ -11,7 +11,7 @@
                     <div class="form">
                         <div class="row align-items-center mb-4">
                             <div class="col-md-12">
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <label for="LoginAttemptsFilter" class="control-label">
                                         {{ 'Filter' | localize }}
                                     </label>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="row align-items-center mb-4">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <label for="StartEndRange">{{ 'DateRange' | localize }}</label>
                                     <input
                                         class="form-control"
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="mb-5">
                                     <label for="LoginResultFilter" class="control-label">
                                         {{ 'Result' | localize }}
                                     </label>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-12 text-right">
+                            <div class="col-xl-12 text-end">
                                 <button name="RefreshButton" class="btn btn-primary" (click)="getLoginAttempts()">
                                     <i class="la la-refresh"></i>
                                     {{ 'Refresh' | localize }}

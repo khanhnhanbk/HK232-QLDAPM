@@ -12,7 +12,7 @@
         *ngIf="loginService.authenticateResult"
     >
         <p>{{ 'SendSecurityCode_Information' | localize }}</p>
-        <div class="form-group">
+        <div class="mb-5">
             <select
                 autoFocus
                 size="1"
@@ -30,7 +30,7 @@
         </div>
 
         <div class="pb-lg-0 pb-5">
-            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 me-3">
                 {{ 'Submit' | localize }}
             </button>
         </div>

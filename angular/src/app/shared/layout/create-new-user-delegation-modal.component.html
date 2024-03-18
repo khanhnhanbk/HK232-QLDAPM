@@ -15,12 +15,11 @@
                     <h5 class="modal-title">
                         <span>{{ 'DelegateNewUser' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')">
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="UsernameOrEmailAddress">{{ 'Username' | localize }}</label>
                         <div class="input-group" (click)="showCommonLookupModal()">
                             <input
@@ -36,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="StartTime">{{ 'StartTime' | localize }}</label>
                         <input
                             id="StartTime"
@@ -53,7 +52,7 @@
                             required
                         />
                     </div>
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="EndTime">{{ 'EndTime' | localize }}</label>
                         <input
                             id="EndTime"

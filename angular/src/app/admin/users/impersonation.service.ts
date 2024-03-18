@@ -24,7 +24,7 @@ export class ImpersonationService {
 
         this._accountService.impersonateTenant(input).subscribe((result: ImpersonateOutput) => {
             let targetUrl =
-                this._appUrlService.getAppRootUrlOfTenant(result.tenancyName) +
+                this.getAppRootUrl(result) +
                 '?impersonationToken=' +
                 result.impersonationToken;
             if (input.tenantId) {
@@ -42,7 +42,7 @@ export class ImpersonationService {
 
         this._accountService.impersonateUser(input).subscribe((result: ImpersonateOutput) => {
             let targetUrl =
-                this._appUrlService.getAppRootUrlOfTenant(result.tenancyName) +
+                this.getAppRootUrl(result) +
                 '?impersonationToken=' +
                 result.impersonationToken;
             if (input.tenantId) {
@@ -59,7 +59,7 @@ export class ImpersonationService {
 
         this._accountService.delegatedImpersonate(input).subscribe((result: ImpersonateOutput) => {
             let targetUrl =
-                this._appUrlService.getAppRootUrlOfTenant(result.tenancyName) +
+                this.getAppRootUrl(result) +
                 '?impersonationToken=' +
                 result.impersonationToken;
             targetUrl = targetUrl + '&userDelegationId=' + userDelegationId;
@@ -74,7 +74,7 @@ export class ImpersonationService {
     backToImpersonator(): void {
         this._accountService.backToImpersonator().subscribe((result: ImpersonateOutput) => {
             let targetUrl =
-                this._appUrlService.getAppRootUrlOfTenant(result.tenancyName) +
+                this.getAppRootUrl(result) +
                 '?impersonationToken=' +
                 result.impersonationToken;
             if (abp.session.impersonatorTenantId) {
@@ -83,5 +83,9 @@ export class ImpersonationService {
 
             this._authService.logout(true, targetUrl);
         });
+    }
+
+    getAppRootUrl(result: ImpersonateOutput): string{
+        return this._appUrlService.getAppRootUrlOfTenant(result.tenancyName) + 'index.html';
     }
 }

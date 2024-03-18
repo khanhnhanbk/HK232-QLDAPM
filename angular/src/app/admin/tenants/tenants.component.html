@@ -17,7 +17,7 @@
                             <div class="form-body">
                                 <div class="row mb-4">
                                     <div class="col-xl-6">
-                                        <label for="TenantNameOrTenancyCode">
+                                        <label for="TenantNameOrTenancyCode" class="form-label">
                                             {{ 'TenantNameOrTenancyCode' | localize }}
                                         </label>
                                         <div class="input-group">
@@ -29,33 +29,31 @@
                                                 placeholder="{{ 'SearchWithThreeDot' | localize }}"
                                                 type="text"
                                             />
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit">
-                                                    <i class="flaticon-search-1" [attr.aria-label]="l('Search')"></i>
-                                                </button>
-                                            </div>
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="flaticon-search-1" [attr.aria-label]="l('Search')"></i>
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
-                                        <label for="EditionDropdown">{{ 'Edition' | localize }}</label>
+                                        <label for="EditionDropdown" class="form-label">{{ 'Edition' | localize }}</label>
                                         <edition-combo [(selectedEdition)]="filters.selectedEditionId"></edition-combo>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-xl-6">
-                                        <div class="checkbox-list mb-2">
-                                            <label class="checkbox">
-                                                <input
-                                                    type="checkbox"
-                                                    [(ngModel)]="filters.subscriptionEndDateRangeActive"
-                                                    id="TenantsTable_SubscriptionEndDateRangeActive"
-                                                    name="SubscriptionEndDateRangeActive"
-                                                    value="true"
-                                                />
-                                                <span></span>
+                                        <label class="form-check form-check-solid form-label py-1 mb-1">
+                                            <input
+                                                id="TenantsTable_SubscriptionEndDateRangeActive"
+                                                type="checkbox"
+                                                name="SubscriptionEndDateRangeActive"
+                                                [(ngModel)]="filters.subscriptionEndDateRangeActive"
+                                                class="form-check-input"
+                                                value="true"
+                                            />
+                                            <span class="form-check-label">
                                                 {{ 'SubscriptionEndDate' | localize }}
-                                            </label>
-                                        </div>
+                                            </span>
+                                        </label>
                                         <input
                                             class="form-control"
                                             name="SubscriptionEndDateRange"
@@ -69,19 +67,19 @@
                                         />
                                     </div>
                                     <div class="col-xl-6">
-                                        <div class="checkbox-list mb-2">
-                                            <label class="checkbox">
-                                                <input
-                                                    type="checkbox"
-                                                    [(ngModel)]="filters.creationDateRangeActive"
-                                                    id="TenantsTable_CreationDateRangeActive"
-                                                    name="CreationDateRangeActive"
-                                                    value="true"
-                                                />
-                                                <span></span>
+                                        <label class="form-check form-check-solid form-label py-1 mb-1">
+                                            <input
+                                                id="TenantsTable_CreationDateRangeActive"
+                                                type="checkbox"
+                                                name="CreationDateRangeActive"
+                                                [(ngModel)]="filters.creationDateRangeActive"
+                                                class="form-check-input"
+                                                value="true"
+                                            />
+                                            <span class="form-check-label">
                                                 {{ 'CreationTime' | localize }}
-                                            </label>
-                                        </div>
+                                            </span>
+                                        </label>
                                         <input
                                             class="form-control"
                                             name="CreationDateRange"
@@ -94,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <div class="col-xl-12 text-right">
+                                    <div class="col-xl-12 text-end">
                                         <button name="RefreshButton" class="btn btn-primary">
                                             <i class="fa fa-sync"></i>
                                             {{ 'Refresh' | localize }}

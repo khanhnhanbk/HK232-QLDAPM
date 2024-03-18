@@ -1,6 +1,10 @@
 import { Injectable, Injector } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { EntityDtoOfGuid, NotificationServiceProxy } from '@shared/service-proxies/service-proxies';
+import {
+    EntityDtoOfGuid,
+    NotificationServiceProxy,
+    SetNotificationAsReadOutput,
+} from '@shared/service-proxies/service-proxies';
 import { DateTime } from 'luxon';
 import * as Push from 'push.js'; // if using ES6
 import { NotificationSettingsModalComponent } from './notification-settings-modal.component';
@@ -158,8 +162,8 @@ export class UserNotificationHelper extends AppComponentBase {
     setAsRead(userNotificationId: string, callback?: (userNotificationId: string) => void): void {
         const input = new EntityDtoOfGuid();
         input.id = userNotificationId;
-        this._notificationService.setNotificationAsRead(input).subscribe(() => {
-            abp.event.trigger('app.notifications.read', userNotificationId);
+        this._notificationService.setNotificationAsRead(input).subscribe((result: SetNotificationAsReadOutput) => {
+            abp.event.trigger('app.notifications.read', userNotificationId, result.success);
             if (callback) {
                 callback(userNotificationId);
             }

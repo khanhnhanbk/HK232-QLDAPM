@@ -45,6 +45,7 @@ import { DateTime } from 'luxon';
 import { ChatFriendDto } from './ChatFriendDto';
 import { ChatSignalrService } from './chat-signalr.service';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
+import { DrawerComponent, ScrollComponent } from '@metronic/app/kt/components';
 
 @Component({
     templateUrl: './chat-bar.component.html',
@@ -64,7 +65,7 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
     @HostBinding('style.overflow')
     styleOverflow: any = 'hidden';
 
-    mQuickSidebarOffcanvas: any;
+    chatDrawer: DrawerComponent;
 
     @ViewChild('ChatMessage', { static: true }) chatMessageInput: ElementRef;
     @ViewChild('chatScrollBar', { static: true }) chatScrollBar;
@@ -95,8 +96,8 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
     _selectedUser: ChatFriendDto = new ChatFriendDto();
 
     @HostListener('mouseleave') mouseleave() {
-        if (!this.pinned && this.mQuickSidebarOffcanvas) {
-            this.mQuickSidebarOffcanvas.hide();
+        if (!this.pinned && this.chatDrawer) {
+            this.chatDrawer.hide();
         }
     }
 
@@ -108,7 +109,7 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
         if (newValue === this._isOpen) {
             return;
         }
-
+        
         this._localStorageService.setItem('app.chat.isOpen', newValue);
         this._isOpen = newValue;
 
@@ -430,13 +431,16 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
 
     scrollToBottom(): void {
         setTimeout(() => {
-            this.chatScrollBar.directiveRef.scrollToBottom();
+            var height = ScrollComponent.getInstance(
+                document.querySelector('#kt_drawer_chat_messenger_body')
+            ).getHeight();
+            var heightInt = parseInt(height.replace('px', ''));
+            document.getElementById('kt_drawer_chat_messenger_body').scrollTop = heightInt;
         });
     }
 
     loadLastState(): void {
         const self = this;
-
         self._localStorageService.getItem('app.chat.isOpen', (err, isOpen) => {
             self.isOpen = isOpen;
 
@@ -445,7 +449,7 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
             });
 
             if (isOpen) {
-                this.mQuickSidebarOffcanvas.show();
+                this.chatDrawer.show();
                 self._localStorageService.getItem('app.chat.selectedUser', (err, selectedUser) => {
                     if (selectedUser && selectedUser.friendUserId) {
                         self.selectFriend(selectedUser);
@@ -468,30 +472,14 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
         if (!chatUser.messagesLoaded) {
             this.loadMessages(chatUser, () => {
                 chatUser.messagesLoaded = true;
-                this.adjustChatScrollbarHeight();
                 this.scrollToBottom();
-                this.chatMessageInput.nativeElement.focus();
             });
         } else {
             this.markAllUnreadMessagesOfUserAsRead(this.selectedUser);
-            this.adjustChatScrollbarHeight();
             this.scrollToBottom();
-            this.chatMessageInput.nativeElement.focus();
-        }
-    }
-
-    adjustChatScrollbarHeight(): void {
-        if (!this.selectedUser.friendUserId) {
-            return;
         }
 
-        let height =
-            document.getElementById('kt_quick_sidebar').clientHeight -
-            document.getElementById('kt_chat_content').getElementsByClassName('card-header')[0].clientHeight -
-            document.getElementById('kt_chat_content').getElementsByClassName('card-footer')[0].clientHeight -
-            100;
-
-        this.chatScrollBar.directiveRef.elementRef.nativeElement.parentElement.style.height = height + 'px';
+        window.dispatchEvent(new Event('resize'));
     }
 
     sendMessage(event?: any): void {
@@ -531,28 +519,22 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
     }
 
     ngAfterViewInit(): void {
-        this.mQuickSidebarOffcanvas = new KTOffcanvas('kt_quick_sidebar', {
-            overlay: false,
-            baseClass: 'offcanvas',
-            placement: 'left',
-            closeBy: 'kt_quick_sidebar_close',
-            toggleBy: 'kt_quick_sidebar_toggle',
+        this.chatDrawer = new DrawerComponent(document.getElementById('kt_drawer_chat'), {
+            overlay: true,
+            baseClass: 'drawer',
+            overlayClass: 'drawer-overlay',
+            direction: 'end',
         });
 
-        this.mQuickSidebarOffcanvas.events.push(
-            {
-                name: 'afterHide',
-                handler: () => {
-                    this.isOpen = this._pinned;
-                },
-            },
-            {
-                name: 'afterShow',
-                handler: () => {
-                    this.isOpen = true;
-                },
-            }
-        );
+        setTimeout(() => {
+            this.chatDrawer.on('kt.drawer.after.hidden', (e: Event) => {
+                this.isOpen = false;
+            });
+        }, 100);
+
+        this.chatDrawer.on('kt.drawer.shown', (e: Event) => {
+            this.isOpen = true;
+        });
 
         this.userLookupModal.configure({
             title: this.l('SelectAUser'),
@@ -719,7 +701,7 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
 
         function onConnected() {
             self.getFriendsAndSettings(() => {
-                DomHelper.waitUntilElementIsReady('#kt_quick_sidebar', () => {
+                DomHelper.waitUntilElementIsReady('#kt_drawer_chat', () => {
                     self.loadLastState();
                 });
             });
@@ -729,10 +711,6 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
             self._zone.run(() => {
                 onConnected();
             });
-        });
-
-        this.subscribeToEvent('app.show.quickUserPanel', () => {
-            this.mQuickSidebarOffcanvas.hide();
         });
     }
 
@@ -744,12 +722,9 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
     }
 
     showChatPanel(): void {
-        document.body.className += ' offcanvas-on';
-        document.getElementById('kt_quick_sidebar').className += ' offcanvas-on';
-    }
-
-    onWindowResize(event): void {
-        this.adjustChatScrollbarHeight();
+        document.body.setAttribute("data-kt-drawer-chat", "on")
+        document.body.setAttribute("data-kt-drawer", "on")
+        document.getElementById('kt_drawer_chat').className += ' drawer-on';
     }
 
     init(): void {
@@ -764,3 +739,4 @@ export class ChatBarComponent extends AppComponentBase implements OnInit, AfterV
             !this.appSession.tenant;
     }
 }
+;

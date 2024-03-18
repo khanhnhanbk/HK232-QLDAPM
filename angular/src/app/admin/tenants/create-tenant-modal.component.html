@@ -25,17 +25,16 @@
                     </h5>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="TenancyName">{{ 'TenancyName' | localize }} *</label>
                         <input
                             id="TenancyName"
@@ -58,7 +57,7 @@
                         </span>
                     </div>
 
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="Name">{{ 'TenantName' | localize }} *</label>
                         <input
                             id="Name"
@@ -74,20 +73,20 @@
                         <validation-messages [formCtrl]="nameInput"></validation-messages>
                     </div>
 
-                    <div class="checkbox-list">
-                        <label class="checkbox">
-                            <input
-                                id="CreateTenant_UseHostDb"
-                                type="checkbox"
-                                name="UseHostDb"
-                                [(ngModel)]="useHostDb"
-                            />
-                            <span></span>
+                    <label class="form-check form-check-custom form-check-solid py-1">
+                        <input
+                            id="CreateTenant_UseHostDb"
+                            type="checkbox"
+                            name="UseHostDb"
+                            [(ngModel)]="useHostDb"
+                            class="form-check-input"
+                        />
+                        <span class="form-check-label">
                             {{ 'UseHostDatabase' | localize }}
-                        </label>
-                    </div>
+                        </span>
+                    </label>
 
-                    <div class="form-group" *ngIf="!useHostDb">
+                    <div class="mb-5" *ngIf="!useHostDb">
                         <label for="DatabaseConnectionString">{{ 'DatabaseConnectionString' | localize }} *</label>
                         <input
                             id="DatabaseConnectionString"
@@ -103,7 +102,7 @@
                         <validation-messages [formCtrl]="connectionStringInput"></validation-messages>
                     </div>
 
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="AdminEmailAddress">{{ 'AdminEmailAddress' | localize }} *</label>
                         <input
                             id="AdminEmailAddress"
@@ -120,20 +119,20 @@
                         <validation-messages [formCtrl]="adminEmailAddressInput"></validation-messages>
                     </div>
 
-                    <div class="checkbox-list">
-                        <label class="checkbox">
-                            <input
-                                id="CreateTenant_SetRandomPassword"
-                                type="checkbox"
-                                name="SetRandomPassword"
-                                [(ngModel)]="setRandomPassword"
-                            />
-                            <span></span>
+                    <label class="form-check form-check-custom form-check-solid py-1">
+                        <input
+                            id="CreateTenant_SetRandomPassword"
+                            type="checkbox"
+                            name="SetRandomPassword"
+                            [(ngModel)]="setRandomPassword"
+                            class="form-check-input"
+                        />
+                        <span class="form-check-label">
                             {{ 'SetRandomPassword' | localize }}
-                        </label>
-                    </div>
+                        </span>
+                    </label>
 
-                    <div class="form-group" *ngIf="!setRandomPassword">
+                    <div class="mb-5" *ngIf="!setRandomPassword">
                         <label for="AdminPassword">{{ 'AdminPassword' | localize }}</label>
                         <input
                             id="AdminPassword"
@@ -178,14 +177,14 @@
                             </li>
                             <li [hidden]="!tenantCreateForm.controls['adminPassword'].errors.requiredLength">
                                 {{
-                                    'PasswordComplexity_RequiredLength_Hint'
-                                        | localize: passwordComplexitySetting.requiredLength
+                                'PasswordComplexity_RequiredLength_Hint'
+                                    | localize: passwordComplexitySetting.requiredLength
                                 }}
                             </li>
                         </ul>
                     </div>
 
-                    <div class="form-group" *ngIf="!setRandomPassword">
+                    <div class="mb-5" *ngIf="!setRandomPassword">
                         <label for="AdminPasswordRepeat">{{ 'AdminPasswordRepeat' | localize }}</label>
                         <input
                             id="AdminPasswordRepeat"
@@ -232,8 +231,8 @@
                             </li>
                             <li [hidden]="!tenantCreateForm.controls['adminPasswordRepeat'].errors.requiredLength">
                                 {{
-                                    'PasswordComplexity_RequiredLength_Hint'
-                                        | localize: passwordComplexitySetting.requiredLength
+                                'PasswordComplexity_RequiredLength_Hint'
+                                    | localize: passwordComplexitySetting.requiredLength
                                 }}
                             </li>
                             <li [hidden]="tenantCreateForm.controls['adminPasswordRepeat'].valid">
@@ -242,7 +241,7 @@
                         </ul>
                     </div>
 
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="edition">{{ 'Edition' | localize }}</label>
                         <select
                             id="edition"
@@ -257,23 +256,23 @@
                         </select>
                     </div>
 
-                    <div [hidden]="!isSubscriptionFieldsVisible" class="checkbox-list">
-                        <label for="CreateTenant_IsUnlimited" class="checkbox">
-                            <input
-                                id="CreateTenant_IsUnlimited"
-                                type="checkbox"
-                                name="IsUnlimited"
-                                [(ngModel)]="isUnlimited"
-                                (change)="onIsUnlimitedChange()"
-                            />
-                            <span></span>
+                    <label class="form-check form-check-custom form-check-solid py-1" [hidden]="!isSubscriptionFieldsVisible">
+                        <input
+                            id="CreateTenant_IsUnlimited"
+                            type="checkbox"
+                            name="IsUnlimited"
+                            [(ngModel)]="isUnlimited"
+                            class="form-check-input"
+                            (change)="onIsUnlimitedChange()"
+                        />
+                        <span class="form-check-label">
                             {{ 'UnlimitedTimeSubscription' | localize }}
-                        </label>
-                    </div>
+                        </span>
+                    </label>
 
                     <div
                         [hidden]="isUnlimited || !isSubscriptionFieldsVisible"
-                        class="form-group"
+                        class="mb-5"
                         [ngClass]="{ 'has-error': !subscriptionEndDateIsValid() }"
                     >
                         <label for="SubscriptionEndDate">{{ 'SubscriptionEndDate' | localize }}</label>
@@ -291,52 +290,56 @@
                         />
                     </div>
 
-                    <div [hidden]="isUnlimited || !isSubscriptionFieldsVisible" class="checkbox-list">
-                        <label for="CreateTenant_IsInTrialPeriod" class="checkbox">
-                            <input
-                                id="CreateTenant_IsInTrialPeriod"
-                                type="checkbox"
-                                name="IsInTrialPeriod"
-                                [disabled]="isSelectedEditionFree"
-                                [(ngModel)]="tenant.isInTrialPeriod"
-                            />
-                            <span></span>
+                    <label class="form-check form-check-custom form-check-solid py-1" [hidden]="isUnlimited || !isSubscriptionFieldsVisible">
+                        <input
+                            id="CreateTenant_IsInTrialPeriod"
+                            type="checkbox"
+                            name="IsInTrialPeriod"
+                            [(ngModel)]="tenant.isInTrialPeriod"
+                            class="form-check-input"
+                            [disabled]="isSelectedEditionFree"
+                        />
+                        <span class="form-check-label">
                             {{ 'IsInTrialPeriod' | localize }}
-                        </label>
-                    </div>
+                        </span>
+                    </label>
 
-                    <div class="checkbox-list">
-                        <label for="CreateTenant_ShouldChangePasswordOnNextLogin" class="checkbox">
+                        <label class="form-check form-check-custom form-check-solid py-1">
                             <input
                                 id="CreateTenant_ShouldChangePasswordOnNextLogin"
                                 type="checkbox"
                                 name="ShouldChangePasswordOnNextLogin"
                                 [(ngModel)]="tenant.shouldChangePasswordOnNextLogin"
+                                class="form-check-input"
                             />
-                            <span></span>
+                            <span class="form-check-label">
                             {{ 'ShouldChangePasswordOnNextLogin' | localize }}
+                            </span>
                         </label>
-                        <label for="CreateTenant_SendActivationEmail" class="checkbox">
+                        <label class="form-check form-check-custom form-check-solid py-1">
                             <input
                                 id="CreateTenant_SendActivationEmail"
                                 type="checkbox"
                                 name="SendActivationEmail"
                                 [(ngModel)]="tenant.sendActivationEmail"
+                                class="form-check-input"
                             />
-                            <span></span>
+                            <span class="form-check-label">
                             {{ 'SendActivationEmail' | localize }}
+                            </span>
                         </label>
-                        <label for="CreateTenant_IsActive" class="checkbox">
+                        <label class="form-check form-check-custom form-check-solid py-1">
                             <input
                                 id="CreateTenant_IsActive"
                                 type="checkbox"
                                 name="IsActive"
                                 [(ngModel)]="tenant.isActive"
+                                class="form-check-input"
                             />
-                            <span></span>
-                            {{ 'Active' | localize }}
+                            <span class="form-check-label">
+                                {{ 'Active' | localize }}
+                            </span>
                         </label>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button

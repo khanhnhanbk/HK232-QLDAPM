@@ -15,49 +15,43 @@
                     <h5 class="modal-title">
                         <span>{{ 'NotificationSettings' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')">
                     </button>
                 </div>
                 <div class="modal-body" *ngIf="settings">
                     <h4>{{ 'ReceiveNotifications' | localize }}</h4>
-                    <div>
-                        <span class="switch switch-icon-check">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    name="ReceiveNotifications"
-                                    value="true"
-                                    [(ngModel)]="settings.receiveNotifications"
-                                />
-                                <span></span>
-                            </label>
+                    <label class="form-check form-check-custom form-check-solid form-switch py-1">
+                        <input
+                            type="checkbox"
+                            name="ReceiveNotifications"
+                            [(ngModel)]="settings.receiveNotifications"
+                            class="form-check-input"
+                            value="true"
+                        />
+                        <span class="form-check-label">
+                            ({{ 'ReceiveNotifications_Definition' | localize }})
                         </span>
-
-                        <div class="help-block">{{ 'ReceiveNotifications_Definition' | localize }}</div>
-                    </div>
+                    </label>
                     <h4 *ngIf="settings.notifications.length" class="mt-4">{{ 'NotificationTypes' | localize }}</h4>
                     <p *ngIf="settings.notifications.length && !settings.receiveNotifications" class="text-danger">
                         <small>{{ 'ReceiveNotifications_DisableInfo' | localize }}</small>
                     </p>
-                    <div class="checkbox-list">
-                        <div *ngFor="let notification of settings.notifications">
-                            <label attr.for="Notification_{{ notification.name }}" class="checkbox">
-                                <input
-                                    id="Notification_{{ notification.name }}"
-                                    type="checkbox"
-                                    name="Notification_{{ notification.name }}"
-                                    [(ngModel)]="notification.isSubscribed"
-                                    [disabled]="!settings.receiveNotifications"
-                                />
-                                <span></span>
-                                {{ notification.displayName }}
-                            </label>
+                    <label class="form-check form-check-custom form-check-solid py-1" *ngFor="let notification of settings.notifications">
+                        <input
+                            id="Notification_{{ notification.name }}"
+                            type="checkbox"
+                            name="Notification_{{ notification.name }}"
+                            [(ngModel)]="notification.isSubscribed"
+                            class="form-check-input"
+                            [disabled]="!settings.receiveNotifications"
+                        />
+                        <span class="form-check-label">
+                            {{ notification.displayName }}
                             <span *ngIf="notification.description" class="help-block">
                                 {{ notification.description }}
                             </span>
-                        </div>
-                    </div>
+                        </span>
+                    </label>
                 </div>
                 <div class="modal-footer">
                     <button

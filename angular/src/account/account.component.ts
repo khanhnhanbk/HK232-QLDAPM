@@ -18,6 +18,11 @@ export class AccountComponent extends AppComponentBase implements OnInit {
 
     currentYear: number = this._dateTimeService.getYear();
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
+
+    skin = this.appSession.theme.baseSettings.layout.darkMode ? 'dark' : 'light';
+    defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/app-logo-on-' + this.skin + '.svg';
+    backgroundImageName = this.appSession.theme.baseSettings.layout.darkMode ? 'login-dark' : 'login';
+
     tenantChangeDisabledRoutes: string[] = [
         'select-edition',
         'buy',
@@ -63,7 +68,7 @@ export class AccountComponent extends AppComponentBase implements OnInit {
         return abp.multiTenancy.isEnabled && !this.supportsTenancyNameInUrl();
     }
 
-    useFullWidthLayout(): boolean {
+    isSelectEditionPage(): boolean {
         return this._router.url.indexOf('/account/select-edition') >= 0;
     }
 

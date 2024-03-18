@@ -48,3 +48,7 @@ header-notifications .dropdown-menu{
     left: 0px !important;
     min-width: 300px;
 }
+
+#kt_chat_contacts_header {
+  padding: 0 1rem !important;
+}

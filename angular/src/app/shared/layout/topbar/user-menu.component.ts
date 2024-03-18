@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, Injector, OnInit, Input } from '@angular/core';
 import { ThemesLayoutBaseComponent } from '../themes/themes-layout-base.component';
 import { LinkedUserDto, ProfileServiceProxy, UserLinkServiceProxy } from '@shared/service-proxies/service-proxies';
 import { LinkedAccountService } from '@app/shared/layout/linked-account.service';
@@ -13,13 +13,13 @@ import { Router } from '@angular/router';
     selector: 'user-menu',
     templateUrl: './user-menu.component.html',
 })
-export class UserMenuComponent extends ThemesLayoutBaseComponent implements OnInit, AfterViewInit {
+export class UserMenuComponent extends ThemesLayoutBaseComponent implements OnInit {
     @Input() iconOnly = false;
 
-    @Input() togglerCssClass = 'btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2';
-    @Input() textCssClass = 'text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3';
-    @Input() symbolCssClass = 'symbol symbol-35 symbol-light-success';
-    @Input() symbolTextCssClass = 'symbol-label font-size-h5 font-weight-bold';
+    @Input() togglerCssClass = 'btn btn-icon btn-active-light-primary position-relative w-auto h-30px h-md-40px px-5';
+    @Input() textCssClass = 'text-dark-50 font-weight-bolder font-size-base d-none d-md-inline me-3';
+    @Input() symbolCssClass = 'symbol symbol-lg-30px symbol-20px';
+    @Input() symbolTextCssClass = 'symbol-label fs-2 fw-bold bg-success text-inverse-success';
 
     usernameFirstLetter = '';
 
@@ -27,6 +27,7 @@ export class UserMenuComponent extends ThemesLayoutBaseComponent implements OnIn
     shownLoginName = '';
     tenancyName = '';
     userName = '';
+    emailAddress = '';
 
     recentlyLinkedUsers: LinkedUserDto[];
     isImpersonatedLogin = false;
@@ -59,27 +60,11 @@ export class UserMenuComponent extends ThemesLayoutBaseComponent implements OnIn
         this.usernameFirstLetter = this.appSession.user.userName.substring(0, 1).toUpperCase();
     }
 
-    ngAfterViewInit(): void {
-        this.mQuickUserOffcanvas = new KTOffcanvas('kt_quick_user', {
-            overlay: true,
-            baseClass: 'offcanvas',
-            placement: 'right',
-            closeBy: 'kt_demo_panel_close',
-            toggleBy: ['kt_quick_user_toggle', 'ShowLoginAttemptsLink'],
-        });
-
-        this.mQuickUserOffcanvas.events.push({
-            name: 'beforeShow',
-            handler: () => {
-                abp.event.trigger('app.show.quickUserPanel');
-            },
-        });
-    }
-
     setCurrentLoginInformations(): void {
         this.shownLoginName = this.appSession.getShownLoginName();
         this.tenancyName = this.appSession.tenancyName;
         this.userName = this.appSession.user.userName;
+        this.emailAddress = this.appSession.user.emailAddress;
     }
 
     getShownUserName(linkedUser: LinkedUserDto): string {

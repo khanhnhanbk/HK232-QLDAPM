@@ -21,18 +21,17 @@
                     </h4>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group col-12">
-                        <div class="form-group">
-                            <label>{{ 'PropertyName' | localize }} *</label>
+                    <div class="mb-5 col-12">
+                        <div class="mb-5">
+                            <label class="form-label">{{ 'PropertyName' | localize }} *</label>
                             <input
                                 class="form-control"
                                 type="text"
@@ -42,8 +41,8 @@
                             />
                         </div>
 
-                        <div class="form-group">
-                            <label>{{ 'DisplayName' | localize }}</label>
+                        <div class="mb-5">
+                            <label class="form-label">{{ 'DisplayName' | localize }}</label>
                             <input
                                 class="form-control"
                                 type="text"
@@ -53,8 +52,8 @@
                             />
                         </div>
 
-                        <div class="form-group">
-                            <label>{{ 'InputType' | localize }} *</label>
+                        <div class="mb-5">
+                            <label class="form-label">{{ 'InputType' | localize }} *</label>
                             <select class="form-control" [(ngModel)]="dynamicProperty.inputType">
                                 <option *ngFor="let inputType of allIputTypes" [value]="inputType">
                                     {{ inputType }}
@@ -62,8 +61,8 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label>{{ 'Permission' | localize }}</label>
+                        <div class="mb-5">
+                            <label class="form-label">{{ 'Permission' | localize }}</label>
                             <div class="input-group">
                                 <input
                                     type="text"
@@ -71,11 +70,9 @@
                                     disabled="disabled"
                                     value="{{ dynamicProperty.permission }}"
                                 />
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" (click)="openPermissionTreeModal()">
-                                        <i class="fa fa-hand-pointer" style="color: white"></i>
-                                    </button>
-                                </div>
+                                <button class="btn btn-primary" type="button" (click)="openPermissionTreeModal()">
+                                    <i class="fa fa-hand-pointer" style="color: white"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

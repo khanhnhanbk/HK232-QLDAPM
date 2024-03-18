@@ -9,18 +9,11 @@ import { DOCUMENT } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
 })
 export class Theme9BrandComponent extends AppComponentBase {
-    defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/app-logo-on-dark-2.svg';
+    skin = this.appSession.theme.baseSettings.layout.darkMode ? 'dark' : 'light';
+    defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/app-logo-on-' + this.skin + '-sm.svg';
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
 
     constructor(injector: Injector, @Inject(DOCUMENT) private document: Document) {
         super(injector);
-    }
-
-    clickTopbarToggle(): void {
-        this.document.body.classList.toggle('m-topbar--on');
-    }
-
-    clickMenuToggle(): void {
-        this.document.body.classList.toggle('m-aside-left--on');
     }
 }

@@ -11,7 +11,7 @@
                 {{ model.edition.displayName }}
             </h3>
         </div>
-        <div class="col-sm-12 col-md-4 text-right">
+        <div class="col-sm-12 col-md-4 text-end">
             <button
                 [disabled]="saving"
                 routerLink="/account/login"
@@ -30,7 +30,7 @@
             {{ 'TenantInformations' | localize }}
         </h5>
 
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 #tenancyName="ngModel"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 #nameInput="ngModel"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
@@ -66,7 +66,7 @@
             {{ 'AccountSettings' | localize }}
         </h5>
 
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 #adminEmailAddressInput="ngModel"
                 class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
@@ -83,7 +83,7 @@
             </span>
         </div>
 
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 type="password"
                 name="Password"
@@ -105,7 +105,7 @@
                 [mediumLabel]="l('medium')"
                 [strongLabel]="l('strong')"
             />
-            <div [hidden]="registerForm.form.valid || registerForm.form.pristine" class="form-group">
+            <div [hidden]="registerForm.form.valid || registerForm.form.pristine" class="mb-5">
                 <ul class="form-text text-danger" *ngIf="Password.errors">
                     <li [hidden]="!Password.errors.requireDigit">
                         {{ 'PasswordComplexity_RequireDigit_Hint' | localize }}
@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 type="password"
                 name="PasswordRepeat"
@@ -146,7 +146,7 @@
                 [requiredLength]="passwordComplexitySetting.requiredLength"
                 required
             />
-            <div [hidden]="registerForm.form.valid || registerForm.form.pristine" class="form-group">
+            <div [hidden]="registerForm.form.valid || registerForm.form.pristine" class="mb-5">
                 <ul class="form-text text-danger" *ngIf="PasswordRepeat.errors">
                     <li [hidden]="!PasswordRepeat.errors.requireDigit">
                         {{ 'PasswordComplexity_RequireDigit_Hint' | localize }}
@@ -174,7 +174,7 @@
         <div class="pb-lg-0 pb-5">
             <button
                 type="submit"
-                class="btn btn-block btn-primary font-weight-bolder font-size-h6 px-8 py-4 mb-5"
+                class="btn w-100 btn-primary font-weight-bolder font-size-h6 px-8 py-4 mb-5"
                 [disabled]="!registerForm.form.valid"
                 [buttonBusy]="saving"
                 [busyText]="l('SavingWithThreeDot')"

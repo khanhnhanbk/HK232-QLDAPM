@@ -6,7 +6,7 @@ export class Theme3ThemeAssetContributor implements IThemeAssetContributor {
         return [AppConsts.appBaseUrl + '/assets/fonts/fonts-montserrat.min.css'];
     }
 
-    public getAdditionalBodyStle(): string {
+    public getAdditionalBodyStyle(): string {
         return 'aside-secondary-enabled';
     }
 
@@ -15,7 +15,7 @@ export class Theme3ThemeAssetContributor implements IThemeAssetContributor {
     }
 
     public getSubheaderStyle(): string {
-        return 'subheader-title text-dark font-weight-bold my-1 mr-3';
+        return 'subheader-title text-dark font-weight-bold my-1 me-3';
     }
 
     public getFooterStyle(): string {

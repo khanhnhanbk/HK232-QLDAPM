@@ -17,15 +17,19 @@
             <div class="card card-custom gutter-b">
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <div class="col-md-12">
-                            <div class="alert alert-custom alert-white alert-shadow gutter-b" role="alert">
-                                <div class="alert-icon">
-                                    <i class="flaticon-information text-primary"></i>
+                        <div class="col-md-12" #webhookAlertArea>
+                            <div class="alert bg-light-primary alert-dismissible d-flex align-items-center p-5 mb-10">
+                                <span class="svg-icon svg-icon-2hx svg-icon-primary me-4">
+                                    <svg class="flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                                        <use xlink:href="#warning-icon"/>
+                                    </svg>
+                                </span>
+                                <div class="d-flex flex-column">
+                                    <span>{{ 'WebhookPageInfo' | localize }}</span>
                                 </div>
-                                <div class="alert-text">
-                                    Webhooks allow external services to be notified when certain events happen. When the
-                                    specified events happen, we’ll send a POST request to each of the URLs you provide.
-                                </div>
+                                <button type="button" class="btn-close position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert"
+                                (click)="webhookAlertArea.remove()">
+                                </button>
                             </div>
                         </div>
                         <!--<Primeng-TurboTable-Start>-->
@@ -68,10 +72,10 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span *ngIf="record.isActive" class="label label-success label-inline m-1">
+                                            <span *ngIf="record.isActive" class="badge badge-success m-1">
                                                 {{ 'Yes' | localize }}
                                             </span>
-                                            <span *ngIf="!record.isActive" class="label label-dark label-inline m-1">
+                                            <span *ngIf="!record.isActive" class="badge badge-dark m-1">
                                                 {{ 'No' | localize }}
                                             </span>
                                         </td>

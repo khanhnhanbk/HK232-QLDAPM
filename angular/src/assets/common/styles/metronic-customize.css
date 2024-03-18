@@ -33,3 +33,22 @@ body.aside-minimize #kt_brand {
 .p-paginator {
     justify-content: flex-end !important;
 }
+
+.dropdown-menu-lg{
+    min-width: 410px !important;
+}
+
+.swal2-popup .swal2-icon{
+    margin: 1.25em auto 1.875em !important;
+}
+
+
+/** METRONIC 8 **/
+.aside .menu-item .menu-icon i{
+    font-size: 16px;
+    line-height: 1;
+}
+
+.aside-menu .menu .menu-sub:not([data-popper-placement]) .menu-item .menu-link{
+    padding-left: calc(0.75rem + 25px);
+}

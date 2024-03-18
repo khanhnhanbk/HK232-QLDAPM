@@ -19,6 +19,7 @@ obj/
 bin/
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage/*
@@ -45,12 +46,9 @@ Properties/launchSettings.json
 /src/assets/common/styles/**/*.min.*
 
 src/assets/metronic/themes/**/css/*.min.css
-!src/assets/metronic/themes/**/css/pages/
+src/assets/metronic/themes/**/plugins/**/*.min.css
 
 src/assets/primeng/datatable/css/*.min.css
-
-src/assets/metronic/themes/**/css/*.min.css
-!src/assets/metronic/themes/**/css/pages/
 
 src/assets/fonts/*min.css
 

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '@app/app-routing.module';
-import { CoreModule } from '@metronic/app/core/core.module';
 import { AppBsModalModule } from '@shared/common/appBsModal/app-bs-modal.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { UtilsModule } from '@shared/utils/utils.module';
@@ -43,7 +42,6 @@ const imports = [
     PaginatorModule,
     ProgressBarModule,
     PerfectScrollbarModule,
-    CoreModule,
     TextMaskModule,
     ImageCropperModule,
     AutoCompleteModule,

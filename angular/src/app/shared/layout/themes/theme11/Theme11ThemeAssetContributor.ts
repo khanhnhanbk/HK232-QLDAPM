@@ -5,7 +5,7 @@ export class Theme11ThemeAssetContributor implements IThemeAssetContributor {
         return [''];
     }
 
-    public getAdditionalBodyStle(): string {
+    public getAdditionalBodyStyle(): string {
         return '';
     }
 
@@ -14,7 +14,7 @@ export class Theme11ThemeAssetContributor implements IThemeAssetContributor {
     }
 
     public getSubheaderStyle(): string {
-        return 'text-dark font-weight-bold my-1 mr-5';
+        return 'text-dark font-weight-bold my-1 me-5 ms-5';
     }
 
     public getFooterStyle(): string {

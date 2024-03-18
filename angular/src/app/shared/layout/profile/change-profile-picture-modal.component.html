@@ -15,24 +15,25 @@
                     <h5 class="modal-title">
                         <span>{{ 'ChangeProfilePicture' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" [attr.aria-label]="l('Close')" (click)="close()">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" [attr.aria-label]="l('Close')" (click)="close()">
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group" *ngIf="canUseGravatar()">
-                        <label for="Profile_UseGravatarProfilePicture" class="checkbox">
+                    <div class="mb-5" *ngIf="canUseGravatar()">
+                        <label class="form-check form-check-custom form-check-solid py-1">
                             <input
                                 id="Profile_UseGravatarProfilePicture"
                                 type="checkbox"
                                 name="UseGravatarProfilePicture"
                                 [(ngModel)]="useGravatarProfilePicture"
+                                class="form-check-input"
                             />
-                            <span></span>
-                            {{ 'UseGravatarProfilePicture' | localize }}
+                            <span class="form-check-label">
+                                {{ 'UseGravatarProfilePicture' | localize }}
+                            </span>
                         </label>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-5">
                         <div class="input-group">
                             <div class="custom-file">
                                 <input

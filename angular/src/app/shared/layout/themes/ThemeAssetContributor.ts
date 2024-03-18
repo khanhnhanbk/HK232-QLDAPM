@@ -1,6 +1,6 @@
 export interface IThemeAssetContributor {
     getAssetUrls(): string[];
-    getAdditionalBodyStle(): string;
+    getAdditionalBodyStyle(): string;
     getMenuWrapperStyle(): string;
     getFooterStyle(): string;
 }

@@ -12,6 +12,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class Theme2BrandComponent extends AppComponentBase {
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
+    skin = this.currentTheme.baseSettings.layout.darkMode ? 'dark': 'light';
 
     constructor(injector: Injector, @Inject(DOCUMENT) private document: Document) {
         super(injector);

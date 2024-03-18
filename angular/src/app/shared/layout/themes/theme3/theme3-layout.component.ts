@@ -4,7 +4,6 @@ import { ThemesLayoutBaseComponent } from '@app/shared/layout/themes/themes-layo
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { AppConsts } from '@shared/AppConsts';
 import { DOCUMENT } from '@angular/common';
-import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/offcanvas.directive';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 
 @Component({
@@ -16,14 +15,6 @@ export class Theme3LayoutComponent extends ThemesLayoutBaseComponent implements 
     @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
 
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
-    asideToggler;
-
-    menuCanvasOptions: OffcanvasOptions = {
-        baseClass: 'aside',
-        overlay: true,
-        closeBy: 'kt_aside_close_btn',
-        toggleBy: 'kt_aside_mobile_toggle',
-    };
 
     constructor(injector: Injector, @Inject(DOCUMENT) private document: Document, _dateTimeService: DateTimeService) {
         super(injector, _dateTimeService);
@@ -32,11 +23,6 @@ export class Theme3LayoutComponent extends ThemesLayoutBaseComponent implements 
     ngOnInit() {
         this.installationMode = UrlHelper.isInstallUrl(location.href);
         this.defaultLogo = AppConsts.appBaseUrl + '/assets/common/images/app-logo-on-light-sm.svg';
-        this.asideToggler = new KTToggle(document.getElementById('kt_aside_toggle'), {
-            target: this.document.body,
-            targetState: 'aside-minimize',
-            toggleState: 'active',
-        });
     }
 
     triggerAsideToggleClickEvent(): void {

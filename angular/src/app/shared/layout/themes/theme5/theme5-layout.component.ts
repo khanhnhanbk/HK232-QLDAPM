@@ -2,11 +2,8 @@ import { Injector, ElementRef, Component, OnInit, AfterViewInit, ViewChild, Inje
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { ThemesLayoutBaseComponent } from '@app/shared/layout/themes/themes-layout-base.component';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { LayoutRefService } from '@metronic/app/core/_base/layout/services/layout-ref.service';
 import { AppConsts } from '@shared/AppConsts';
 import { DOCUMENT } from '@angular/common';
-import { ToggleOptions } from '@metronic/app/core/_base/layout/directives/toggle.directive';
-import { OffcanvasOptions } from '@metronic/app/core/_base/layout/directives/offcanvas.directive';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 
 @Component({
@@ -20,15 +17,8 @@ export class Theme5LayoutComponent extends ThemesLayoutBaseComponent implements 
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
     asideToggler;
 
-    userMenuToggleOptions: ToggleOptions = {
-        target: this.document.body,
-        targetState: 'topbar-mobile-on',
-        toggleState: 'active',
-    };
-
     constructor(
         injector: Injector,
-        private layoutRefService: LayoutRefService,
         @Inject(DOCUMENT) private document: Document,
         _dateTimeService: DateTimeService
     ) {
@@ -40,7 +30,6 @@ export class Theme5LayoutComponent extends ThemesLayoutBaseComponent implements 
     }
 
     ngAfterViewInit(): void {
-        this.layoutRefService.addElement('header', this.ktHeader.nativeElement);
         this.asideToggler = new KTOffcanvas(this.document.getElementById('kt_aside'), {
             overlay: true,
             baseClass: 'aside',

@@ -5,7 +5,7 @@
         </h3>
     </div>
     <form #twoFactorForm="ngForm" class="login-form form" method="post" (ngSubmit)="submit()">
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 #passwordInput="ngModel"
                 autoFocus
@@ -22,25 +22,27 @@
         </div>
 
         <div
-            class="form-group mt-4"
+            class="mb-5 mt-4"
             *ngIf="s('Abp.Zero.UserManagement.TwoFactorLogin.IsRememberBrowserEnabled') === 'true'"
         >
-            <label class="checkbox checkbox-outline">
+            <label class="form-check form-check-custom form-check-solid py-1">
                 <input
-                    [(ngModel)]="loginService.authenticateModel.rememberClient"
                     type="checkbox"
                     name="rememberClient"
+                    [(ngModel)]="loginService.authenticateModel.rememberClient"
+                    class="form-check-input"
                     value="true"
                 />
-                <span></span>
-                {{ 'RememberThisBrowser' | localize }}
+                <span class="form-check-label">
+                    {{ 'RememberThisBrowser' | localize }}
+                </span>
             </label>
         </div>
 
         <div class="pb-lg-0 pb-5">
             <button
                 type="submit"
-                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 me-3"
                 [disabled]="!twoFactorForm.form.valid"
             >
                 {{ 'Submit' | localize }}

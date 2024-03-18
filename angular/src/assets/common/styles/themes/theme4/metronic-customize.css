@@ -55,3 +55,11 @@ p-autoComplete{
 .menuSearchBarContainer{
     width: calc(100% - 20px);
 }
+
+#kt_content, .content{
+    padding: 0 ;
+}
+
+sub-header{
+    margin-bottom: 2.5rem !important
+}

@@ -15,8 +15,7 @@
                 <h4 class="modal-title">
                     {{ options.title }}
                 </h4>
-                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                <button type="button" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')">
                 </button>
             </div>
             <div class="modal-body">
@@ -62,7 +61,7 @@
                                 <tr>
                                     <td>
                                         <button
-                                            class="btn btn-outline-primary btn-sm btn-icon"
+                                            class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"
                                             (click)="selectItem(record)"
                                             title="{{ 'Select' | localize }}"
                                         >

@@ -1,27 +1,16 @@
-<div dropdown class="dropdown dropdown-language" aria-haspopup="true" *ngIf="languages.length > 1" [dropup]="isDropup">
-    <div dropdownToggle class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
-        <div [class]="customStyle">
-            <i [class]="currentLanguage.icon"></i>
-        </div>
+<div class="d-flex align-items-center dropdown-language" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" *ngIf="languages.length > 1">
+    <div [class]="customStyle">
+        <i [class]="currentLanguage.icon"></i>
     </div>
-    <div
-        *dropdownMenu
-        class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right"
-        [attr.aria-label]="l('Languages')"
-    >
-        <perfect-scrollbar>
-            <ul class="navi navi-hover py-4">
-                <li class="navi-item" *ngFor="let language of languages">
-                    <a href="javascript:;" (click)="changeLanguage(language.name)" class="navi-link">
-                        <span class="symbol symbol-20 mr-3">
-                            <i [class]="language.icon"></i>
-                        </span>
-                        <span class="navi-text">
-                            {{ language.displayName }}
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </perfect-scrollbar>
+</div>
+<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-200px py-4"
+     data-kt-menu="true">
+     <div class="menu-item px-3" *ngFor="let language of languages">
+        <a href="javascript:;" (click)="changeLanguage(language.name)" class="menu-link px-3">
+            <span class="d-flex symbol symbol-20px me-4">
+                <i [class]="language.icon"></i>
+            </span>
+            {{ language.displayName }}
+        </a>
     </div>
 </div>

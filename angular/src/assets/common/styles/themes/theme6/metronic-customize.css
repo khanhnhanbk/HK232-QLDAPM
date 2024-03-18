@@ -32,3 +32,12 @@ p-autoComplete{
 .menuSearchBarContainer{
     width: calc(100% - 20px);
 }
+
+.subheader {
+    margin-bottom: 1.25rem !important;
+}
+
+.content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}

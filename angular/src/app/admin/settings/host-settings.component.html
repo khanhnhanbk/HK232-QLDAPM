@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <tabset *ngIf="hostSettings">
                         <tab class="p-5" heading="{{ 'General' | localize }}" *ngIf="showTimezoneSelection">
-                            <div class="form-group">
+                            <div class="mb-5">
                                 <label for="Timezone">{{ 'Timezone' | localize }}</label>
                                 <timezone-combo
                                     name="Timezone"
@@ -29,69 +29,63 @@
                             *ngIf="hostSettings.tenantManagement"
                         >
                             <div class="form">
-                                <h5>{{ 'FormBasedRegistration' | localize }}</h5>
-                                <div class="checkbox-list">
-                                    <div class="form-group">
-                                        <label
-                                            for="Setting_AllowSelfRegistration"
-                                            class="checkbox"
-                                            style="margin-bottom: 0"
-                                        >
-                                            <input
-                                                id="Setting_AllowSelfRegistration"
-                                                type="checkbox"
-                                                name="AllowSelfRegistration"
-                                                [(ngModel)]="hostSettings.tenantManagement.allowSelfRegistration"
-                                            />
-                                            <span></span>
-                                            {{ 'AllowTenantsToRegisterThemselves' | localize }}
-                                        </label>
-                                        <span class="form-text text-muted">
-                                            {{ 'AllowTenantsToRegisterThemselves_Hint' | localize }}
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="form-group"
-                                        [hidden]="!hostSettings.tenantManagement.allowSelfRegistration"
-                                    >
-                                        <label
-                                            for="Setting_IsNewRegisteredTenantActiveByDefault"
-                                            class="checkbox"
-                                            style="margin-bottom: 0"
-                                        >
-                                            <input
-                                                id="Setting_IsNewRegisteredTenantActiveByDefault"
-                                                type="checkbox"
-                                                name="IsNewRegisteredTenantActiveByDefault"
-                                                [(ngModel)]="
-                                                    hostSettings.tenantManagement.isNewRegisteredTenantActiveByDefault
-                                                "
-                                            />
-                                            <span></span>
-                                            {{ 'NewRegisteredTenantsIsActiveByDefault' | localize }}
-                                        </label>
-                                        <span class="form-text text-muted">
-                                            {{ 'NewRegisteredTenantsIsActiveByDefault_Hint' | localize }}
-                                        </span>
-                                    </div>
-                                    <div
-                                        class="form-group"
-                                        [hidden]="!hostSettings.tenantManagement.allowSelfRegistration"
-                                    >
-                                        <label for="Setting_UseCaptchaOnRegistration" class="checkbox">
-                                            <input
-                                                id="Setting_UseCaptchaOnRegistration"
-                                                type="checkbox"
-                                                name="UseCaptchaOnRegistration"
-                                                [(ngModel)]="hostSettings.tenantManagement.useCaptchaOnRegistration"
-                                            />
-                                            <span></span>
-                                            {{ 'UseCaptchaOnRegistration' | localize }}
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="DefaultEditionId">{{ 'Edition' | localize }}</label>
+                                <h5 class="mt-5">{{ 'FormBasedRegistration' | localize }}</h5>
+                                <label class="form-check form-check-custom form-check-solid py-1">
+                                    <input
+                                        id="Setting_AllowSelfRegistration"
+                                        type="checkbox"
+                                        name="AllowSelfRegistration"
+                                        [(ngModel)]="hostSettings.tenantManagement.allowSelfRegistration"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
+                                        {{ 'AllowTenantsToRegisterThemselves' | localize }}
+                                    </span>
+                                </label>
+                                <span class="d-flex form-text text-muted mb-5">
+                                    {{ 'AllowTenantsToRegisterThemselves_Hint' | localize }}
+                                </span>
+
+                                <label
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                    [hidden]="!hostSettings.tenantManagement.allowSelfRegistration"
+                                >
+                                    <input
+                                        id="Setting_IsNewRegisteredTenantActiveByDefault"
+                                        type="checkbox"
+                                        name="IsNewRegisteredTenantActiveByDefault"
+                                        [(ngModel)]="hostSettings.tenantManagement.isNewRegisteredTenantActiveByDefault"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
+                                        {{ 'NewRegisteredTenantsIsActiveByDefault' | localize }}
+                                    </span>
+                                </label>
+                                <span
+                                    class="d-flex form-text text-muted mb-5"
+                                    *ngIf="hostSettings.tenantManagement.allowSelfRegistration"
+                                >
+                                    {{ 'NewRegisteredTenantsIsActiveByDefault_Hint' | localize }}
+                                </span>
+
+                                <label
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                    [hidden]="!hostSettings.tenantManagement.allowSelfRegistration"
+                                >
+                                    <input
+                                        id="Setting_UseCaptchaOnRegistration"
+                                        type="checkbox"
+                                        name="UseCaptchaOnRegistration"
+                                        [(ngModel)]="hostSettings.tenantManagement.useCaptchaOnRegistration"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
+                                        {{ 'UseCaptchaOnRegistration' | localize }}
+                                    </span>
+                                </label>
+
+                                <div class="mt-5">
+                                    <label class="form-label" for="DefaultEditionId">{{ 'Edition' | localize }}</label>
                                     <select
                                         id="DefaultEditionId"
                                         class="form-control"
@@ -109,242 +103,321 @@
                             heading="{{ 'UserManagement' | localize }}"
                             *ngIf="hostSettings.userManagement"
                         >
-                            <div class="checkbox-list">
-                                <label for="Settings_IsEmailConfirmationRequiredForLogin" class="checkbox">
-                                    <input
-                                        id="Settings_IsEmailConfirmationRequiredForLogin"
-                                        type="checkbox"
-                                        name="IsEmailConfirmationRequiredForLogin"
-                                        [(ngModel)]="hostSettings.userManagement.isEmailConfirmationRequiredForLogin"
-                                    />
-                                    <span></span>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Settings_IsEmailConfirmationRequiredForLogin"
+                                    type="checkbox"
+                                    name="IsEmailConfirmationRequiredForLogin"
+                                    [(ngModel)]="hostSettings.userManagement.isEmailConfirmationRequiredForLogin"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'EmailConfirmationRequiredForLogin' | localize }}
-                                </label>
-                                <label for="Settings_SmsVerificationEnabled" class="checkbox">
-                                    <input
-                                        id="Settings_SmsVerificationEnabled"
-                                        class="md-check"
-                                        type="checkbox"
-                                        name="SmsVerificationEnabled"
-                                        [(ngModel)]="hostSettings.userManagement.smsVerificationEnabled"
-                                    />
-                                    <span></span>
+                                </span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Settings_SmsVerificationEnabled"
+                                    type="checkbox"
+                                    name="SmsVerificationEnabled"
+                                    [(ngModel)]="hostSettings.userManagement.smsVerificationEnabled"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'SmsVerificationEnabled' | localize }}
-                                </label>
-                                <label for="Setting_UseCaptchaOnLogin" class="checkbox">
-                                    <input
-                                        id="Setting_UseCaptchaOnLogin"
-                                        type="checkbox"
-                                        name="UseCaptchaOnLogin"
-                                        [(ngModel)]="hostSettings.userManagement.useCaptchaOnLogin"
-                                    />
-                                    <span></span>
+                                </span>
+                            </label>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Setting_UseCaptchaOnLogin"
+                                    type="checkbox"
+                                    name="UseCaptchaOnLogin"
+                                    [(ngModel)]="hostSettings.userManagement.useCaptchaOnLogin"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'UseCaptchaOnLogin' | localize }}
-                                </label>
-                                <h5>{{ 'CookieConsent' | localize }}</h5>
-                                <label for="Settings_IsCookieConsentEnabled" class="checkbox">
-                                    <input
-                                        id="Settings_IsCookieConsentEnabled"
-                                        class="md-check"
-                                        type="checkbox"
-                                        name="IsCookieConsentEnabled"
-                                        [(ngModel)]="hostSettings.userManagement.isCookieConsentEnabled"
-                                    />
-                                    <span></span>
+                                </span>
+                            </label>
+
+                            <h5 class="mt-5">{{ 'CookieConsent' | localize }}</h5>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Settings_IsCookieConsentEnabled"
+                                    type="checkbox"
+                                    name="IsCookieConsentEnabled"
+                                    [(ngModel)]="hostSettings.userManagement.isCookieConsentEnabled"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'IsCookieConsentEnabled' | localize }}
-                                </label>
-                                <h5>{{ 'SessionTimeOut' | localize }}</h5>
-                                <label for="Setting_IsSessionTimeOutEnabled" class="checkbox">
-                                    <input
-                                        id="Setting_IsSessionTimeOutEnabled"
-                                        class="md-check"
-                                        type="checkbox"
-                                        name="IsEnabled"
-                                        [(ngModel)]="hostSettings.userManagement.sessionTimeOutSettings.isEnabled"
-                                    />
-                                    <span></span>
+                                </span>
+                            </label>
+
+                            <h5 class="mt-5">{{ 'SessionTimeOut' | localize }}</h5>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Setting_IsSessionTimeOutEnabled"
+                                    type="checkbox"
+                                    name="IsEnabled"
+                                    [(ngModel)]="hostSettings.userManagement.sessionTimeOutSettings.isEnabled"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'IsSessionTimeOutEnabled' | localize }}
-                                </label>
-                                <label
-                                    *ngIf="hostSettings.userManagement.sessionTimeOutSettings.isEnabled"
-                                    for="Setting_ShowLockScreenWhenTimedOut"
-                                    class="checkbox"
-                                >
-                                    <input
-                                        id="Setting_ShowLockScreenWhenTimedOut"
-                                        class="md-check"
-                                        type="checkbox"
-                                        name="IsEnabled"
-                                        [(ngModel)]="
-                                            hostSettings.userManagement.sessionTimeOutSettings
-                                                .showLockScreenWhenTimedOut
-                                        "
-                                    />
-                                    <span></span>
+                                </span>
+                            </label>
+                            <label
+                                class="form-check form-check-custom form-check-solid py-1"
+                                *ngIf="hostSettings.userManagement.sessionTimeOutSettings.isEnabled"
+                            >
+                                <input
+                                    id="Setting_ShowLockScreenWhenTimedOut"
+                                    type="checkbox"
+                                    name="IsEnabled"
+                                    [(ngModel)]="
+                                        hostSettings.userManagement.sessionTimeOutSettings.showLockScreenWhenTimedOut
+                                    "
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'ShowLockScreenWhenTimedOut' | localize }}
+                                </span>
+                            </label>
+                            <div class="mb-5 pt-1" *ngIf="hostSettings.userManagement.sessionTimeOutSettings.isEnabled">
+                                <label for="Setting_SessionTimeOutSecond">
+                                    {{ 'SessionTimeOutSecond' | localize }}
                                 </label>
-                                <div
-                                    class="form-group"
-                                    *ngIf="hostSettings.userManagement.sessionTimeOutSettings.isEnabled"
-                                >
-                                    <label for="Setting_SessionTimeOutSecond">
-                                        {{ 'SessionTimeOutSecond' | localize }}
-                                    </label>
-                                    <input
-                                        id="Setting_SessionTimeOutSecond"
-                                        type="number"
-                                        name="TimeOutSecond"
-                                        class="form-control"
-                                        min="1"
-                                        [ngClass]="{
-                                            edited: hostSettings.userManagement.sessionTimeOutSettings.timeOutSecond
-                                        }"
-                                        [(ngModel)]="hostSettings.userManagement.sessionTimeOutSettings.timeOutSecond"
-                                    />
-                                </div>
-                                <div
-                                    class="form-group"
-                                    *ngIf="hostSettings.userManagement.sessionTimeOutSettings.isEnabled"
-                                >
-                                    <label for="Setting_ShowTimeOutNotificationSecond">
-                                        {{ 'ShowTimeOutNotificationSecond' | localize }}
-                                    </label>
-                                    <input
-                                        id="Setting_ShowTimeOutNotificationSecond"
-                                        type="number"
-                                        name="TimeOutSecond"
-                                        class="form-control"
-                                        min="1"
-                                        [ngClass]="{
-                                            edited: hostSettings.userManagement.sessionTimeOutSettings
-                                                .showTimeOutNotificationSecond
-                                        }"
-                                        [(ngModel)]="
-                                            hostSettings.userManagement.sessionTimeOutSettings
-                                                .showTimeOutNotificationSecond
-                                        "
-                                    />
-                                </div>
-                                <div class="form-group">
-                                    <h5>{{ 'Profile' | localize }}</h5>
-                                    <label for="Setting_AllowUsingGravatarProfilePicture" class="checkbox">
-                                        <input
-                                            id="Setting_AllowUsingGravatarProfilePicture"
-                                            class="md-check"
-                                            type="checkbox"
-                                            name="AllowUsingGravatarProfilePicture"
-                                            [(ngModel)]="hostSettings.userManagement.allowUsingGravatarProfilePicture"
-                                        />
-                                        <span></span>
-                                        {{ 'AllowUsingGravatarProfilePicture' | localize }}
-                                    </label>
-                                </div>
+                                <input
+                                    id="Setting_SessionTimeOutSecond"
+                                    type="number"
+                                    name="TimeOutSecond"
+                                    class="form-control"
+                                    min="1"
+                                    [ngClass]="{
+                                        edited: hostSettings.userManagement.sessionTimeOutSettings.timeOutSecond
+                                    }"
+                                    [(ngModel)]="hostSettings.userManagement.sessionTimeOutSettings.timeOutSecond"
+                                />
+                            </div>
+                            <div class="mb-5" *ngIf="hostSettings.userManagement.sessionTimeOutSettings.isEnabled">
+                                <label for="Setting_ShowTimeOutNotificationSecond">
+                                    {{ 'ShowTimeOutNotificationSecond' | localize }}
+                                </label>
+                                <input
+                                    id="Setting_ShowTimeOutNotificationSecond"
+                                    type="number"
+                                    name="TimeOutSecond"
+                                    class="form-control"
+                                    min="1"
+                                    [ngClass]="{
+                                        edited: hostSettings.userManagement.sessionTimeOutSettings
+                                            .showTimeOutNotificationSecond
+                                    }"
+                                    [(ngModel)]="
+                                        hostSettings.userManagement.sessionTimeOutSettings.showTimeOutNotificationSecond
+                                    "
+                                />
+                            </div>
+
+                            <h5 class="mt-5">{{ 'Profile' | localize }}</h5>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Setting_AllowUsingGravatarProfilePicture"
+                                    type="checkbox"
+                                    name="AllowUsingGravatarProfilePicture"
+                                    [(ngModel)]="hostSettings.userManagement.allowUsingGravatarProfilePicture"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
+                                    {{ 'AllowUsingGravatarProfilePicture' | localize }}
+                                </span>
+                            </label>
+
+                            <h5 class="mt-5">{{ 'Password' | localize }}</h5>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Setting_EnableCheckingLastXPasswordWhenPasswordChange"
+                                    type="checkbox"
+                                    name="EnableCheckingLastXPasswordWhenPasswordChange"
+                                    [(ngModel)]="hostSettings.userManagement.userPasswordSettings.enableCheckingLastXPasswordWhenPasswordChange"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
+                                    {{ 'EnableCheckingLastXPasswordWhenPasswordChangeSettingLabel' | localize }}
+                                </span>
+                            </label>
+                            <div class="mb-5 pt-1" *ngIf="hostSettings.userManagement.userPasswordSettings.enableCheckingLastXPasswordWhenPasswordChange">
+                                <label for="Setting_CheckingLastXPasswordCount">
+                                    {{ 'CheckingLastXPasswordCountSettingLabel' | localize }}
+                                </label>
+                                <input
+                                    id="Setting_CheckingLastXPasswordCount"
+                                    type="number"
+                                    name="CheckingLastXPasswordCount"
+                                    class="form-control"
+                                    min="1"
+                                    [ngClass]="{
+                                        edited: hostSettings.userManagement.userPasswordSettings.checkingLastXPasswordCount
+                                    }"
+                                    [(ngModel)]="hostSettings.userManagement.userPasswordSettings.checkingLastXPasswordCount"
+                                />
+                            </div>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Setting_EnablePasswordExpiration"
+                                    type="checkbox"
+                                    name="EnablePasswordExpiration"
+                                    [(ngModel)]="hostSettings.userManagement.userPasswordSettings.enablePasswordExpiration"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
+                                    {{ 'EnablePasswordExpirationSettingLabel' | localize }}
+                                </span>
+                            </label>
+                            <div class="mb-5 pt-1" *ngIf="hostSettings.userManagement.userPasswordSettings.enablePasswordExpiration">
+                                <label for="Setting_PasswordExpirationDayCount">
+                                    {{ 'PasswordExpirationDayCountSettingLabel' | localize }}
+                                </label>
+                                <input
+                                    id="Setting_PasswordExpirationDayCount"
+                                    type="number"
+                                    name="PasswordExpirationDayCount"
+                                    class="form-control"
+                                    min="1"
+                                    [ngClass]="{
+                                        edited: hostSettings.userManagement.userPasswordSettings.passwordExpirationDayCount
+                                    }"
+                                    [(ngModel)]="hostSettings.userManagement.userPasswordSettings.passwordExpirationDayCount"
+                                />
                             </div>
                         </tab>
                         <tab class="p-5" heading="{{ 'Security' | localize }}" *ngIf="hostSettings.security">
                             <div>
-                                <h5>{{ 'PasswordComplexity' | localize }}</h5>
-                                <label for="Setting_PasswordComplexity_UseDefaultSettings" class="checkbox">
+                                <h5 class="mt-5">{{ 'PasswordComplexity' | localize }}</h5>
+                                <label class="form-check form-check-custom form-check-solid py-3">
                                     <input
                                         id="Setting_PasswordComplexity_UseDefaultSettings"
                                         type="checkbox"
                                         name="Setting_PasswordComplexity_UseDefaultSettings"
                                         [(ngModel)]="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                        class="form-check-input"
                                     />
-                                    <span></span>
-                                    {{ 'UseDefaultSettings' | localize }}
+                                    <span class="form-check-label">
+                                        {{ 'UseDefaultSettings' | localize }}
+                                    </span>
                                 </label>
-                                <div class="p-5">
-                                    <div class="checkbox-list">
-                                        <label for="Setting_PasswordComplexity_RequireDigit" class="checkbox">
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireDigit"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireDigit"
-                                                [(ngModel)]="hostSettings.security.passwordComplexity.requireDigit"
-                                                *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
-                                            />
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireDigit"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireDigit"
-                                                [(ngModel)]="
-                                                    hostSettings.security.defaultPasswordComplexity.requireDigit
-                                                "
-                                                *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                disabled
-                                            />
-                                            <span></span>
+
+                                <div class="px-5">
+                                    <label
+                                        for="Setting_PasswordComplexity_RequireDigit"
+                                        class="form-check form-check-custom form-check-solid py-1"
+                                    >
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireDigit"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireDigit"
+                                            [(ngModel)]="hostSettings.security.passwordComplexity.requireDigit"
+                                            *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            class="form-check-input"
+                                        />
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireDigit"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireDigit"
+                                            [(ngModel)]="hostSettings.security.defaultPasswordComplexity.requireDigit"
+                                            *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            disabled
+                                            class="form-check-input"
+                                        />
+                                        <span class="form-check-label">
                                             {{ 'PasswordComplexity_RequireDigit' | localize }}
-                                        </label>
-                                        <label for="Setting_PasswordComplexity_RequireLowercase" class="checkbox">
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireLowercase"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireLowercase"
-                                                [(ngModel)]="hostSettings.security.passwordComplexity.requireLowercase"
-                                                *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
-                                            />
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireLowercase"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireLowercase"
-                                                [(ngModel)]="
-                                                    hostSettings.security.defaultPasswordComplexity.requireLowercase
-                                                "
-                                                *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                disabled
-                                            />
-                                            <span></span>
+                                        </span>
+                                    </label>
+                                    <label
+                                        for="Setting_PasswordComplexity_RequireLowercase"
+                                        class="form-check form-check-custom form-check-solid py-1"
+                                    >
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireLowercase"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireLowercase"
+                                            [(ngModel)]="hostSettings.security.passwordComplexity.requireLowercase"
+                                            *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            class="form-check-input"
+                                        />
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireLowercase"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireLowercase"
+                                            [(ngModel)]="
+                                                hostSettings.security.defaultPasswordComplexity.requireLowercase
+                                            "
+                                            *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            disabled
+                                            class="form-check-input"
+                                        />
+                                        <span class="form-check-label">
                                             {{ 'PasswordComplexity_RequireLowercase' | localize }}
-                                        </label>
-                                        <label for="Setting_PasswordComplexity_RequireNonAlphanumeric" class="checkbox">
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireNonAlphanumeric"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireNonAlphanumeric"
-                                                [(ngModel)]="
-                                                    hostSettings.security.passwordComplexity.requireNonAlphanumeric
-                                                "
-                                                *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
-                                            />
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireNonAlphanumeric"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireNonAlphanumeric"
-                                                [(ngModel)]="
-                                                    hostSettings.security.defaultPasswordComplexity
-                                                        .requireNonAlphanumeric
-                                                "
-                                                *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                disabled
-                                            />
-                                            <span></span>
+                                        </span>
+                                    </label>
+                                    <label
+                                        for="Setting_PasswordComplexity_RequireNonAlphanumeric"
+                                        class="form-check form-check-custom form-check-solid py-1"
+                                    >
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireNonAlphanumeric"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireNonAlphanumeric"
+                                            [(ngModel)]="
+                                                hostSettings.security.passwordComplexity.requireNonAlphanumeric
+                                            "
+                                            *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            class="form-check-input"
+                                        />
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireNonAlphanumeric"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireNonAlphanumeric"
+                                            [(ngModel)]="
+                                                hostSettings.security.defaultPasswordComplexity.requireNonAlphanumeric
+                                            "
+                                            *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            disabled
+                                            class="form-check-input"
+                                        />
+                                        <span class="form-check-label">
                                             {{ 'PasswordComplexity_RequireNonAlphanumeric' | localize }}
-                                        </label>
-                                        <label for="Setting_PasswordComplexity_RequireUppercase" class="checkbox">
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireUppercase"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireUppercase"
-                                                [(ngModel)]="hostSettings.security.passwordComplexity.requireUppercase"
-                                                *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
-                                            />
-                                            <input
-                                                id="Setting_PasswordComplexity_RequireUppercase"
-                                                type="checkbox"
-                                                name="Setting_PasswordComplexity_RequireUppercase"
-                                                [(ngModel)]="
-                                                    hostSettings.security.defaultPasswordComplexity.requireUppercase
-                                                "
-                                                *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
-                                                disabled
-                                            />
-                                            <span></span>
+                                        </span>
+                                    </label>
+                                    <label
+                                        for="Setting_PasswordComplexity_RequireUppercase"
+                                        class="form-check form-check-custom form-check-solid py-1"
+                                    >
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireUppercase"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireUppercase"
+                                            [(ngModel)]="hostSettings.security.passwordComplexity.requireUppercase"
+                                            *ngIf="!hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            class="form-check-input"
+                                        />
+                                        <input
+                                            id="Setting_PasswordComplexity_RequireUppercase"
+                                            type="checkbox"
+                                            name="Setting_PasswordComplexity_RequireUppercase"
+                                            [(ngModel)]="
+                                                hostSettings.security.defaultPasswordComplexity.requireUppercase
+                                            "
+                                            *ngIf="hostSettings.security.useDefaultPasswordComplexitySettings"
+                                            disabled
+                                            class="form-check-input"
+                                        />
+                                        <span class="form-check-label">
                                             {{ 'PasswordComplexity_RequireUppercase' | localize }}
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
+                                        </span>
+                                    </label>
+                                    <div class="mb-5">
                                         <label>{{ 'PasswordComplexity_RequiredLength' | localize }}</label>
                                         <input
                                             type="number"
@@ -371,21 +444,26 @@
                                 </div>
                             </div>
                             <div>
-                                <h5>{{ 'UserLockOut' | localize }}</h5>
-                                <div class="form-group">
-                                    <label for="Setting_UserLockOut_IsEnabled" class="checkbox">
+                                <h5 class="mt-5">{{ 'UserLockOut' | localize }}</h5>
+                                <div class="mb-5">
+                                    <label
+                                        for="Setting_UserLockOut_IsEnabled"
+                                        class="form-check form-check-custom form-check-solid py-1"
+                                    >
                                         <input
                                             id="Setting_UserLockOut_IsEnabled"
                                             type="checkbox"
                                             name="Setting_UserLockOut_IsEnabled"
                                             [(ngModel)]="hostSettings.security.userLockOut.isEnabled"
+                                            class="form-check-input"
                                         />
-                                        <span></span>
-                                        {{ 'EnableUserAccountLockingOnFailedLoginAttemts' | localize }}
+                                        <span class="form-check-label">
+                                            {{ 'EnableUserAccountLockingOnFailedLoginAttempts' | localize }}
+                                        </span>
                                     </label>
                                 </div>
-                                <div class="form-group" *ngIf="hostSettings.security.userLockOut.isEnabled">
-                                    <label for="MaxFailedAccessAttemptsBeforeLockout">
+                                <div class="mb-5" *ngIf="hostSettings.security.userLockOut.isEnabled">
+                                    <label class="form-label" for="MaxFailedAccessAttemptsBeforeLockout">
                                         {{ 'MaxFailedAccessAttemptsBeforeLockout' | localize }}
                                     </label>
                                     <input
@@ -402,8 +480,8 @@
                                         "
                                     />
                                 </div>
-                                <div class="form-group" *ngIf="hostSettings.security.userLockOut.isEnabled">
-                                    <label for="DefaultAccountLockoutDurationAsSeconds">
+                                <div class="mb-5" *ngIf="hostSettings.security.userLockOut.isEnabled">
+                                    <label class="form-label" for="DefaultAccountLockoutDurationAsSeconds">
                                         {{ 'DefaultAccountLockoutDurationAsSeconds' | localize }}
                                     </label>
                                     <input
@@ -419,98 +497,109 @@
                                 </div>
                             </div>
                             <div>
-                                <h5>{{ 'TwoFactorLogin' | localize }}</h5>
-                                <div class="checkbox-list">
-                                    <label for="Setting_TwoFactorLogin_IsEnabled" class="checkbox">
-                                        <input
-                                            id="Setting_TwoFactorLogin_IsEnabled"
-                                            type="checkbox"
-                                            name="Setting_TwoFactorLogin_IsEnabled"
-                                            [(ngModel)]="hostSettings.security.twoFactorLogin.isEnabled"
-                                        />
-                                        <span></span>
+                                <h5 class="mt-5">{{ 'TwoFactorLogin' | localize }}</h5>
+                                <label for="Setting_TwoFactorLogin_IsEnabled" class="form-check form-check-custom form-check-solid py-1">
+                                    <input
+                                        id="Setting_TwoFactorLogin_IsEnabled"
+                                        type="checkbox"
+                                        name="Setting_TwoFactorLogin_IsEnabled"
+                                        [(ngModel)]="hostSettings.security.twoFactorLogin.isEnabled"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'EnableTwoFactorLogin' | localize }}
-                                    </label>
-                                    <label
-                                        for="Setting_TwoFactorLogin_IsEmailProviderEnabled"
-                                        class="checkbox"
-                                        *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
-                                    >
-                                        <input
-                                            id="Setting_TwoFactorLogin_IsEmailProviderEnabled"
-                                            type="checkbox"
-                                            name="Setting_TwoFactorLogin_IsEmailProviderEnabled"
-                                            [(ngModel)]="hostSettings.security.twoFactorLogin.isEmailProviderEnabled"
-                                        />
-                                        <span></span>
+                                    </span>
+                                </label>
+                                <label
+                                    for="Setting_TwoFactorLogin_IsEmailProviderEnabled"
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                    *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
+                                >
+                                    <input
+                                        id="Setting_TwoFactorLogin_IsEmailProviderEnabled"
+                                        type="checkbox"
+                                        name="Setting_TwoFactorLogin_IsEmailProviderEnabled"
+                                        [(ngModel)]="hostSettings.security.twoFactorLogin.isEmailProviderEnabled"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'IsEmailVerificationEnabled' | localize }}
-                                    </label>
-                                    <label
-                                        for="Setting_TwoFactorLogin_IsSmsProviderEnabled"
-                                        class="checkbox"
-                                        *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
-                                    >
-                                        <input
-                                            id="Setting_TwoFactorLogin_IsSmsProviderEnabled"
-                                            type="checkbox"
-                                            name="Setting_TwoFactorLogin_IsSmsProviderEnabled"
-                                            [(ngModel)]="hostSettings.security.twoFactorLogin.isSmsProviderEnabled"
-                                        />
-                                        <span></span>
+                                    </span>
+                                </label>
+                                <label
+                                    for="Setting_TwoFactorLogin_IsSmsProviderEnabled"
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                    *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
+                                >
+                                    <input
+                                        id="Setting_TwoFactorLogin_IsSmsProviderEnabled"
+                                        type="checkbox"
+                                        name="Setting_TwoFactorLogin_IsSmsProviderEnabled"
+                                        [(ngModel)]="hostSettings.security.twoFactorLogin.isSmsProviderEnabled"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'IsSmsVerificationEnabled' | localize }}
-                                    </label>
-                                    <label
-                                        for="Setting_TwoFactorLogin_IsGoogleAuthenticatorEnabled"
-                                        class="checkbox"
-                                        *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
-                                    >
-                                        <input
-                                            id="Setting_TwoFactorLogin_IsGoogleAuthenticatorEnabled"
-                                            type="checkbox"
-                                            name="Setting_TwoFactorLogin_IsGoogleAuthenticatorEnabled"
-                                            [(ngModel)]="
-                                                hostSettings.security.twoFactorLogin.isGoogleAuthenticatorEnabled
-                                            "
-                                        />
-                                        <span></span>
+                                    </span>
+                                </label>
+                                <label
+                                    for="Setting_TwoFactorLogin_IsGoogleAuthenticatorEnabled"
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                    *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
+                                >
+                                    <input
+                                        id="Setting_TwoFactorLogin_IsGoogleAuthenticatorEnabled"
+                                        type="checkbox"
+                                        name="Setting_TwoFactorLogin_IsGoogleAuthenticatorEnabled"
+                                        [(ngModel)]="hostSettings.security.twoFactorLogin.isGoogleAuthenticatorEnabled"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'IsGoogleAuthenticatorEnabled' | localize }}
-                                    </label>
-                                    <label
-                                        for="Setting_TwoFactorLogin_IsRememberBrowserEnabled"
-                                        class="checkbox"
-                                        *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
-                                    >
-                                        <input
-                                            id="Setting_TwoFactorLogin_IsRememberBrowserEnabled"
-                                            type="checkbox"
-                                            name="Setting_TwoFactorLogin_IsRememberBrowserEnabled"
-                                            [(ngModel)]="hostSettings.security.twoFactorLogin.isRememberBrowserEnabled"
-                                        />
-                                        <span></span>
+                                    </span>
+                                </label>
+                                <label
+                                    for="Setting_TwoFactorLogin_IsRememberBrowserEnabled"
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                    *ngIf="hostSettings.security.twoFactorLogin.isEnabled"
+                                >
+                                    <input
+                                        id="Setting_TwoFactorLogin_IsRememberBrowserEnabled"
+                                        type="checkbox"
+                                        name="Setting_TwoFactorLogin_IsRememberBrowserEnabled"
+                                        [(ngModel)]="hostSettings.security.twoFactorLogin.isRememberBrowserEnabled"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'AllowToRememberBrowserForTwoFactorLogin' | localize }}
-                                    </label>
-                                </div>
+                                    </span>
+                                </label>
                             </div>
                             <div>
-                                <h5>{{ 'OneConcurrentLoginPerUser' | localize }}</h5>
-                                <div class="checkbox-list">
-                                    <label for="Setting_IsOneConcurrentLoginPerUserActive" class="checkbox">
-                                        <input
-                                            id="Setting_IsOneConcurrentLoginPerUserActive"
-                                            type="checkbox"
-                                            name="Setting_IsOneConcurrentLoginPerUserActive"
-                                            [(ngModel)]="hostSettings.security.allowOneConcurrentLoginPerUser"
-                                        />
-                                        <span></span>
+                                <h5 class="mt-5">{{ 'OneConcurrentLoginPerUser' | localize }}</h5>
+                                <label
+                                    for="Setting_IsOneConcurrentLoginPerUserActive"
+                                    class="form-check form-check-custom form-check-solid py-1"
+                                >
+                                    <input
+                                        id="Setting_IsOneConcurrentLoginPerUserActive"
+                                        type="checkbox"
+                                        name="Setting_IsOneConcurrentLoginPerUserActive"
+                                        [(ngModel)]="hostSettings.security.allowOneConcurrentLoginPerUser"
+                                        class="form-check-input"
+                                    />
+                                    <span class="form-check-label">
                                         {{ 'OneConcurrentLoginPerUserActive' | localize }}
-                                    </label>
-                                </div>
+                                    </span>
+                                </label>
                             </div>
                         </tab>
                         <tab class="p-5" heading="{{ 'EmailSmtp' | localize }}" *ngIf="hostSettings.email">
                             <form class="form" #emailSmtpSettingsForm="ngForm" method="post">
-                                <div class="form-group">
-                                    <label for="DefaultFromAddress">{{ 'DefaultFromAddress' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="DefaultFromAddress">
+                                        {{ 'DefaultFromAddress' | localize }}
+                                    </label>
                                     <input
                                         id="DefaultFromAddress"
                                         type="email"
@@ -524,8 +613,8 @@
                                     />
                                     <validation-messages [formCtrl]="defaultFromAddressInput"></validation-messages>
                                 </div>
-                                <div class="form-group">
-                                    <label for="DefaultFromDisplayName">
+                                <div class="mb-5">
+                                    <label class="form-label" for="DefaultFromDisplayName">
                                         {{ 'DefaultFromDisplayName' | localize }}
                                     </label>
                                     <input
@@ -538,8 +627,8 @@
                                         maxlength="128"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="SmtpHost">{{ 'SmtpHost' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="SmtpHost">{{ 'SmtpHost' | localize }}</label>
                                     <input
                                         id="SmtpHost"
                                         type="text"
@@ -550,8 +639,8 @@
                                         maxlength="64"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="SmtpPort">{{ 'SmtpPort' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="SmtpPort">{{ 'SmtpPort' | localize }}</label>
                                     <input
                                         id="SmtpPort"
                                         type="number"
@@ -563,30 +652,34 @@
                                     />
                                 </div>
                             </form>
-                            <div class="checkbox-list">
-                                <label for="Settings_SmtpEnableSsl" class="checkbox">
-                                    <input
-                                        id="Settings_SmtpEnableSsl"
-                                        type="checkbox"
-                                        name="SmtpEnableSsl"
-                                        [(ngModel)]="hostSettings.email.smtpEnableSsl"
-                                    />
-                                    <span></span>
+
+                            <label for="Settings_SmtpEnableSsl" class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Settings_SmtpEnableSsl"
+                                    type="checkbox"
+                                    name="SmtpEnableSsl"
+                                    [(ngModel)]="hostSettings.email.smtpEnableSsl"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'UseSsl' | localize }}
-                                </label>
-                                <label for="Settings_SmtpUseDefaultCredentials" class="checkbox">
-                                    <input
-                                        id="Settings_SmtpUseDefaultCredentials"
-                                        type="checkbox"
-                                        name="SmtpUseDefaultCredentials"
-                                        [(ngModel)]="hostSettings.email.smtpUseDefaultCredentials"
-                                    />
-                                    <span></span>
+                                </span>
+                            </label>
+                            <label for="Settings_SmtpUseDefaultCredentials" class="form-check form-check-custom form-check-solid py-1 mb-5">
+                                <input
+                                    id="Settings_SmtpUseDefaultCredentials"
+                                    type="checkbox"
+                                    name="SmtpUseDefaultCredentials"
+                                    [(ngModel)]="hostSettings.email.smtpUseDefaultCredentials"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'UseDefaultCredentials' | localize }}
-                                </label>
-                            </div>
-                            <div class="form-group" [hidden]="hostSettings.email.smtpUseDefaultCredentials">
-                                <label for="SmtpDomainName">{{ 'DomainName' | localize }}</label>
+                                </span>
+                            </label>
+
+                            <div class="mb-5" [hidden]="hostSettings.email.smtpUseDefaultCredentials">
+                                <label class="form-label" for="SmtpDomainName">{{ 'DomainName' | localize }}</label>
                                 <input
                                     id="SmtpDomainName"
                                     type="text"
@@ -597,8 +690,8 @@
                                     maxlength="128"
                                 />
                             </div>
-                            <div class="form-group" [hidden]="hostSettings.email.smtpUseDefaultCredentials">
-                                <label for="SmtpUserName">{{ 'UserName' | localize }}</label>
+                            <div class="mb-5" [hidden]="hostSettings.email.smtpUseDefaultCredentials">
+                                <label class="form-label" for="SmtpUserName">{{ 'UserName' | localize }}</label>
                                 <input
                                     id="SmtpUserName"
                                     type="text"
@@ -609,8 +702,8 @@
                                     maxlength="128"
                                 />
                             </div>
-                            <div class="form-group" [hidden]="hostSettings.email.smtpUseDefaultCredentials">
-                                <label for="SmtpPassword">{{ 'Password' | localize }}</label>
+                            <div class="mb-5" [hidden]="hostSettings.email.smtpUseDefaultCredentials">
+                                <label class="form-label" for="SmtpPassword">{{ 'Password' | localize }}</label>
                                 <input
                                     id="SmtpPassword"
                                     type="password"
@@ -622,11 +715,11 @@
                                 />
                             </div>
                             <hr />
-                            <h5>{{ 'TestEmailSettingsHeader' | localize }}</h5>
+                            <h5 class="mt-5">{{ 'TestEmailSettingsHeader' | localize }}</h5>
                             <div class="row">
                                 <div class="col-md-4">
                                     <form class="form" #emailSmtpSettingsTestForm="ngForm">
-                                        <div class="form-group">
+                                        <div class="mb-5">
                                             <input
                                                 type="email"
                                                 name="testEmailAddress"
@@ -643,7 +736,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="mb-5 col-md-2">
                                     <button
                                         class="btn btn-primary"
                                         type="button"
@@ -657,9 +750,9 @@
                         </tab>
                         <tab class="p-5" *ngIf="true" heading="{{ 'Invoice' | localize }}">
                             <!-- *ngIf="true" is a workaround for https://github.com/valor-software/ng2-bootstrap/issues/823 -->
-                            <h5>{{ 'InvoiceInformation' | localize }}</h5>
-                            <div class="form-group">
-                                <label for="LegalName">{{ 'LegalName' | localize }}</label>
+                            <h5 class="my-5">{{ 'InvoiceInformation' | localize }}</h5>
+                            <div class="mb-5">
+                                <label class="form-label" for="LegalName">{{ 'LegalName' | localize }}</label>
                                 <input
                                     id="LegalName"
                                     type="text"
@@ -670,8 +763,8 @@
                                     maxlength="64"
                                 />
                             </div>
-                            <div class="form-group">
-                                <label for="Address">{{ 'Address' | localize }}</label>
+                            <div class="mb-5">
+                                <label class="form-label" for="Address">{{ 'Address' | localize }}</label>
                                 <textarea
                                     id="Address"
                                     rows="5"
@@ -684,20 +777,19 @@
                             </div>
                         </tab>
                         <tab class="p-5" *ngIf="true" heading="{{ 'OtherSettings' | localize }}">
-                            <div class="checkbox-list">
-                                <h5>{{ 'QuickThemeSelection' | localize }}</h5>
-                                <label for="Settings_IsQuickThemeSelectEnabled" class="checkbox">
-                                    <input
-                                        id="Settings_IsQuickThemeSelectEnabled"
-                                        class="md-check"
-                                        type="checkbox"
-                                        name="IsQuickThemeSelectEnabled"
-                                        [(ngModel)]="hostSettings.otherSettings.isQuickThemeSelectEnabled"
-                                    />
-                                    <span></span>
+                            <h5 class="mt-5">{{ 'QuickThemeSelection' | localize }}</h5>
+                            <label for="Settings_IsQuickThemeSelectEnabled" class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="Settings_IsQuickThemeSelectEnabled"
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="IsQuickThemeSelectEnabled"
+                                    [(ngModel)]="hostSettings.otherSettings.isQuickThemeSelectEnabled"
+                                />
+                                <span class="form-check-label">
                                     {{ 'IsQuickThemeSelectEnabled' | localize }}
-                                </label>
-                            </div>
+                                </span>
+                            </label>
                         </tab>
                         <tab
                             class="p-5"
@@ -705,9 +797,9 @@
                             heading="{{ 'ExternalLoginSettings' | localize }}"
                         >
                             <div *ngIf="isSocialLoginEnabled('Facebook')">
-                                <h5>Facebook</h5>
-                                <div class="form-group">
-                                    <label for="Setting_Facebook_AppId">{{ 'AppId' | localize }}*</label>
+                                <h5 class="mt-5">Facebook</h5>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_Facebook_AppId">{{ 'AppId' | localize }}*</label>
                                     <input
                                         id="Setting_Facebook_AppId"
                                         type="text"
@@ -715,8 +807,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.facebook.appId"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label>{{ 'AppSecret' | localize }}*</label>
+                                <div class="mb-5">
+                                    <label class="form-label">{{ 'AppSecret' | localize }}*</label>
                                     <password-input-with-show-button
                                         [(data)]="hostSettings.externalLoginProviderSettings.facebook.appSecret"
                                     ></password-input-with-show-button>
@@ -724,9 +816,9 @@
                             </div>
                             <div *ngIf="isSocialLoginEnabled('Google')">
                                 <hr />
-                                <h5>Google</h5>
-                                <div class="form-group">
-                                    <label for="Setting_Google_ClientId">{{ 'ClientId' | localize }}*</label>
+                                <h5 class="mt-5">Google</h5>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_Google_ClientId">{{ 'ClientId' | localize }}*</label>
                                     <input
                                         id="Setting_Google_ClientId"
                                         type="text"
@@ -734,14 +826,14 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.google.clientId"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label>{{ 'ClientSecret' | localize }}*</label>
+                                <div class="mb-5">
+                                    <label class="form-label">{{ 'ClientSecret' | localize }}*</label>
                                     <password-input-with-show-button
                                         [(data)]="hostSettings.externalLoginProviderSettings.google.clientSecret"
                                     ></password-input-with-show-button>
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_Google_UserInfoEndpoint">
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_Google_UserInfoEndpoint">
                                         {{ 'UserInfoEndpoint' | localize }}*
                                     </label>
                                     <input
@@ -754,9 +846,9 @@
                             </div>
                             <div *ngIf="isSocialLoginEnabled('Microsoft')">
                                 <hr />
-                                <h5>Microsoft</h5>
-                                <div class="form-group">
-                                    <label for="Setting_Microsoft_ClientId">{{ 'ClientId' | localize }}*</label>
+                                <h5 class="mt-5">Microsoft</h5>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_Microsoft_ClientId">{{ 'ClientId' | localize }}*</label>
                                     <input
                                         id="Setting_Microsoft_ClientId"
                                         type="text"
@@ -764,8 +856,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.microsoft.clientId"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label>{{ 'ClientSecret' | localize }}*</label>
+                                <div class="mb-5">
+                                    <label class="form-label">{{ 'ClientSecret' | localize }}*</label>
                                     <password-input-with-show-button
                                         [(data)]="hostSettings.externalLoginProviderSettings.microsoft.clientSecret"
                                     ></password-input-with-show-button>
@@ -774,9 +866,9 @@
 
                             <div *ngIf="isSocialLoginEnabled('WsFederation')" class="mb-4">
                                 <hr />
-                                <h5>WsFederation</h5>
-                                <div class="form-group">
-                                    <label for="Setting_WsFederation_ClientId">{{ 'ClientId' | localize }}</label>
+                                <h5 class="mt-5">WsFederation</h5>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_WsFederation_ClientId">{{ 'ClientId' | localize }}</label>
                                     <input
                                         id="Setting_WsFederation_ClientId"
                                         type="text"
@@ -784,8 +876,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.wsFederation.clientId"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_WsFederation_Tenant">{{ 'Tenant' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_WsFederation_Tenant">{{ 'Tenant' | localize }}</label>
                                     <input
                                         id="Setting_WsFederation_Tenant"
                                         type="text"
@@ -793,8 +885,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.wsFederation.tenant"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_WsFederation_MetaDataAddress">
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_WsFederation_MetaDataAddress">
                                         {{ 'MetaDataAddress' | localize }}
                                     </label>
                                     <input
@@ -806,8 +898,8 @@
                                         "
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_WsFederation_Wtrealm">{{ 'Wtrealm' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_WsFederation_Wtrealm">{{ 'Wtrealm' | localize }}</label>
                                     <input
                                         id="Setting_WsFederation_Wtrealm"
                                         type="text"
@@ -815,8 +907,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.wsFederation.wtrealm"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_WsFederation_Authority">{{ 'Authority' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_WsFederation_Authority">{{ 'Authority' | localize }}</label>
                                     <input
                                         id="Setting_WsFederation_Authority"
                                         type="text"
@@ -835,9 +927,9 @@
 
                             <div *ngIf="isSocialLoginEnabled('OpenId')">
                                 <hr />
-                                <h5>OpenIdConnect</h5>
-                                <div class="form-group">
-                                    <label for="Setting_OpenIdConnect_ClientId">{{ 'ClientId' | localize }}</label>
+                                <h5 class="mt-5">OpenIdConnect</h5>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_OpenIdConnect_ClientId">{{ 'ClientId' | localize }}</label>
                                     <input
                                         id="Setting_OpenIdConnect_ClientId"
                                         type="text"
@@ -845,8 +937,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.openIdConnect.clientId"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_OpenIdConnect_ClientSecret">
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_OpenIdConnect_ClientSecret">
                                         {{ 'ClientSecret' | localize }}
                                     </label>
                                     <input
@@ -858,8 +950,8 @@
                                         "
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_OpenIdConnect_Authority">{{ 'Authority' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_OpenIdConnect_Authority">{{ 'Authority' | localize }}</label>
                                     <input
                                         id="Setting_OpenIdConnect_Authority"
                                         type="text"
@@ -867,8 +959,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.openIdConnect.authority"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label for="Setting_OpenIdConnect_LoginUrl">{{ 'LoginUrl' | localize }}</label>
+                                <div class="mb-5">
+                                    <label class="form-label" for="Setting_OpenIdConnect_LoginUrl">{{ 'LoginUrl' | localize }}</label>
                                     <input
                                         id="Setting_OpenIdConnect_LoginUrl"
                                         type="text"
@@ -883,15 +975,16 @@
                                 >
                                     <input
                                         id="Setting_OpenIdConnect_ValidateIssuer"
-                                        class="check"
+                                        class="form-check-input"
                                         type="checkbox"
                                         name="AllowSelfRegistration"
                                         [(ngModel)]="
                                             hostSettings.externalLoginProviderSettings.openIdConnect.validateIssuer
                                         "
                                     />
-                                    <span></span>
-                                    {{ 'ValidateIssuer' | localize }}
+                                    <span class="form-check-label">
+                                        {{ 'ValidateIssuer' | localize }}
+                                    </span>
                                 </label>
                                 <key-value-list-manager
                                     #openIdConnectClaimsMappingManager
@@ -904,9 +997,9 @@
 
                             <div *ngIf="isSocialLoginEnabled('Twitter')">
                                 <hr />
-                                <h5>Twitter</h5>
-                                <div class="form-group mt-3">
-                                    <label for="Setting_Twitter_ConsumerKey">{{ 'ConsumerKey' | localize }}*</label>
+                                <h5 class="mt-5">Twitter</h5>
+                                <div class="mb-5 mt-3">
+                                    <label class="form-label" for="Setting_Twitter_ConsumerKey">{{ 'ConsumerKey' | localize }}*</label>
                                     <input
                                         id="Setting_Twitter_ConsumerKey"
                                         type="text"
@@ -914,8 +1007,8 @@
                                         [(ngModel)]="hostSettings.externalLoginProviderSettings.twitter.consumerKey"
                                     />
                                 </div>
-                                <div class="form-group">
-                                    <label>{{ 'ConsumerSecret' | localize }}*</label>
+                                <div class="mb-5">
+                                    <label class="form-label">{{ 'ConsumerSecret' | localize }}*</label>
                                     <password-input-with-show-button
                                         [(data)]="hostSettings.externalLoginProviderSettings.twitter.consumerSecret"
                                     ></password-input-with-show-button>

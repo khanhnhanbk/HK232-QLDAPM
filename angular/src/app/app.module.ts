@@ -38,6 +38,8 @@ import { Theme7LayoutComponent } from './shared/layout/themes/theme7/theme7-layo
 import { Theme8LayoutComponent } from './shared/layout/themes/theme8/theme8-layout.component';
 import { Theme10LayoutComponent } from './shared/layout/themes/theme10/theme10-layout.component';
 import { Theme11LayoutComponent } from './shared/layout/themes/theme11/theme11-layout.component';
+import { Theme12LayoutComponent } from './shared/layout/themes/theme12/theme12-layout.component';
+import { Theme13LayoutComponent } from './shared/layout/themes/theme13/theme13-layout.component';
 import { AppCommonModule } from './shared/common/app-common.module';
 import { ChatBarComponent } from './shared/layout/chat/chat-bar.component';
 import { ThemeSelectionPanelComponent } from './shared/layout/theme-selection/theme-selection-panel.component';
@@ -63,6 +65,8 @@ import { Theme8BrandComponent } from './shared/layout/themes/theme8/theme8-brand
 import { Theme9BrandComponent } from './shared/layout/themes/theme9/theme9-brand.component';
 import { Theme10BrandComponent } from './shared/layout/themes/theme10/theme10-brand.component';
 import { Theme11BrandComponent } from './shared/layout/themes/theme11/theme11-brand.component';
+import { Theme12BrandComponent } from './shared/layout/themes/theme12/theme12-brand.component';
+import { Theme13BrandComponent } from './shared/layout/themes/theme13/theme13-brand.component';
 import { UserNotificationHelper } from './shared/layout/notifications/UserNotificationHelper';
 import { HeaderNotificationsComponent } from './shared/layout/notifications/header-notifications.component';
 import { NotificationSettingsModalComponent } from './shared/layout/notifications/notification-settings-modal.component';
@@ -70,6 +74,8 @@ import { NotificationsComponent } from './shared/layout/notifications/notificati
 import { TextMaskModule } from 'angular2-text-mask';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ActiveDelegatedUsersComboComponent } from './shared/layout/topbar/active-delegated-users-combo.component';
+
+import { DefaultLogoComponent } from './shared/layout/themes/default/default-logo.component';
 
 // Metronic
 import {
@@ -81,7 +87,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // suppressScrollX: true
 };
 
-import { CoreModule } from '@metronic/app/core/core.module';
 import { SessionTimeoutModalComponent } from './shared/common/session-timeout/session-timeout-modal-component';
 import { SessionTimeoutComponent } from './shared/common/session-timeout/session-timeout.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -105,6 +110,8 @@ import { SubheaderModule } from './shared/common/sub-header/subheader.module';
         Theme9LayoutComponent,
         Theme10LayoutComponent,
         Theme11LayoutComponent,
+        Theme12LayoutComponent,
+        Theme13LayoutComponent,
         HeaderNotificationsComponent,
         SideBarMenuComponent,
         TopBarMenuComponent,
@@ -140,10 +147,13 @@ import { SubheaderModule } from './shared/common/sub-header/subheader.module';
         Theme9BrandComponent,
         Theme10BrandComponent,
         Theme11BrandComponent,
+        Theme12BrandComponent,
+        Theme13BrandComponent,
         SessionTimeoutModalComponent,
         SessionTimeoutComponent,
         MenuSearchBarComponent,
         ActiveDelegatedUsersComboComponent,
+        DefaultLogoComponent
     ],
     imports: [
         CommonModule,
@@ -166,7 +176,6 @@ import { SubheaderModule } from './shared/common/sub-header/subheader.module';
         PrimeNgFileUploadModule,
         ProgressBarModule,
         PerfectScrollbarModule,
-        CoreModule,
         TextMaskModule,
         ImageCropperModule,
         AutoCompleteModule,
@@ -183,7 +192,6 @@ import { SubheaderModule } from './shared/common/sub-header/subheader.module';
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
         },
-    ],
-    entryComponents: [NgxSpinnerComponent],
+    ]
 })
 export class AppModule {}

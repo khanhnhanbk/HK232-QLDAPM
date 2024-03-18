@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, EventEmitter, Injector, Output, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, Injector, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AppConsts } from '@shared/AppConsts';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import {
@@ -22,7 +22,8 @@ import { finalize } from 'rxjs/operators';
 @Component({
     selector: 'createOrEditUserModal',
     templateUrl: './create-or-edit-user-modal.component.html',
-    styleUrls: ['create-or-edit-user-modal.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['create-or-edit-user-modal.component.less']
 })
 export class CreateOrEditUserModalComponent extends AppComponentBase {
     @ViewChild('createOrEditModal', { static: true }) modal: ModalDirective;

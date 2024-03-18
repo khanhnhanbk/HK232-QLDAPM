@@ -22,31 +22,27 @@
                     <h5 class="modal-title">
                         <span>{{ 'ChangeTenant' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="close()">
-                        <i aria-hidden="true" class="ki ki-close"></i>
-                    </button>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="close()"></button>
                 </div>
 
                 <div class="modal-body">
-                    <div class="form-group row text-left mb-0">
+                    <div class="row text-left mb-0">
                         <label class="col-4 col-form-label">{{ 'SwitchToTenant' | localize }}</label>
                         <div class="col">
-                            <span class="switch switch-icon">
-                                <label>
-                                    <input
-                                        checked="checked"
-                                        name="SwitchToTenant"
-                                        type="checkbox"
-                                        [(ngModel)]="isSwitchToTenant"
-                                        (change)="switchToTenant($event)"
-                                        value="{{ isSwitchToTenant ? 'true' : 'false' }}"
-                                    />
-                                    <span></span>
-                                </label>
-                            </span>
+                            <label class="form-check form-check-custom form-check-solid form-switch py-1">
+                                <input
+                                    type="checkbox"
+                                    name="SwitchToTenant"
+                                    [(ngModel)]="isSwitchToTenant"
+                                    class="form-check-input"
+                                    value="{{ isSwitchToTenant ? 'true' : 'false' }}"
+                                    checked="checked"
+                                    (change)="switchToTenant($event)"
+                                />
+                            </label>
                         </div>
                     </div>
-                    <div class="form-group row mb-0">
+                    <div class="row mb-0">
                         <label class="col-4 col-form-label">
                             <label>{{ 'TenancyName' | localize }}</label>
                         </label>

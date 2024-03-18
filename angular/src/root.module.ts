@@ -96,7 +96,6 @@ function getDefaultThemeForInstallPage(): UiCustomizationSettingsDto {
     theme.baseSettings.menu.asideSkin = 'light';
 
     theme.baseSettings.header = new ThemeHeaderSettingsDto();
-    theme.baseSettings.header.headerSkin = 'light';
 
     theme.baseSettings.subHeader = new ThemeSubHeaderSettingsDto();
 
@@ -126,11 +125,13 @@ function initializeAppCssClasses(injector: Injector, theme: UiCustomizationSetti
     let appUiCustomizationService = injector.get(AppUiCustomizationService);
     appUiCustomizationService.init(theme);
 
-    //Css classes based on the layout
+    // Css classes based on the layout
     if (abp.session.userId) {
         document.body.className = appUiCustomizationService.getAppModuleBodyClass();
+        document.body.setAttribute("style", appUiCustomizationService.getAppModuleBodyStyle())
     } else {
         document.body.className = appUiCustomizationService.getAccountModuleBodyClass();
+        document.body.setAttribute("style", appUiCustomizationService.getAccountModuleBodyStyle())
     }
 }
 
@@ -207,7 +208,7 @@ function registerLocales(
 ) {
     if (shouldLoadLocale()) {
         let angularLocale = convertAbpLocaleToAngularLocale(abp.localization.currentLanguage.name);
-        import(`@angular/common/locales/${angularLocale}.js`).then((module) => {
+        import(`/node_modules/@angular/common/locales/${angularLocale}.mjs`).then((module) => {
             registerLocaleData(module.default);
             NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales().then((_) => {
                 resolve(true);

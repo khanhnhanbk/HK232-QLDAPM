@@ -1,17 +1,17 @@
-<div class="header-logo">
+<div class="header-logo me-5 me-md-10 ">
     <a routerLink="/" target="_blank">
         <img
             alt="Logo"
             *ngIf="!appSession.tenant || !appSession.tenant.logoId"
-            src="/assets/common/images/app-logo-on-dark.svg"
-            class="logo-default max-h-40px"
+            src="/assets/common/images/app-logo-on-dark-sm.svg"
+            class="logo-default h-25px"
             height="38"
         />
         <img
             alt="Logo"
             *ngIf="!appSession.tenant || !appSession.tenant.logoId"
-            src="/assets/common/images/app-logo-on-light.svg"
-            class="logo-sticky max-h-40px"
+            src="/assets/common/images/app-logo-on-{{skin}}-sm.svg"
+            class="logo-sticky h-25px"
             height="38"
         />
         <img
@@ -26,8 +26,7 @@
                 '&id=' +
                 appSession.tenant.logoId
             "
-            class="logo-default max-h-40px"
-            height="38"
+            class="logo-default h-25px"
         />
         <img
             alt="Logo"
@@ -41,8 +40,7 @@
                 '&id=' +
                 appSession.tenant.logoId
             "
-            class="logo-sticky max-h-40px"
-            height="38"
+            class="logo-sticky h-25px"
         />
     </a>
 </div>

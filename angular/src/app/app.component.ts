@@ -12,8 +12,16 @@ import { ChangeProfilePictureModalComponent } from '@app/shared/layout/profile/c
 import { MySettingsModalComponent } from '@app/shared/layout/profile/my-settings-modal.component';
 import { NotificationSettingsModalComponent } from '@app/shared/layout/notifications/notification-settings-modal.component';
 import { UserNotificationHelper } from '@app/shared/layout/notifications/UserNotificationHelper';
-import { DateTime } from 'luxon';
 import { DateTimeService } from './shared/common/timing/date-time.service';
+
+import {
+    ToggleComponent,
+    ScrollTopComponent,
+    DrawerComponent,
+    StickyComponent,
+    MenuComponent,
+    ScrollComponent,
+} from '@metronic/app/kt/components';
 
 @Component({
     templateUrl: './app.component.html',
@@ -58,6 +66,37 @@ export class AppComponent extends AppComponentBase implements OnInit {
                 this._chatSignalrService.init();
             });
         }
+
+        this.pluginsInitialization();
+    }
+
+    pluginsInitialized(): boolean {
+        var menuItems = document.querySelectorAll('[data-kt-menu="true"]');
+        for (var i = 0; i < menuItems.length; i++) {
+            var el = menuItems[i];
+            const menuItem = el as HTMLElement;
+            let menuInstance = MenuComponent.getInstance(menuItem);
+            if (menuInstance) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    pluginsInitialization() {
+        setTimeout(() => {
+            if (this.pluginsInitialized()) {
+                return;
+            }
+
+            ToggleComponent.bootstrap();
+            ScrollTopComponent.bootstrap();
+            DrawerComponent.bootstrap();
+            StickyComponent.bootstrap();
+            MenuComponent.bootstrap();
+            ScrollComponent.bootstrap();
+        }, 200);
     }
 
     subscriptionStatusBarVisible(): boolean {
@@ -68,7 +107,7 @@ export class AppComponent extends AppComponentBase implements OnInit {
     }
 
     subscriptionIsExpiringSoon(): boolean {
-        if (this.appSession.tenant.subscriptionEndDateUtc) {
+        if (this.appSession.tenant?.subscriptionEndDateUtc) {
             let today = this._dateTimeService.getUTCDate();
             let daysFromNow = this._dateTimeService.plusDays(today, AppConsts.subscriptionExpireNootifyDayCount);
             return daysFromNow >= this.appSession.tenant.subscriptionEndDateUtc;

@@ -5,18 +5,19 @@ import {
     Component,
     OnInit,
     ViewEncapsulation,
-    Inject,
     Renderer2,
     AfterViewInit,
+    Input,
 } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppMenu } from './app-menu';
 import { AppNavigationService } from './app-navigation.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationCancel, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { MenuOptions } from '@metronic/app/core/_base/layout/directives/menu.directive';
 import { FormattedStringValueExtracter } from '@shared/helpers/FormattedStringValueExtracter';
 import * as objectPath from 'object-path';
+import { AppMenuItem } from './app-menu-item';
+import { MenuComponent, DrawerComponent, ToggleComponent, ScrollComponent } from '@metronic/app/kt/components';
 
 @Component({
     templateUrl: './side-bar-menu.component.html',
@@ -30,19 +31,7 @@ export class SideBarMenuComponent extends AppComponentBase implements OnInit, Af
     insideTm: any;
     outsideTm: any;
 
-    menuOptions: MenuOptions = {
-        submenu: {
-            desktop: {
-                default: 'dropdown',
-            },
-            tablet: 'accordion',
-            mobile: 'accordion',
-        },
-
-        accordion: {
-            expandAll: false,
-        },
-    };
+    @Input() iconMenu = false;
 
     constructor(
         injector: Injector,
@@ -63,10 +52,25 @@ export class SideBarMenuComponent extends AppComponentBase implements OnInit, Af
         this.router.events
             .pipe(filter((event) => event instanceof NavigationEnd))
             .subscribe((event) => (this.currentRouteUrl = this.router.url.split(/[?#]/)[0]));
+
+        this.router.events
+            .pipe(filter((event) => event instanceof NavigationEnd || event instanceof NavigationCancel))
+            .subscribe((event) => {
+                this.reinitializeMenu();
+            });
     }
 
     ngAfterViewInit(): void {
         this.scrollToCurrentMenuElement();
+    }
+
+    reinitializeMenu(): void {
+        setTimeout(() => {
+            MenuComponent.reinitialization();
+            DrawerComponent.reinitialization();
+            ToggleComponent.reinitialization();
+            ScrollComponent.reinitialization();
+        }, 50);
     }
 
     showMenuItem(menuItem): boolean {
@@ -109,55 +113,6 @@ export class SideBarMenuComponent extends AppComponentBase implements OnInit, Af
         return false;
     }
 
-    /**
-     * Use for fixed left aside menu, to show menu on mouseenter event.
-     * @param e Event
-     */
-    mouseEnter(e: Event) {
-        // check if the left aside menu is fixed
-        if (document.body.classList.contains('aside-fixed')) {
-            if (this.outsideTm) {
-                clearTimeout(this.outsideTm);
-                this.outsideTm = null;
-            }
-
-            this.insideTm = setTimeout(() => {
-                // if the left aside menu is minimized
-                if (
-                    document.body.classList.contains('aside-minimize') &&
-                    KTUtil.isInResponsiveRange('desktop') &&
-                    document.body.classList.contains('aside-minimize-hoverable')
-                ) {
-                    // show the left aside menu
-                    this.render.removeClass(document.body, 'aside-minimize');
-                    this.render.addClass(document.body, 'aside-minimize-hover');
-                }
-            }, 50);
-        }
-    }
-
-    /**
-     * Use for fixed left aside menu, to show menu on mouseenter event.
-     * @param e Event
-     */
-    mouseLeave(e: Event) {
-        if (document.body.classList.contains('aside-fixed')) {
-            if (this.insideTm) {
-                clearTimeout(this.insideTm);
-                this.insideTm = null;
-            }
-
-            this.outsideTm = setTimeout(() => {
-                // if the left aside menu is expand
-                if (document.body.classList.contains('aside-minimize-hover') && KTUtil.isInResponsiveRange('desktop')) {
-                    // hide back the left aside menu
-                    this.render.removeClass(document.body, 'aside-minimize-hover');
-                    this.render.addClass(document.body, 'aside-minimize');
-                }
-            }, 100);
-        }
-    }
-
     scrollToCurrentMenuElement(): void {
         const path = location.pathname;
         const menuItem = document.querySelector("a[href='" + path + "']");
@@ -166,32 +121,19 @@ export class SideBarMenuComponent extends AppComponentBase implements OnInit, Af
         }
     }
 
-    getItemAttrSubmenuToggle(item) {
-        let toggle = 'hover';
-        if (objectPath.get(item, 'toggle') === 'click') {
-            toggle = 'click';
-        } else if (objectPath.get(item, 'submenu.type') === 'tabs') {
-            toggle = 'tabs';
-        } else {
-            // submenu toggle default to 'hover'
-        }
-
-        return toggle;
-    }
-
-    getItemCssClasses(item) {
+    getItemCssClasses(item: AppMenuItem, parentItem: AppMenuItem) {
         let classes = 'menu-item';
 
-        if (objectPath.get(item, 'submenu')) {
-            classes += ' menu-item-submenu';
-        }
-
-        if (!item.items && this.isMenuItemIsActive(item)) {
-            classes += ' menu-item-active menu-item-here';
-        }
-
-        if (item.items && this.isMenuItemIsActive(item)) {
-            classes += ' menu-item-open menu-item-here';
+        if (item.items.length) {
+            if (!this.iconMenu) {
+                classes += ' menu-accordion';
+            } else {
+                if (parentItem == null) {
+                    classes += ' menu-dropdown';
+                } else {
+                    classes += ' menu-accordion';
+                }
+            }
         }
 
         // custom class for menu item
@@ -200,8 +142,28 @@ export class SideBarMenuComponent extends AppComponentBase implements OnInit, Af
             classes += ' ' + customClass;
         }
 
-        if (objectPath.get(item, 'icon-only')) {
-            classes += ' menu-item-icon-only';
+        if (this.iconMenu && parentItem == null) {
+            classes += ' pb-3';
+        }
+
+        if (!this.iconMenu && parentItem == null && this.isMenuItemIsActive(item)) {
+            classes += ' show';
+        }
+
+        return classes;
+    }
+
+    getSubMenuItemCssClass(item: AppMenuItem, parentItem: AppMenuItem): string {
+        let classes = 'menu-sub';
+
+        if (!this.iconMenu) {
+            classes += ' menu-sub-accordion';
+        } else {
+            if (parentItem == null) {
+                classes += ' menu-sub-dropdown px-1 py-4';
+            } else {
+                classes += ' menu-sub-accordion';
+            }
         }
 
         return classes;

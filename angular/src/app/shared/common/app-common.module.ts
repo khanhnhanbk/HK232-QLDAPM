@@ -86,14 +86,7 @@ import { KeyValueListManagerComponent } from './key-value-list-manager/key-value
         { provide: BsDatepickerConfig, useFactory: NgxBootstrapDatePickerConfigService.getDatepickerConfig },
         { provide: BsDaterangepickerConfig, useFactory: NgxBootstrapDatePickerConfigService.getDaterangepickerConfig },
         { provide: BsLocaleService, useFactory: NgxBootstrapDatePickerConfigService.getDatepickerLocale },
-    ],
-
-    entryComponents: [
-        SingleLineStringInputTypeComponent,
-        ComboboxInputTypeComponent,
-        CheckboxInputTypeComponent,
-        MultipleSelectComboboxInputTypeComponent,
-    ],
+    ]
 })
 export class AppCommonModule {
     static forRoot(): ModuleWithProviders<AppCommonModule> {

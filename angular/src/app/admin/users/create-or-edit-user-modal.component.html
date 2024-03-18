@@ -2,7 +2,7 @@
     appBsModal
     #createOrEditModal="bs-modal"
     (onShown)="onShown()"
-    class="modal fade"
+    class="modal fade create-or-edit-user-modal"
     tabindex="-1"
     role="dialog"
     aria-labelledby="createOrEditModal"
@@ -19,12 +19,11 @@
                     </h4>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -40,8 +39,8 @@
                                     />
                                 </div>
                                 <div class="col-sm-9">
-                                    <div class="form-group">
-                                        <label for="Name">{{ 'FirstName' | localize }} *</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="Name">{{ 'FirstName' | localize }} *</label>
                                         <input
                                             id="Name"
                                             #nameInput="ngModel"
@@ -55,8 +54,8 @@
                                         <validation-messages [formCtrl]="nameInput"></validation-messages>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="Surname">{{ 'Surname' | localize }} *</label>
+                                    <div class="mb-5">
+                                        <label class="form-label" for="Surname">{{ 'Surname' | localize }} *</label>
                                         <input
                                             id="Surname"
                                             #surnameInput="ngModel"
@@ -71,8 +70,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="EmailAddress">{{ 'EmailAddress' | localize }} *</label>
+                            <div class="mb-5">
+                                <label class="form-label" for="EmailAddress">{{ 'EmailAddress' | localize }} *</label>
                                 <input
                                     id="EmailAddress"
                                     #emailAddressInput="ngModel"
@@ -87,8 +86,8 @@
                                 <validation-messages [formCtrl]="emailAddressInput"></validation-messages>
                             </div>
 
-                            <div class="form-group">
-                                <label for="PhoneNumber">{{ 'PhoneNumber' | localize }}</label>
+                            <div class="mb-5">
+                                <label class="form-label" for="PhoneNumber">{{ 'PhoneNumber' | localize }}</label>
                                 <input
                                     id="PhoneNumber"
                                     type="text"
@@ -99,8 +98,8 @@
                                 />
                             </div>
 
-                            <div class="form-group">
-                                <label for="UserName">{{ 'UserName' | localize }} *</label>
+                            <div class="mb-5">
+                                <label class="form-label" for="UserName">{{ 'UserName' | localize }} *</label>
                                 <input
                                     id="UserName"
                                     #userNameInput="ngModel"
@@ -112,27 +111,26 @@
                                     required
                                     maxlength="256"
                                 />
-                                <span class="help-block" *ngIf="!canChangeUserName">
+                                <span class="form-text text-muted" *ngIf="!canChangeUserName">
                                     {{ 'CanNotChangeAdminUserName' | localize }}
                                 </span>
                                 <validation-messages [formCtrl]="userNameInput"></validation-messages>
                             </div>
-
-                            <div class="checkbox-inline">
-                                <label for="EditUser_SetRandomPassword" class="checkbox">
-                                    <input
-                                        id="EditUser_SetRandomPassword"
-                                        type="checkbox"
-                                        name="SetRandomPassword"
-                                        [(ngModel)]="setRandomPassword"
-                                    />
-                                    <span></span>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="EditUser_SetRandomPassword"
+                                    type="checkbox"
+                                    name="SetRandomPassword"
+                                    [(ngModel)]="setRandomPassword"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'SetRandomPassword' | localize }}
-                                </label>
-                            </div>
-                            <div class="form-group" *ngIf="!setRandomPassword">
+                                </span>
+                            </label>
+                            <div class="mb-5" *ngIf="!setRandomPassword">
                                 <div class="right">
-                                    <label for="Password">{{ 'Password' | localize }}</label>
+                                    <label class="form-label" for="Password">{{ 'Password' | localize }}</label>
                                     <input
                                         id="Password"
                                         type="password"
@@ -179,9 +177,9 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="form-group" *ngIf="!setRandomPassword">
+                            <div class="mb-5" *ngIf="!setRandomPassword">
                                 <div class="right">
-                                    <label for="PasswordRepeat">{{ 'PasswordRepeat' | localize }}</label>
+                                    <label class="form-label" for="PasswordRepeat">{{ 'PasswordRepeat' | localize }}</label>
                                     <input
                                         id="PasswordRepeat"
                                         type="password"
@@ -233,96 +231,102 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="checkbox-list">
-                                <label for="EditUser_ShouldChangePasswordOnNextLogin" class="checkbox">
-                                    <input
-                                        id="EditUser_ShouldChangePasswordOnNextLogin"
-                                        type="checkbox"
-                                        name="ShouldChangePasswordOnNextLogin"
-                                        [(ngModel)]="user.shouldChangePasswordOnNextLogin"
-                                    />
-                                    <span></span>
+
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="EditUser_ShouldChangePasswordOnNextLogin"
+                                    type="checkbox"
+                                    name="ShouldChangePasswordOnNextLogin"
+                                    [(ngModel)]="user.shouldChangePasswordOnNextLogin"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'ShouldChangePasswordOnNextLogin' | localize }}
-                                </label>
-
-                                <span class="form-text text-muted" *ngIf="!isSMTPSettingsProvided()">
-                                    {{ 'SMTPSettingsNotProvidedWarningText' | localize }}
                                 </span>
-                                <label
-                                    for="EditUser_SendActivationEmail"
-                                    class="checkbox"
-                                    [class.checkbox-disabled]="!isSMTPSettingsProvided()"
-                                >
-                                    <input
-                                        id="EditUser_SendActivationEmail"
-                                        type="checkbox"
-                                        name="SendActivationEmail"
-                                        [disabled]="!isSMTPSettingsProvided()"
-                                        [(ngModel)]="sendActivationEmail"
-                                    />
-                                    <span></span>
+                            </label>
+
+                            <span class="form-text text-muted" *ngIf="!isSMTPSettingsProvided()">
+                                {{ 'SMTPSettingsNotProvidedWarningText' | localize }}
+                            </span>
+
+                            <label class="form-check form-check-custom form-check-solid py-1" [class.checkbox-disabled]="!isSMTPSettingsProvided()">
+                                <input
+                                    id="EditUser_SendActivationEmail"
+                                    type="checkbox"
+                                    name="SendActivationEmail"
+                                    [(ngModel)]="sendActivationEmail"
+                                    class="form-check-input"
+                                    [disabled]="!isSMTPSettingsProvided()"
+                                />
+                                <span class="form-check-label">
                                     {{ 'SendActivationEmail' | localize }}
-                                </label>
+                                </span>
+                            </label>
 
-                                <label for="EditUser_IsActive" class="checkbox">
-                                    <input
-                                        id="EditUser_IsActive"
-                                        type="checkbox"
-                                        name="IsActive"
-                                        [(ngModel)]="user.isActive"
-                                    />
-                                    <span></span>
+                            <label class="form-check form-check-custom form-check-solid py-1">
+                                <input
+                                    id="EditUser_IsActive"
+                                    type="checkbox"
+                                    name="IsActive"
+                                    [(ngModel)]="user.isActive"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'Active' | localize }}
-                                </label>
+                                </span>
+                            </label>
 
-                                <label *ngIf="isTwoFactorEnabled" for="EditUser_IsTwoFactorEnabled" class="checkbox">
-                                    <input
-                                        id="EditUser_IsTwoFactorEnabled"
-                                        type="checkbox"
-                                        name="IsTwoFactorEnabled"
-                                        [(ngModel)]="user.isTwoFactorEnabled"
-                                    />
-                                    <span></span>
+                            <label class="form-check form-check-custom form-check-solid py-1" *ngIf="isTwoFactorEnabled" >
+                                <input
+                                    id="EditUser_IsTwoFactorEnabled"
+                                    type="checkbox"
+                                    name="IsTwoFactorEnabled"
+                                    [(ngModel)]="user.isTwoFactorEnabled"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'IsTwoFactorEnabled' | localize }}
-                                </label>
+                                </span>
+                            </label>
 
-                                <label *ngIf="isLockoutEnabled" for="EditUser_IsLockoutEnabled" class="checkbox">
-                                    <input
-                                        id="EditUser_IsLockoutEnabled"
-                                        type="checkbox"
-                                        name="IsLockoutEnabled"
-                                        [(ngModel)]="user.isLockoutEnabled"
-                                    />
-                                    <span></span>
+                            <label class="form-check form-check-custom form-check-solid py-1" *ngIf="isLockoutEnabled" >
+                                <input
+                                    id="EditUser_IsLockoutEnabled"
+                                    type="checkbox"
+                                    name="IsLockoutEnabled"
+                                    [(ngModel)]="user.isLockoutEnabled"
+                                    class="form-check-input"
+                                />
+                                <span class="form-check-label">
                                     {{ 'IsLockoutEnabled' | localize }}
-                                </label>
-                            </div>
+                                </span>
+                            </label>
                         </tab>
                         <tab class="pt-5" heading="{{ 'Roles' | localize }}">
                             <ng-template tabHeading>
-                                <span class="label label-success label-inline assigned-role-count">
+                                <span class="badge badge-success assigned-role-count ms-2">
                                     {{ getAssignedRoleCount() }}
                                 </span>
                             </ng-template>
-                            <div class="checkbox-list">
-                                <label
-                                    attr.for="EditUser_{{ role.roleName }}"
-                                    class="checkbox"
-                                    *ngFor="let role of roles"
-                                >
-                                    <input
-                                        id="EditUser_{{ role.roleName }}"
-                                        type="checkbox"
-                                        name="{{ role.roleName }}"
-                                        [(ngModel)]="role.isAssigned"
-                                        [disabled]="role.inheritedFromOrganizationUnit"
-                                    />
-                                    <span></span>
-                                    {{ role.roleDisplayName }}
-                                    <small *ngIf="role.inheritedFromOrganizationUnit">
-                                        ({{ 'RoleIsInheritedFromOrganizationUnit' | localize }})
-                                    </small>
-                                </label>
+                            <div class="row">
+                                <div *ngFor="let role of roles" class="col-4">
+                                    <label class="form-check form-check-custom form-check-solid py-1">
+                                        <input
+                                            id="EditUser_{{ role.roleName }}"
+                                            type="checkbox"
+                                            name="{{ role.roleName }}"
+                                            [(ngModel)]="role.isAssigned"
+                                            [disabled]="role.inheritedFromOrganizationUnit"
+                                            class="form-check-input"
+                                        />
+                                        <span class="form-check-label">
+                                            {{ role.roleDisplayName }}
+                                            <small *ngIf="role.inheritedFromOrganizationUnit">
+                                                ({{ 'RoleIsInheritedFromOrganizationUnit' | localize }})
+                                            </small>
+                                        </span>
+                                    </label>
+                                </div>
                             </div>
                         </tab>
                         <tab class="pt-5" heading="{{ 'OrganizationUnits' | localize }}">

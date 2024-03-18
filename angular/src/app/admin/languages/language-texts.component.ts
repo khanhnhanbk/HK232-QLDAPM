@@ -15,7 +15,7 @@ import { finalize } from 'rxjs/operators';
     styleUrls: ['./language-texts.component.less'],
     animations: [appModuleAnimation()],
 })
-export class LanguageTextsComponent extends AppComponentBase implements AfterViewInit, OnInit {
+export class LanguageTextsComponent extends AppComponentBase implements OnInit {
     @ViewChild('targetLanguageNameCombobox', { static: true }) targetLanguageNameCombobox: ElementRef;
     @ViewChild('baseLanguageNameCombobox', { static: true }) baseLanguageNameCombobox: ElementRef;
     @ViewChild('sourceNameCombobox', { static: true }) sourceNameCombobox: ElementRef;
@@ -48,12 +48,7 @@ export class LanguageTextsComponent extends AppComponentBase implements AfterVie
             (value) => value.name
         );
         this.languages = abp.localization.languages;
-    }
-
-    ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.init();
-        });
+        this.init();
     }
 
     getLanguageTexts(event?: LazyLoadEvent) {
@@ -98,7 +93,7 @@ export class LanguageTextsComponent extends AppComponentBase implements AfterVie
         this.paginator.changePage(this.paginator.getPage());
     }
 
-    applyFilters(): void {
+    applyFilters(event?: LazyLoadEvent): void {
         this._router.navigate([
             'app/admin/languages',
             this.targetLanguageName,
@@ -111,11 +106,7 @@ export class LanguageTextsComponent extends AppComponentBase implements AfterVie
             },
         ]);
 
-        if (this.paginator.getPage() !== 0) {
-            this.paginator.changePage(0);
-
-            return;
-        }
+        this.paginator.changePage(0);
     }
 
     truncateString(text): string {

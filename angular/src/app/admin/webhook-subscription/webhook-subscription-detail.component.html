@@ -2,10 +2,10 @@
     <div class="content d-flex flex-column flex-column-fluid">
         <sub-header [title]="'WebhookSubscriptions' | localize" [breadcrumbs]="breadcrumbs">
             <div role="actions">
-                <span *ngIf="subscription && subscription.isActive" class="label label-success label-inline mr-2">
+                <span *ngIf="subscription && subscription.isActive" class="badge badge-success me-2">
                     {{ 'Active' | localize }}
                 </span>
-                <span *ngIf="subscription && !subscription.isActive" class="label label-dark label-inline mr-2">
+                <span *ngIf="subscription && !subscription.isActive" class="badge badge-dark me-2">
                     {{ 'Disabled' | localize }}
                 </span>
                 <div
@@ -63,13 +63,13 @@
         <div [class]="containerClass">
             <div class="card card-custom gutter-b">
                 <div class="card-body" *ngIf="subscription">
-                    <div class="form-group row">
+                    <div class="mb-5 row">
                         <label class="col-2 col-form-label">{{ 'WebhookEndpoint' | localize }}</label>
                         <div class="col-10 text-break mt-2">
                             {{ subscription.webhookUri }}
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="mb-5 row">
                         <label class="col-2 col-form-label">{{ 'WebhookEvents' | localize }}</label>
                         <div class="col-10 text-break mt-2">
                             <div *ngIf="subscription.webhooks">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="mb-5 row">
                         <label class="col-2 col-form-label">{{ 'AdditionalWebhookHeaders' | localize }}</label>
                         <div class="col-10 text-break mt-2">
                             <div *ngIf="subscription.headers">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row mb-0">
+                    <div class="row mb-0">
                         <label class="col-2 col-form-label">{{ 'WebhookSecret' | localize }}</label>
                         <div class="col-10 position-relative mt-2">
                             <span [class.blur]="isSecretBlurActive">{{ subscription.secret }}</span>

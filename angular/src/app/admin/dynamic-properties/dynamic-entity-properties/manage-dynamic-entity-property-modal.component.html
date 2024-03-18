@@ -14,15 +14,14 @@
                 <h4 class="modal-title">
                     <span>{{ 'AddNewDynamicEntityProperty' | localize }}</span>
                 </h4>
-                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                <button type="button" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')">
                 </button>
             </div>
             <div class="modal-body">
                 <div class="col-12" style="height: 40px">
                     <button
                         *ngIf="'Pages.Administration.DynamicEntityProperties.Create' | permission"
-                        class="btn btn-primary float-right"
+                        class="btn btn-primary float-end"
                         (click)="addNewDynamicEntityProperty()"
                     >
                         <i class="fa fa-plus"></i>

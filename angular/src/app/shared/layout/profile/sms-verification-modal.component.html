@@ -15,12 +15,11 @@
                     <h5 class="modal-title">
                         <span>{{ 'VerifyYourCode' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" [attr.aria-label]="l('Close')" (click)="close()">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" [attr.aria-label]="l('Close')" (click)="close()">
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div id="inputDiv" class="form-group">
+                    <div id="inputDiv" class="mb-5">
                         <label for="YourCode">{{ 'YourCode' | localize }} *</label>
                         <input
                             id="YourCode"

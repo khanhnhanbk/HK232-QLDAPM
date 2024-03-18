@@ -1,7 +1,8 @@
 import { Component, Output, EventEmitter, Injector, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { WidgetOutput } from '@shared/service-proxies/service-proxies';
+import { DashboardCustomizationServiceProxy, WidgetOutput } from '@shared/service-proxies/service-proxies';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { DashboardCustomizationConst } from '../DashboardCustomizationConsts';
 
 @Component({
     selector: 'add-widget-modal',
@@ -16,7 +17,8 @@ export class AddWidgetModalComponent extends AppComponentBase {
     saving = false;
     selectedWidgetId: string;
 
-    constructor(injector: Injector) {
+    constructor(injector: Injector,
+        private _dashboardCustomizationServiceProxy: DashboardCustomizationServiceProxy) {
         super(injector);
     }
 
@@ -30,16 +32,17 @@ export class AddWidgetModalComponent extends AppComponentBase {
         this.hide();
     }
 
-    show(widgets: WidgetOutput[]): void {
-        this.widgets = widgets;
-
-        if (this.widgets && this.widgets.length) {
-            this.selectedWidgetId = this.widgets[0].id;
-        } else {
-            this.selectedWidgetId = null;
-        }
-
-        this.modal.show();
+    show(dashboardName:string,pageId: string): void {
+        this._dashboardCustomizationServiceProxy.getAllAvailableWidgetDefinitionsForPage(dashboardName, DashboardCustomizationConst.Applications.Angular, pageId)
+        .subscribe(availableWidgets=>{
+            this.widgets = availableWidgets;
+            if (this.widgets && this.widgets.length) {
+                this.selectedWidgetId = this.widgets[0].id;
+            } else {
+                this.selectedWidgetId = null;
+            }    
+            this.modal.show();
+        });
     }
 
     hide(): void {

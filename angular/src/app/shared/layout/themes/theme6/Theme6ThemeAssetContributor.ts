@@ -6,7 +6,7 @@ export class Theme6ThemeAssetContributor implements IThemeAssetContributor {
         return [AppConsts.appBaseUrl + '/assets/fonts/fonts-montserrat.min.css'];
     }
 
-    public getAdditionalBodyStle(): string {
+    public getAdditionalBodyStyle(): string {
         return '';
     }
 
@@ -15,10 +15,10 @@ export class Theme6ThemeAssetContributor implements IThemeAssetContributor {
     }
 
     public getSubheaderStyle(): string {
-        return 'text-dark font-weight-bold my-1 mr-5';
+        return 'text-dark font-weight-bold my-1 me-5';
     }
 
     public getFooterStyle(): string {
-        return 'footer py-2 py-lg-0 my-5 d-flex flex-lg-column';
+        return 'footer py-5 d-flex flex-lg-column';
     }
 }

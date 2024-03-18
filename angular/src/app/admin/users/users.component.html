@@ -7,7 +7,7 @@
                         id="dropdownButtonExcelOperations"
                         dropdownToggle
                         type="button"
-                        class="btn btn-outline-success dropdown-toggle mr-1"
+                        class="btn btn-outline btn-outline-success btn-active-light-success dropdown-toggle me-1"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
@@ -30,7 +30,7 @@
                                 (click)="exportToExcel()"
                                 href="javascript:;"
                             >
-                                <i class="fa fa-download mr-2 mt-1 text-dark" style="font-size: 1rem"></i>
+                                <i class="fa fa-download me-2 mt-1 text-dark" style="font-size: 1rem"></i>
                                 {{ 'ExportToExcel' | localize }}
                             </a>
                         </li>
@@ -86,7 +86,7 @@
                         <div>
                             <div class="row align-items-center mb-4">
                                 <div class="col-xl-12">
-                                    <div class="form-group m-form__group align-items-center">
+                                    <div class="mb-5 m-form__group align-items-center">
                                         <div class="input-group">
                                             <input
                                                 [(ngModel)]="filterText"
@@ -96,11 +96,9 @@
                                                 [placeholder]="l('SearchWithThreeDot')"
                                                 type="text"
                                             />
-                                            <div class="input-group-append">
-                                                <button (click)="getUsers()" class="btn btn-primary" type="submit">
-                                                    <i class="flaticon-search-1" [attr.aria-label]="l('Search')"></i>
-                                                </button>
-                                            </div>
+                                            <button (click)="getUsers()" class="btn btn-primary" type="submit">
+                                                <i class="flaticon-search-1" [attr.aria-label]="l('Search')"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +111,7 @@
                                         'col-md-12': !('Pages.Administration.Roles' | permission)
                                     }"
                                 >
-                                    <div class="form-group">
+                                    <div class="mb-5">
                                         <permission-tree-modal
                                             #permissionFilterTreeModal
                                             (onModalclose)="getUsers()"
@@ -122,29 +120,29 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6" *ngIf="'Pages.Administration.Roles' | permission">
-                                    <div class="form-group">
+                                    <div class="mb-5">
                                         <role-combo name="roleFilter" [(ngModel)]="role"></role-combo>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="checkbox-inline">
-                                        <label for="UsersTable_OnlyLockedUsers" class="checkbox">
-                                            <input
-                                                id="UsersTable_OnlyLockedUsers"
-                                                type="checkbox"
-                                                name="OnlyLockedUsers"
-                                                [(ngModel)]="onlyLockedUsers"
-                                            />
-                                            <span></span>
+                                    <label class="form-check form-check-custom form-check-solid form-switch py-1">
+                                        <input
+                                            id="UsersTable_OnlyLockedUsers"
+                                            type="checkbox"
+                                            name="OnlyLockedUsers"
+                                            [(ngModel)]="onlyLockedUsers"
+                                            class="form-check-input"
+                                        />
+                                        <span class="form-check-label">
                                             {{ 'OnlyLockedUsers' | localize }}
-                                        </label>
-                                    </div>
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
 
                             <div class="row mb-4" *ngIf="advancedFiltersAreShown">
-                                <div class="col-sm-12 text-right">
-                                    <button class="btn btn-primary" (click)="getUsers()">
+                                <div class="col-sm-12 text-end">
+                                    <button class="btn btn-primary float-end" (click)="getUsers()">
                                         <i class="fa fa-sync"></i>
                                         {{ 'Refresh' | localize }}
                                     </button>
@@ -186,6 +184,7 @@
                                 [lazy]="true"
                                 [scrollable]="true"
                                 ScrollWidth="100%"
+                                scrollDirection="horizontal"
                                 [responsive]="primengTableHelper.isResponsive"
                                 [resizableColumns]="primengTableHelper.resizableColumns"
                             >
@@ -395,13 +394,13 @@
                                         <td style="width: 200px">
                                             <span class="p-column-title">{{ 'EmailConfirm' | localize }}</span>
                                             <span
-                                                class="label label-success label-inline"
+                                                class="badge badge-success"
                                                 *ngIf="record.isEmailConfirmed"
                                             >
                                                 {{ 'Yes' | localize }}
                                             </span>
                                             <span
-                                                class="label label-dark label-inline"
+                                                class="badge badge-dark"
                                                 *ngIf="!record.isEmailConfirmed"
                                             >
                                                 {{ 'No' | localize }}
@@ -409,10 +408,10 @@
                                         </td>
                                         <td style="width: 100px">
                                             <span class="p-column-title">{{ 'Active' | localize }}</span>
-                                            <span class="label label-success label-inline" *ngIf="record.isActive">
+                                            <span class="badge badge-success" *ngIf="record.isActive">
                                                 {{ 'Yes' | localize }}
                                             </span>
-                                            <span class="label label-dark label-inline" *ngIf="!record.isActive">
+                                            <span class="badge badge-dark" *ngIf="!record.isActive">
                                                 {{ 'No' | localize }}
                                             </span>
                                         </td>

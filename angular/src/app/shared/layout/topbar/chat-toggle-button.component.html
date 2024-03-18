@@ -1,6 +1,6 @@
 <div
     id="chat_is_connecting_icon"
-    class="topbar-item"
+    class="d-flex align-items-center"
     *ngIf="(isHost || ('App.ChatFeature' | checkFeature)) && !chatConnected"
 >
     <button [class]="customStyle">
@@ -14,19 +14,24 @@
     </button>
 </div>
 <div
-    id="kt_quick_sidebar_toggle"
-    class="topbar-item"
-    [hidden]="!(isHost || ('App.ChatFeature' | checkFeature)) || !chatConnected"
+    id="kt_drawer_chat_toggle"
+    class="d-flex align-items-center"
+    *ngIf="(isHost || ('App.ChatFeature' | checkFeature)) && chatConnected"
 >
-    <button [class]="customStyle">
-        <div id="chatIconUnRead" *ngIf="unreadChatMessageCount">
-            <i class="flaticon-chat-2 unread-notification"></i>
-            <span class="label label-warning unread-chat-message-count">
-                {{ unreadChatMessageCount }}
-            </span>
-        </div>
-        <div id="chatIcon" *ngIf="!unreadChatMessageCount">
-            <i class="flaticon-chat-2"></i>
-        </div>
+    <button [class]="customStyle" id="chatIconUnRead" class="unread-notification">
+        <i [class]="iconStyle"></i>
+        <span
+            *ngIf="unreadChatMessageCount"
+            class="
+                position-absolute
+                top-0
+                start-100
+                translate-middle
+                badge badge-circle badge-warning
+                unread-chat-message-count
+            "
+        >
+            {{ unreadChatMessageCount }}
+        </span>
     </button>
 </div>

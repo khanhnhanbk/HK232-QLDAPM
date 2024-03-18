@@ -3,7 +3,7 @@
         <button
             *ngIf="('Pages.Administration.OrganizationUnits.ManageMembers' | permission) && organizationUnit"
             (click)="openAddMemberModal()"
-            class="btn btn-primary float-right mb-3"
+            class="btn btn-primary float-end mb-3"
         >
             <i class="fa fa-plus"></i>
             {{ 'AddMember' | localize }}
@@ -49,11 +49,11 @@
                         <tr>
                             <td [hidden]="!('Pages.Administration.OrganizationUnits.ManageMembers' | permission)">
                                 <button
-                                    class="btn btn-outline-danger btn-icon"
+                                    class="btn btn-icon btn-bg-light btn-active-color-danger btn-sm"
                                     (click)="removeMember(record)"
                                     title="{{ 'Delete' | localize }}"
                                 >
-                                    <i class="la la-times" [attr.aria-label]="l('Delete')"></i>
+                                    <i class="fa fa-times" [attr.aria-label]="l('Delete')"></i>
                                 </button>
                             </td>
                             <td>

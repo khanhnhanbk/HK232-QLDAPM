@@ -1,4 +1,4 @@
-.key-value-items-list{
+.key-value-items-list {
     height: auto;
     overflow-y: auto;
     background-color: #e5e5e5;
@@ -8,4 +8,8 @@
 
 .key-value-items-list .alert-text {
     overflow: auto;
+}
+
+.key-value-items-list .alert {
+    line-height: 30px;
 }

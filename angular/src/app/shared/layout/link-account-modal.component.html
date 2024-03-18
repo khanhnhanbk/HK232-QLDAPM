@@ -16,13 +16,12 @@
                     <h5 class="modal-title">
                         <span>{{ 'LinkNewAccount' | localize }}</span>
                     </h5>
-                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
-                        <i aria-hidden="true" class="ki ki-close"></i>
+                    <button type="button" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')">
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="TenancyName">{{ 'TenancyName' | localize }}</label>
                         <input
                             id="TenancyName"
@@ -36,7 +35,7 @@
                         />
                     </div>
 
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="UserName">{{ 'UserName' | localize }} *</label>
                         <input
                             id="UserName"
@@ -52,7 +51,7 @@
                         <validation-messages [formCtrl]="usernameOrEmailAddressInput"></validation-messages>
                     </div>
 
-                    <div class="form-group">
+                    <div class="mb-5">
                         <label for="Password">{{ 'Password' | localize }} *</label>
                         <input
                             id="Password"

@@ -9,7 +9,7 @@
         <p>
             {{ 'SendEmailActivationLink_Information' | localize }}
         </p>
-        <div class="form-group">
+        <div class="mb-5">
             <input
                 #emailAddressInput="ngModel"
                 [(ngModel)]="model.emailAddress"
@@ -37,7 +37,7 @@
             </button>
             <button
                 type="submit"
-                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 me-3"
                 [disabled]="!emailActivationForm.form.valid"
                 [buttonBusy]="saving"
                 [busyText]="l('SavingWithThreeDot')"

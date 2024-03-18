@@ -267,7 +267,7 @@ export class CustomizableDashboardComponent extends AppComponentBase implements 
     openAddWidgetModal(): void {
         let page = this.userDashboard.pages.find((page) => page.id === this.selectedPage.id);
         if (page) {
-            this.addWidgetModal.show(this.dashboardDefinition.widgets);
+            this.addWidgetModal.show(this.dashboardName, this.selectedPage.id);
         }
     }
 

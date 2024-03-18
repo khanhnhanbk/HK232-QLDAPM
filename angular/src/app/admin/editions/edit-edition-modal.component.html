@@ -18,19 +18,18 @@
                     </h5>
                     <button
                         type="button"
-                        class="close"
+                        class="btn-close"
                         (click)="close()"
                         [attr.aria-label]="l('Close')"
                         [disabled]="saving"
                     >
-                        <i aria-hidden="true" class="ki ki-close"></i>
                     </button>
                 </div>
                 <div class="modal-body">
                     <tabset>
                         <tab heading="{{ l('EditionProperties') }}" class="p-5">
-                            <div class="form-group">
-                                <label for="EditionDisplayName">{{ l('EditionName') }} *</label>
+                            <div class="mb-5">
+                                <label class="form-label" for="EditionDisplayName">{{ l('EditionName') }} *</label>
                                 <input
                                     id="EditionDisplayName"
                                     #editionNameInput="ngModel"

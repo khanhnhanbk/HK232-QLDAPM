@@ -6,7 +6,7 @@ export class Theme5ThemeAssetContributor implements IThemeAssetContributor {
         return [AppConsts.appBaseUrl + '/assets/fonts/fonts-asap-condensed.min.css'];
     }
 
-    public getAdditionalBodyStle(): string {
+    public getAdditionalBodyStyle(): string {
         return '';
     }
 
@@ -15,10 +15,10 @@ export class Theme5ThemeAssetContributor implements IThemeAssetContributor {
     }
 
     public getSubheaderStyle(): string {
-        return 'subheader-title text-dark font-weight-bold my-1 mr-3';
+        return 'subheader-title text-dark font-weight-bold my-1 me-3';
     }
 
     public getFooterStyle(): string {
-        return 'footer bg-white py-4 d-flex flex-lg-column';
+        return 'footer pt-10 pb-5 d-flex flex-column flex-md-row flex-stack';
     }
 }

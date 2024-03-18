@@ -2,9 +2,7 @@ import { Injector, ElementRef, Component, ViewChild, OnInit, AfterViewInit, Inje
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { ThemesLayoutBaseComponent } from '@app/shared/layout/themes/themes-layout-base.component';
-import { LayoutRefService } from '@metronic/app/core/_base/layout/services/layout-ref.service';
 import { AppConsts } from '@shared/AppConsts';
-import { ToggleOptions } from '@metronic/app/core/_base/layout/directives/toggle.directive';
 import { DOCUMENT } from '@angular/common';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 
@@ -15,18 +13,11 @@ import { DateTimeService } from '@app/shared/common/timing/date-time.service';
 })
 export class Theme8LayoutComponent extends ThemesLayoutBaseComponent implements OnInit, AfterViewInit {
     @ViewChild('ktHeader', { static: true }) ktHeader: ElementRef;
-    userMenuToggleOptions: ToggleOptions = {
-        target: this.document.body,
-        targetState: 'topbar-mobile-on',
-        toggleState: 'active',
-    };
 
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
 
     constructor(
         injector: Injector,
-        private layoutRefService: LayoutRefService,
-        @Inject(DOCUMENT) private document: Document,
         _dateTimeService: DateTimeService
     ) {
         super(injector, _dateTimeService);
@@ -37,6 +28,6 @@ export class Theme8LayoutComponent extends ThemesLayoutBaseComponent implements 
     }
 
     ngAfterViewInit(): void {
-        this.layoutRefService.addElement('header', this.ktHeader.nativeElement);
+        
     }
 }

@@ -35,7 +35,7 @@ export class ThemesLayoutBaseComponent extends AppComponentBase {
     }
 
     subscriptionIsExpiringSoon(): boolean {
-        if (this.appSession.tenant.subscriptionEndDateUtc) {
+        if (this.appSession.tenant?.subscriptionEndDateUtc) {
             let today = this._dateTimeService.getUTCDate();
             let daysFromNow = this._dateTimeService.plusDays(today, AppConsts.subscriptionExpireNootifyDayCount);
             return daysFromNow >= this.appSession.tenant.subscriptionEndDateUtc;
