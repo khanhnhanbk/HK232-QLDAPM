@@ -1,0 +1,106 @@
+<div
+    appBsModal
+    #createOrEditModal="bs-modal"
+    class="modal fade create-or-edit-user-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="createOrEditModal"
+    aria-hidden="true"
+    [config]="{ backdrop: 'static', keyboard: !saving }"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #userForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="classroom.id">{{ 'Edit classroom' | localize }}: {{ classroom.name }}</span>
+                        <span *ngIf="!classroom.id">{{ 'New classroom' | localize }}</span>
+                    </h4>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        (click)="close()"
+                        [attr.aria-label]="l('Close')"
+                        [disabled]="saving"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">{{ 'Name' | localize }}</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            required
+                            [(ngModel)]="classroom.name"
+                            #name="ngModel"
+                            [ngClass]="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }"
+                        />
+                        <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+                            <span *ngIf="name.errors.required">{{ 'This field is required' | localize }}</span>
+                        </div>
+
+                        <label for="description">{{ 'Description' | localize }}</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="description"
+                            name="description"
+                            required
+                            [(ngModel)]="classroom.description"
+                            #description="ngModel"
+                            [ngClass]="{
+                                'is-invalid': description.invalid && (description.dirty || description.touched)
+                            }"
+                        />
+
+                        <label for="location">{{ 'Location' | localize }}</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="location"
+                            name="location"
+                            required
+                            [(ngModel)]="classroom.location"
+                            #location="ngModel"
+                            [ngClass]="{ 'is-invalid': location.invalid && (location.dirty || location.touched) }"
+                        />
+
+                        <label for="capacity">{{ 'Capacity' | localize }}</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="capacity"
+                            name="capacity"
+                            required
+                            [(ngModel)]="classroom.capacity"
+                            #capacity="ngModel"
+                            [ngClass]="{ 'is-invalid': capacity.invalid && (capacity.dirty || capacity.touched) }"
+                        />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        [disabled]="saving"
+                        type="button"
+                        class="btn btn-light-primary font-weight-bold"
+                        (click)="close()"
+                    >
+                        {{ 'Cancel' | localize }}
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-primary font-weight-bold"
+                        [disabled]="!userForm.form.valid"
+                        [buttonBusy]="saving"
+                        [busyText]="l('SavingWithThreeDot')"
+                    >
+                        <i class="fa fa-save"></i>
+                        <span>{{ 'Save' | localize }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

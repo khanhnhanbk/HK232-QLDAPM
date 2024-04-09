@@ -7,10 +7,12 @@ import { ClassroomComponent } from './classroom.component';
     RouterModule.forChild([
       {
         path: '',
-       component: ClassroomComponent,
+        component: ClassroomComponent,
+        pathMatch: 'full',
       },
     ]),
   ],
+
   exports: [RouterModule],
 })
 export class ClassroomRoutingModule { }
