@@ -12,11 +12,10 @@ import { RouterModule } from '@angular/router';
             loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
             data: { permission: 'Pages.Tenant.Dashboard' },
           },
-          // {
-          //   path: 'classroom',
-          //   loadChildren: () => import('./classroom/classroom.module').then((m) => m.ClassroomModule),
-          //   data: { permission: 'Pages.Tenant.Classroom' },
-          // },
+          {
+            path: 'classroom',
+            loadChildren: () => import('./classroom/classroom.module').then((m) => m.ClassroomModule),
+          },
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: '**', redirectTo: 'dashboard' },
         ],
