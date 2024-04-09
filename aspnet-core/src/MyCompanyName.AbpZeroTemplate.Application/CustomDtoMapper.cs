@@ -39,6 +39,8 @@ using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments.Dto;
 using MyCompanyName.AbpZeroTemplate.Notifications.Dto;
 using MyCompanyName.AbpZeroTemplate.Organizations.Dto;
+using MyCompanyName.AbpZeroTemplate.QLDAPM_AHA;
+using MyCompanyName.AbpZeroTemplate.QLDAPM_AHA.Dto;
 using MyCompanyName.AbpZeroTemplate.Sessions.Dto;
 using MyCompanyName.AbpZeroTemplate.WebHooks.Dto;
 
@@ -164,6 +166,12 @@ namespace MyCompanyName.AbpZeroTemplate
             configuration.CreateMap<CreateUserDelegationDto, UserDelegation>();
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
+
+            // QLDAPM_AHA
+            configuration.CreateMap<Classroom, ClassroomListDto>();
+            configuration.CreateMap<CreateClassroomInput, Classroom>();
+            configuration.CreateMap<EditClassroomInput, Classroom>();
+
         }
     }
 }

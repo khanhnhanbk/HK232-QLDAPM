@@ -10,6 +10,7 @@ using MyCompanyName.AbpZeroTemplate.Friendships;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Accounting;
 using MyCompanyName.AbpZeroTemplate.MultiTenancy.Payments;
+using MyCompanyName.AbpZeroTemplate.QLDAPM_AHA;
 using MyCompanyName.AbpZeroTemplate.Storage;
 
 namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
@@ -17,6 +18,9 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
     public class AbpZeroTemplateDbContext : AbpZeroDbContext<Tenant, Role, User, AbpZeroTemplateDbContext>, IAbpPersistedGrantDbContext
     {
         /* Define an IDbSet for each entity of the application */
+
+        // Classroom entity
+        public virtual DbSet<Classroom> Classrooms { get; set; }
 
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
 
