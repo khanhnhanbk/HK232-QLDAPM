@@ -34,6 +34,37 @@
                                         (roleRemoved)="ouTree.roleRemoved($event)"
                                     ></organization-unit-roles>
                                 </tab>
+                                <tab heading="{{ 'Classtime' | localize }}">
+                                    <div *ngIf="ouTree.selectedOuTime">
+                                        <div class="form-group">
+                                            <label for="startTime">{{ 'StartTime' | localize }}</label>
+                                            <input
+                                                type="datetime"
+                                                class="form-control"
+                                                id="startTime"
+                                                name="startTime"
+                                                [(ngModel)]="ouTree.selectedOuTime.startTime"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endTime">{{ 'EndTime' | localize }}</label>
+                                            <input
+                                                type="datetime"
+                                                class="form-control"
+                                                id="endTime"
+                                                name="endTime"
+                                                [(ngModel)]="ouTree.selectedOuTime.endTime"
+                                                required
+                                            />
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" (click)="ouTree.saveTime()">
+                                                Update time
+                                            </button>
+                                        </div>
+                                    </div>
+                                </tab>
                             </tabset>
                         </div>
                     </div>

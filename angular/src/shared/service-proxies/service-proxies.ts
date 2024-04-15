@@ -27744,7 +27744,7 @@ export interface IUnlinkUserInput {
 }
 
 export class UpdateClasstimeInput implements IUpdateClasstimeInput {
-    id!: number;
+    organizationUnitId!: number;
     startTime!: DateTime;
     endTime!: DateTime;
 
@@ -27759,7 +27759,7 @@ export class UpdateClasstimeInput implements IUpdateClasstimeInput {
 
     init(_data?: any) {
         if (_data) {
-            this.id = _data["id"];
+            this.organizationUnitId = _data["organizationUnitId"];
             this.startTime = _data["startTime"] ? DateTime.fromISO(_data["startTime"].toString()) : <any>undefined;
             this.endTime = _data["endTime"] ? DateTime.fromISO(_data["endTime"].toString()) : <any>undefined;
         }
@@ -27774,7 +27774,7 @@ export class UpdateClasstimeInput implements IUpdateClasstimeInput {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
+        data["organizationUnitId"] = this.organizationUnitId;
         data["startTime"] = this.startTime ? this.startTime.toString() : <any>undefined;
         data["endTime"] = this.endTime ? this.endTime.toString() : <any>undefined;
         return data; 
@@ -27782,7 +27782,7 @@ export class UpdateClasstimeInput implements IUpdateClasstimeInput {
 }
 
 export interface IUpdateClasstimeInput {
-    id: number;
+    organizationUnitId: number;
     startTime: DateTime;
     endTime: DateTime;
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyCompanyName.AbpZeroTemplate.QLDAPM_AHA
 {
-    public class ClasstimeAppService :  AbpZeroTemplateAppServiceBase, IClasstimeAppService
+    public class ClasstimeAppService : AbpZeroTemplateAppServiceBase, IClasstimeAppService
     {
         private readonly IRepository<Classtime> _classtimeRepository;
 
@@ -27,9 +27,23 @@ namespace MyCompanyName.AbpZeroTemplate.QLDAPM_AHA
             };
             return _classtimeRepository.InsertAsync(classtime);
         }
-        public Task UpdateClasstime(UpdateClasstimeInput input)
+        public async Task UpdateClasstime(UpdateClasstimeInput input)
         {
-            return _classtimeRepository.UpdateAsync(ObjectMapper.Map<Classtime>(input));
+            var classtime = await _classtimeRepository.GetAll().FirstOrDefaultAsync(p => p.OrganizationUnitId == input.OrganizationUnitId);
+            if (classtime == null)
+            {
+                classtime = new Classtime();
+                classtime.OrganizationUnitId = input.OrganizationUnitId;
+                classtime.StartTime = input.StartTime;
+                classtime.EndTime = input.EndTime;
+                await _classtimeRepository.InsertAsync(classtime);
+                return;
+            }
+            classtime.OrganizationUnitId = input.OrganizationUnitId;
+            classtime.StartTime = input.StartTime;
+            classtime.EndTime = input.EndTime;
+
+            await _classtimeRepository.UpdateAsync(classtime);
         }
 
         public Task<ClasstimeDto> GetClasstimeById(long classId)
