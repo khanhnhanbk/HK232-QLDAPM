@@ -22,6 +22,8 @@ namespace MyCompanyName.AbpZeroTemplate.EntityFrameworkCore
         // Classroom entity
         public virtual DbSet<Classroom> Classrooms { get; set; }
 
+        public virtual DbSet<Classtime> Classtimes { get; set; }
+
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
 
         public virtual DbSet<Friendship> Friendships { get; set; }

@@ -1910,6 +1910,178 @@ export class ClassroomServiceProxy {
 }
 
 @Injectable()
+export class ClasstimeServiceProxy {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    createClasstime(body: CreateClasstimeInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Classtime/CreateClasstime";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreateClasstime(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreateClasstime(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processCreateClasstime(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    updateClasstime(body: UpdateClasstimeInput | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Classtime/UpdateClasstime";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateClasstime(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdateClasstime(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processUpdateClasstime(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
+     * @param classId (optional) 
+     * @return Success
+     */
+    getClasstimeById(classId: number | undefined): Observable<ClasstimeDto> {
+        let url_ = this.baseUrl + "/api/services/app/Classtime/GetClasstimeById?";
+        if (classId === null)
+            throw new Error("The parameter 'classId' cannot be null.");
+        else if (classId !== undefined)
+            url_ += "classId=" + encodeURIComponent("" + classId) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetClasstimeById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetClasstimeById(<any>response_);
+                } catch (e) {
+                    return <Observable<ClasstimeDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ClasstimeDto>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetClasstimeById(response: HttpResponseBase): Observable<ClasstimeDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ClasstimeDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ClasstimeDto>(<any>null);
+    }
+}
+
+@Injectable()
 export class CommonLookupServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
@@ -15944,6 +16116,50 @@ export interface IClassroomListDto {
     capacity: number;
 }
 
+export class ClasstimeDto implements IClasstimeDto {
+    organizationUnitId!: number;
+    startTime!: DateTime;
+    endTime!: DateTime;
+
+    constructor(data?: IClasstimeDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.organizationUnitId = _data["organizationUnitId"];
+            this.startTime = _data["startTime"] ? DateTime.fromISO(_data["startTime"].toString()) : <any>undefined;
+            this.endTime = _data["endTime"] ? DateTime.fromISO(_data["endTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): ClasstimeDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ClasstimeDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["organizationUnitId"] = this.organizationUnitId;
+        data["startTime"] = this.startTime ? this.startTime.toString() : <any>undefined;
+        data["endTime"] = this.endTime ? this.endTime.toString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IClasstimeDto {
+    organizationUnitId: number;
+    startTime: DateTime;
+    endTime: DateTime;
+}
+
 export class CleanValuesInput implements ICleanValuesInput {
     dynamicEntityPropertyId!: number;
     entityId!: string | undefined;
@@ -16074,6 +16290,50 @@ export interface ICreateClassroomInput {
     description: string | undefined;
     location: string | undefined;
     capacity: number;
+}
+
+export class CreateClasstimeInput implements ICreateClasstimeInput {
+    organizationUnitId!: number;
+    startTime!: DateTime;
+    endTime!: DateTime;
+
+    constructor(data?: ICreateClasstimeInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.organizationUnitId = _data["organizationUnitId"];
+            this.startTime = _data["startTime"] ? DateTime.fromISO(_data["startTime"].toString()) : <any>undefined;
+            this.endTime = _data["endTime"] ? DateTime.fromISO(_data["endTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): CreateClasstimeInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new CreateClasstimeInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["organizationUnitId"] = this.organizationUnitId;
+        data["startTime"] = this.startTime ? this.startTime.toString() : <any>undefined;
+        data["endTime"] = this.endTime ? this.endTime.toString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface ICreateClasstimeInput {
+    organizationUnitId: number;
+    startTime: DateTime;
+    endTime: DateTime;
 }
 
 export class CreateEditionDto implements ICreateEditionDto {
@@ -27481,6 +27741,50 @@ export class UnlinkUserInput implements IUnlinkUserInput {
 export interface IUnlinkUserInput {
     tenantId: number | undefined;
     userId: number;
+}
+
+export class UpdateClasstimeInput implements IUpdateClasstimeInput {
+    id!: number;
+    startTime!: DateTime;
+    endTime!: DateTime;
+
+    constructor(data?: IUpdateClasstimeInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.id = _data["id"];
+            this.startTime = _data["startTime"] ? DateTime.fromISO(_data["startTime"].toString()) : <any>undefined;
+            this.endTime = _data["endTime"] ? DateTime.fromISO(_data["endTime"].toString()) : <any>undefined;
+        }
+    }
+
+    static fromJS(data: any): UpdateClasstimeInput {
+        data = typeof data === 'object' ? data : {};
+        let result = new UpdateClasstimeInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["startTime"] = this.startTime ? this.startTime.toString() : <any>undefined;
+        data["endTime"] = this.endTime ? this.endTime.toString() : <any>undefined;
+        return data; 
+    }
+}
+
+export interface IUpdateClasstimeInput {
+    id: number;
+    startTime: DateTime;
+    endTime: DateTime;
 }
 
 export class UpdateEditionDto implements IUpdateEditionDto {

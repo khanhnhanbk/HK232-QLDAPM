@@ -172,6 +172,10 @@ namespace MyCompanyName.AbpZeroTemplate
             configuration.CreateMap<CreateClassroomInput, Classroom>();
             configuration.CreateMap<EditClassroomInput, Classroom>();
 
+            configuration.CreateMap<Classtime, ClasstimeDto>();
+            configuration.CreateMap<CreateClasstimeInput, Classtime>();
+            configuration.CreateMap<UpdateClasstimeInput, Classtime>();
+
         }
     }
 }
